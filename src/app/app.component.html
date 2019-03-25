@@ -2,9 +2,9 @@
   {{ title }}
 </h1>
 <nav [class.navigation]="true">
-  <ul>
+  <ul [class.navigation__unorderedList]="true">
     <ng-template ngFor let-item [ngForOf]="routs">
-      <li [class.navigation__listItem]='true'>
+      <li [class.navigation__listItem]='true' routerLinkActive="activeLink" [routerLinkActiveOptions]="{exact:true}">
         <a [class.navigation__link]='true' routerLink="{{ item }}">{{ item | slice: 1 | uppercase }}</a>
       </li>
     </ng-template>
