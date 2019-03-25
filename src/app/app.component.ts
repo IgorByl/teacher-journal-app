@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { titleRouts } from './titleRouts';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.less']
 })
 export class AppComponent {
-  title = 'Teacher journal';
+  title: string = 'Teacher journal';
+  routs: Array<string> = titleRouts;
 }

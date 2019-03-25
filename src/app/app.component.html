@@ -1,5 +1,14 @@
 <h1>
-  {{title}}
+  {{ title }}
 </h1>
+<nav [class.navigation]="true">
+  <ul>
+    <ng-template ngFor let-item [ngForOf]="routs">
+      <li [class.navigation__listItem]='true'>
+        <a [class.navigation__link]='true' routerLink="{{ item }}">{{ item | slice: 1 | uppercase }}</a>
+      </li>
+    </ng-template>
+  </ul>
+</nav>
 
 <router-outlet></router-outlet>
