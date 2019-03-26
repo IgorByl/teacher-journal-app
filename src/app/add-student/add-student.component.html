@@ -1,0 +1,59 @@
+<div [class.addFieldWrapper]="true" *ngIf=true>
+  <p>Add new student:</p>
+  <form
+    [class.form]="true"
+    #myForm="ngForm"
+    (ngSubmit)="
+      addStudent(
+        myForm,
+        studentName,
+        studentLastname,
+        studentAddress,
+        studentDescription
+      )
+    "
+  >
+    <label>Name: 
+    <input
+      type="text"
+      placeholder="name"
+      name="studentName"
+      [(ngModel)]="studentName"
+      #studentName="ngModel"
+      required
+     
+    /></label>
+    <div [hidden]="true || false">
+        Не указано имя
+      </div>
+    <br />
+    <label >Lastname: 
+    <input
+      type="text"
+      #name
+      placeholder="lastname"
+      name="studentLastname"
+      [(ngModel)]="studentLastname"
+    /></label>
+    <br />
+    <label>Address:
+    <input
+      type="text"
+      #name
+      placeholder="name"
+      name="studentAddress"
+      [(ngModel)]="studentAddress"
+    /></label>
+    <br />
+    <label>Discription:
+    <textarea
+      id="name"
+      #name
+      placeholder="description"
+      name="studentDescription"
+      [(ngModel)]="studentDescription"
+    ></textarea></label>
+    <br />
+    <button type="submit">Add</button>
+  </form>
+</div>

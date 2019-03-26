@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { STUDENTS } from '../mock-data';
 import { Student } from '../studentClass';
 import { ListOfStudentsService } from '../list-of-students.service';
 
@@ -10,7 +9,14 @@ import { ListOfStudentsService } from '../list-of-students.service';
 })
 export class StudentsComponent implements OnInit {
   students: Student[];
-
+  tableHeaders: Array<string> = [
+    'Id',
+    'Name',
+    'Lastname',
+    'Address',
+    'Description',
+  ];
+  addFlag: boolean = true;
   constructor(private studentsListService: ListOfStudentsService) {}
 
   ngOnInit() {
@@ -21,6 +27,13 @@ export class StudentsComponent implements OnInit {
     this.studentsListService
       .getStudents()
       .subscribe(students => (this.students = students));
-    console.log(this.students);
+  }
+
+  addNewStudent(): void {
+    this.addFlag = !this.addFlag;
+  }
+
+  changed(increased: any): void {
+    this.addFlag = increased;
   }
 }
