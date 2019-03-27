@@ -30,7 +30,7 @@
 </table>
 
 <button [class.studentaAddedButton]="true" (click)="addNewStudent()">
-  Add student
+ {{ addFlag ? 'Back' : 'Add student' }}
 </button>
 
 <app-add-student [addFlag]="addFlag" [list]="students" (changed)="changed($event)"></app-add-student>

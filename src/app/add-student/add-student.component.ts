@@ -1,8 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AddedStudent } from '../AddedStudentClass';
 import { Student } from '../studentClass';
-import {NgForm} from '@angular/forms';
-
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-add-student',
@@ -12,28 +11,37 @@ import {NgForm} from '@angular/forms';
 export class AddStudentComponent implements OnInit {
   @Input() addFlag: boolean;
   @Input() list: Student[];
-  @Output() changed = new EventEmitter <boolean>();
+  @Output() changed = new EventEmitter<boolean>();
 
-  ngOnInit() {
-  }
+  profileForm: FormGroup = new FormGroup({
+    studentName: new FormControl('', [
+      Validators.required,
+      Validators.pattern(
+        /^[a-zA-Zа-яА-Я'][a-zA-Zа-яА-Я-' ]+[a-zA-Zа-яА-Я']?$/u
+      ),
+    ]),
+    studentLastname: new FormControl('', [
+      Validators.required,
+      Validators.pattern(
+        /^[a-zA-Zа-яА-Я'][a-zA-Zа-яА-Я-' ]+[a-zA-Zа-яА-Я']?$/u
+      ),
+    ]),
+    studentAddress: new FormControl(''),
+    studentDescription: new FormControl(''),
+  });
 
-  addStudent(
-    myForm: NgForm,
-    studentName: string,
-    studentLastname: string,
-    studentAddress: string,
-    studentDescription: string
-  ): void {
+  ngOnInit() {}
+
+  addStudent(): void {
     this.list.push(
       new AddedStudent(
-        studentName,
-        studentLastname,
-        studentAddress,
-        studentDescription
+        this.profileForm.value.studentName,
+        this.profileForm.value.studentLastname,
+        this.profileForm.value.studentAddress,
+        this.profileForm.value.studentDescription
       )
     );
     this.changed.emit(false);
-    myForm.resetForm();
+    this.profileForm.reset();
   }
-
 }

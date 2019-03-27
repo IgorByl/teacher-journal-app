@@ -1,59 +1,36 @@
-<div [class.addFieldWrapper]="true" *ngIf=true>
+<div [class.addFieldWrapper]="true" *ngIf="addFlag">
   <p>Add new student:</p>
-  <form
-    [class.form]="true"
-    #myForm="ngForm"
-    (ngSubmit)="
-      addStudent(
-        myForm,
-        studentName,
-        studentLastname,
-        studentAddress,
-        studentDescription
-      )
-    "
-  >
-    <label>Name: 
-    <input
-      type="text"
-      placeholder="name"
-      name="studentName"
-      [(ngModel)]="studentName"
-      #studentName="ngModel"
-      required
-     
+  <form [class.form]='true' [formGroup]="profileForm" (ngSubmit)="addStudent()">
+    <label
+      >Name: <input type="text" placeholder="name" formControlName="studentName"
     /></label>
-    <div [hidden]="true || false">
-        Не указано имя
-      </div>
+    <div class="alert alert-danger"
+    *ngIf="profileForm.controls['studentName'].invalid && profileForm.controls['studentName'].touched">
+    Undefined or uncorrect name field.
+</div>
     <br />
-    <label >Lastname: 
-    <input
-      type="text"
-      #name
-      placeholder="lastname"
-      name="studentLastname"
-      [(ngModel)]="studentLastname"
+    <label
+      >Lastname:
+      <input type="text" placeholder="lastname" formControlName="studentLastname"
     /></label>
+    <div class="alert alert-danger"
+    *ngIf="profileForm.controls['studentLastname'].invalid && profileForm.controls['studentLastname'].touched">
+    Undefined or uncorrect Lastname field.
+</div>
     <br />
     <label>Address:
     <input
       type="text"
-      #name
       placeholder="name"
-      name="studentAddress"
-      [(ngModel)]="studentAddress"
+      formControlName="studentAddress"
     /></label>
     <br />
     <label>Discription:
     <textarea
-      id="name"
-      #name
       placeholder="description"
-      name="studentDescription"
-      [(ngModel)]="studentDescription"
+      formControlName="studentDescription"
     ></textarea></label>
     <br />
-    <button type="submit">Add</button>
+    <button type="submit" [disabled]="!profileForm.valid">Add</button>
   </form>
 </div>

@@ -16,7 +16,7 @@ export class StudentsComponent implements OnInit {
     'Address',
     'Description',
   ];
-  addFlag: boolean = true;
+  addFlag: boolean = false;
   constructor(private studentsListService: ListOfStudentsService) {}
 
   ngOnInit() {
