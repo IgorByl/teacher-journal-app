@@ -30,7 +30,12 @@
 </table>
 
 <button [class.studentaAddedButton]="true" (click)="addNewStudent()">
- {{ addFlag ? 'Back' : 'Add student' }}
+  {{ addFlag ? 'Back' : 'Add' }}
 </button>
 
-<app-add-student [addFlag]="addFlag" [list]="students" (changed)="changed($event)"></app-add-student>
+<app-add-student
+  [addFlag]="addFlag"
+  [formRequestFields]="formRequestFields"
+  (changedVisibility)="changedVisibility($event)"
+  (transferFormData)="transferFormData($event)"
+></app-add-student>

@@ -1,8 +1,8 @@
 <div [class.addFieldWrapper]="true" *ngIf="addFlag">
-  <p>Add new student:</p>
-  <form [class.form]='true' [formGroup]="profileForm" (ngSubmit)="addStudent()">
+  <p>{{formRequestFields.title}}</p>
+  <form [class.form]='true' [formGroup]="profileForm" (ngSubmit)="omSubmit()">
     <label
-      >Name: <input type="text" placeholder="name" formControlName="studentName"
+      >Name: <input type="text" placeholder="name" formControlName='{{formRequestFields.firstRoW}}'
     /></label>
     <div class="alert alert-danger"
     *ngIf="profileForm.controls['studentName'].invalid && profileForm.controls['studentName'].touched">

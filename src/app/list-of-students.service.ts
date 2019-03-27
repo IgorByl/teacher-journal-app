@@ -8,6 +8,7 @@ import { Student } from './studentClass';
 })
 export class ListOfStudentsService {
   constructor() {}
+
   getStudents(): Observable<Student[]> {
     return of(STUDENTS);
   }
