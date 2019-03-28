@@ -1,35 +1,55 @@
 <div [class.addFieldWrapper]="true" *ngIf="addFlag">
-  <p>{{formRequestFields.title}}</p>
-  <form [class.form]='true' [formGroup]="profileForm" (ngSubmit)="omSubmit()">
+  <p>[[formRequestFields.title]]</p>
+  <form [class.form]="true" [formGroup]="profileForm" (ngSubmit)="omSubmit()">
     <label
-      >Name: <input type="text" placeholder="name" formControlName='{{formRequestFields.firstRoW}}'
+      >[[formRequestFields.firstRow]]:
+      <input
+        type="text"
+        placeholder="[[formRequestFields.firstRow  | lowercase]]"
+        formControlName="[[formRequestFields.firstRow]]"
     /></label>
-    <div class="alert alert-danger"
-    *ngIf="profileForm.controls['studentName'].invalid && profileForm.controls['studentName'].touched">
-    Undefined or uncorrect name field.
-</div>
+    <div
+      class="alert alert-danger"
+      *ngIf="
+        profileForm.controls[formRequestFields.firstRow].invalid &&
+        profileForm.controls[formRequestFields.firstRow].touched
+      "
+    >
+      Undefined or uncorrect name field.
+    </div>
     <br />
     <label
-      >Lastname:
-      <input type="text" placeholder="lastname" formControlName="studentLastname"
+      >[[formRequestFields.secondRow]]:
+      <input
+        type="text"
+        placeholder="[[formRequestFields.secondRow  | lowercase]]"
+        formControlName="[[formRequestFields.secondRow]]"
     /></label>
-    <div class="alert alert-danger"
-    *ngIf="profileForm.controls['studentLastname'].invalid && profileForm.controls['studentLastname'].touched">
-    Undefined or uncorrect Lastname field.
-</div>
+    <div
+      class="alert alert-danger"
+      *ngIf="
+        profileForm.controls[formRequestFields.secondRow].invalid &&
+        profileForm.controls[formRequestFields.secondRow].touched
+      "
+    >
+      Undefined or uncorrect Lastname field.
+    </div>
     <br />
-    <label>Address:
-    <input
-      type="text"
-      placeholder="name"
-      formControlName="studentAddress"
+    <label
+      >[[formRequestFields.thirdRow]]:
+      <input
+        type="text"
+        placeholder="[[formRequestFields.thirdRow  | lowercase]]"
+        formControlName="[[formRequestFields.thirdRow]]"
     /></label>
     <br />
-    <label>Discription:
-    <textarea
-      placeholder="description"
-      formControlName="studentDescription"
-    ></textarea></label>
+    <label
+      >[[formRequestFields.fourthRow]]:
+      <textarea
+        placeholder="[[formRequestFields.fourthRow  | lowercase]]"
+        formControlName="[[formRequestFields.fourthRow]]"
+      ></textarea
+    ></label>
     <br />
     <button type="submit" [disabled]="!profileForm.valid">Add</button>
   </form>

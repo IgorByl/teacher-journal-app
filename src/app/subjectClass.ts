@@ -1,7 +1,6 @@
 export class Subject {
   name: string;
-  lastName: string;
-  address: string;
+  teacher: string;
+  cabiner: number;
   desription: string;
-  subjects: object;
 }

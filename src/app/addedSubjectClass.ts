@@ -1,12 +1,8 @@
 export class AddedSubject {
   constructor(
     public name: string,
-    public lastName: string,
-    public address: string,
+    public teacher: string,
+    public cabiner: number,
     public desription: string,
-    public subjects: object = {
-      physics: [],
-      chemistry: [],
-    }
   ) {}
 }

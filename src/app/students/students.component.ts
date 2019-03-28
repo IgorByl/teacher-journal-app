@@ -20,10 +20,10 @@ export class StudentsComponent implements OnInit {
   ];
   formRequestFields: object = {
     title: 'Add new student:',
-    firstRoW: 'studentName',
-    secondRow: 'studentLastname',
-    thirdRow: 'studentAddress',
-    fourthRow: 'studentDescription',
+    firstRow: 'Name',
+    secondRow: 'Lastname',
+    thirdRow: 'Address',
+    fourthRow: 'Description',
   };
 
   addFlag: boolean = false;
@@ -50,10 +50,10 @@ export class StudentsComponent implements OnInit {
   transferFormData(increased: any): void {
     this.students.push(
       new AddedStudent(
-        increased.value.studentName,
-        increased.value.studentLastname,
-        increased.value.studentAddress,
-        increased.value.studentDescription
+        increased.value.Name,
+        increased.value.Lastname,
+        increased.value.Address,
+        increased.value.Description
       )
     );
   }

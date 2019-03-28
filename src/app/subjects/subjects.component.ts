@@ -11,6 +11,14 @@ export class SubjectsComponent implements OnInit {
   title: string = 'List of subjects:';
   subjects: Array<string> = [];
   addFlag: boolean = false;
+  formRequestFields: object = {
+    title: 'Add new subject:',
+    firstRow: 'Name',
+    secondRow: 'Teacher',
+    thirdRow: 'Cabiner',
+    fourthRow: 'Description',
+  };
+
   constructor(private subjectListService: GetListOfSubjectsService) {}
 
   ngOnInit() {
@@ -28,10 +36,10 @@ export class SubjectsComponent implements OnInit {
   transferFormData(increased: any): void {
     console.log(
       new AddedSubject(
-        increased.value.studentName,
-        increased.value.studentLastname,
-        increased.value.studentAddress,
-        increased.value.studentDescription
+        increased.value.Name,
+        increased.value.Teacher,
+        increased.value.Cabiner,
+        increased.value.Description
       )
     );
   }

@@ -8,6 +8,7 @@
       "camelCase"
     ],
     "no-inferrable-types": false,
+    "no-unused-expression": false,
     "component-selector": [
       true,
       "element",
