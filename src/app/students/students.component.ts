@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Student } from '../studentClass';
+import { Student } from '../studentInterface';
 import { ListOfStudentsService } from '../list-of-students.service';
 import { AddedStudent } from '../AddedStudentClass';
 
@@ -25,8 +25,8 @@ export class StudentsComponent implements OnInit {
     thirdRow: 'Address',
     fourthRow: 'Description',
   };
-
   addFlag: boolean = false;
+
   constructor(private studentsListService: ListOfStudentsService) {}
 
   ngOnInit() {

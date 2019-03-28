@@ -1,5 +1,5 @@
-export class Subject {
-  name: string;
+export interface Subject {
+  subject: string;
   teacher: string;
   cabiner: number;
   desription: string;

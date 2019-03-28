@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ngOnChanges } from '@angular/core';
 import { GetListOfSubjectsService } from '../get-list-of-subjects.service';
-import { AddedSubject } from '../AddedSubjectClass';
+import { ListOfStudentsService } from '../list-of-students.service';
+import { Student } from '../studentInterface';
 
 @Component({
   selector: 'app-subjects',
@@ -10,23 +11,37 @@ import { AddedSubject } from '../AddedSubjectClass';
 export class SubjectsComponent implements OnInit {
   title: string = 'List of subjects:';
   subjects: Array<string> = [];
+  students: Student[];
   addFlag: boolean = false;
   formRequestFields: object = {
     title: 'Add new subject:',
-    firstRow: 'Name',
+    firstRow: 'Subject',
     secondRow: 'Teacher',
     thirdRow: 'Cabiner',
     fourthRow: 'Description',
   };
 
-  constructor(private subjectListService: GetListOfSubjectsService) {}
+  constructor(
+    private subjectListService: GetListOfSubjectsService,
+    private studentsListService: ListOfStudentsService
+  ) {}
 
+  ngOnChanges() {
+
+  }
   ngOnInit() {
     this.subjects = this.getSubjects();
+    this.getStudents();
   }
 
   getSubjects(): Array<string> {
     return this.subjectListService.getSubjects();
+  }
+
+  getStudents(): void {
+    this.studentsListService
+      .getStudents()
+      .subscribe(students => (this.students = students));
   }
 
   addNewSubject(): void {
@@ -34,14 +49,15 @@ export class SubjectsComponent implements OnInit {
   }
 
   transferFormData(increased: any): void {
-    console.log(
-      new AddedSubject(
-        increased.value.Name,
-        increased.value.Teacher,
-        increased.value.Cabiner,
-        increased.value.Description
-      )
-    );
+    this.students.forEach(item => {
+      item.subjects[increased.value.Subject] = {
+        marks: [],
+        teacher: increased.value.Teacher,
+        cabiner: Number(increased.value.Cabiner),
+        description: increased.value.Description,
+      };
+    });
+    console.log(this.students);
   }
 
   changedVisibility(increased: any): void {
