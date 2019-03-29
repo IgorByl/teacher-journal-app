@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
-
 @Component({
   selector: 'app-add-student',
   templateUrl: './add-student.component.html',
@@ -9,7 +8,6 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   interpolation: ['[[', ']]'],
 })
 export class AddStudentComponent implements OnInit {
-
   @Input() formRequestFields;
   @Input() addFlag: boolean;
   @Output() changedVisibility = new EventEmitter<boolean>();
@@ -41,7 +39,7 @@ export class AddStudentComponent implements OnInit {
         ),
       ]),
       [this.formRequestFields.thirdRow]: new FormControl(''),
-     [ this.formRequestFields.fourthRow]: new FormControl(''),
+      [this.formRequestFields.fourthRow]: new FormControl(''),
     });
   }
 }

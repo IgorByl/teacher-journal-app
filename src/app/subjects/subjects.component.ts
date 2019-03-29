@@ -1,4 +1,4 @@
-import { Component, OnInit, ngOnChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { GetListOfSubjectsService } from '../get-list-of-subjects.service';
 import { ListOfStudentsService } from '../list-of-students.service';
 import { Student } from '../studentInterface';
@@ -26,9 +26,9 @@ export class SubjectsComponent implements OnInit {
     private studentsListService: ListOfStudentsService
   ) {}
 
-  ngOnChanges() {
+  // ngOnChanges() {
 
-  }
+
   ngOnInit() {
     this.subjects = this.getSubjects();
     this.getStudents();
@@ -62,5 +62,6 @@ export class SubjectsComponent implements OnInit {
 
   changedVisibility(increased: any): void {
     this.addFlag = increased;
+    this.subjects = this.getSubjects();
   }
 }
