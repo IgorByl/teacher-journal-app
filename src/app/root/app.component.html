@@ -1,0 +1,20 @@
+<h1>
+  {{ title }}
+</h1>
+<nav class="navigation">
+  <ul class="navigation__unorderedList">
+    <ng-template ngFor let-item [ngForOf]="routs">
+      <li
+        class="navigation__listItem"
+        routerLinkActive="activeLink"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <a class="navigation__link" routerLink="{{ item }}">{{
+          item | slice: 1 | uppercase
+        }}</a>
+      </li>
+    </ng-template>
+  </ul>
+</nav>
+
+<router-outlet></router-outlet>

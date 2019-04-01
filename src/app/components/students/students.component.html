@@ -1,0 +1,26 @@
+<table class="table">
+    <tr>
+      <th class="table__header" *ngFor="let item of tableHeaders">
+        {{ item }}
+      </th>
+    </tr>
+    <tr *ngFor="let i of students; index as ind">
+      <td>{{ ind + 1 }}</td>
+      <td>{{ i.name }}</td>
+      <td>{{ i.lastName }}</td>
+      <td>{{ i.address }}</td>
+      <td class="table__tableData_description">{{ i.desription }}</td>
+    </tr>
+  </table>
+  
+  <button class="studentaAddedButton" (click)="addNewStudent()">
+    {{ addFlag ? 'Back' : 'Add' }}
+  </button>
+  
+  <!-- <app-form
+    [addFlag]="addFlag"
+    [formRequestFields]="formRequestStudentsFields"
+    (changedVisibility)="changedVisibility($event)"
+    (transferFormData)="transferFormData($event)"
+  ></app-form> -->
+  
