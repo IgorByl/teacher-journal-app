@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { IRequest } from "../../common/entities/interfaces";
 
 @Component({
   selector: "app-form",
@@ -7,7 +8,7 @@ import { FormGroup, FormControl, Validators } from "@angular/forms";
   styleUrls: ["./form.component.less"],
 })
 export class FormComponent implements OnInit {
-  @Input() public formRequestFields: object;
+  @Input() public formRequestFields: IRequest;
   @Input() public addFlag: boolean;
   @Output() public changedVisibility: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() public transferFormData: EventEmitter<object> = new EventEmitter<object>();

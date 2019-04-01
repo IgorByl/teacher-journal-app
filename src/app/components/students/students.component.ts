@@ -11,9 +11,7 @@ import { IStudent } from "../../common/entities/interfaces";
   styleUrls: ["./students.component.less"],
 })
 export class StudentsComponent implements OnInit {
-  // tslint:disable-next-line:typedef
   public students: IStudent[];
-  public obj: object;
   public subjects: Array<string>;
   public tableHeaders: Array<string> = TABLE_HEADERS;
   public formRequestStudentsFields: object = FORM_REQUEST_STUDENTS_FIELDS;
@@ -29,8 +27,7 @@ export class StudentsComponent implements OnInit {
   public getStudents(): void {
     this.listOfStudentsService
       .getStudents()
-      .subscribe(data => this.obj = data);
-    this.students = this.obj.default;
+      .subscribe(data => this.students = data);
   }
 
   public addNewStudent(): void {
