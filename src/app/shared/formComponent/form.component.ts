@@ -10,7 +10,7 @@ export class FormComponent implements OnInit {
   @Input() public formRequestFields: object;
   @Input() public addFlag: boolean;
   @Output() public changedVisibility: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Output() public transferFormData = new EventEmitter<object>();
+  @Output() public transferFormData: EventEmitter<object> = new EventEmitter<object>();
   public profileForm: FormGroup;
 
   public ngOnInit(): void {

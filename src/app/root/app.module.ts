@@ -9,7 +9,7 @@ import { ListOfStudentsService } from "../common/services";
 
 @NgModule({
   declarations: [AppComponent, StudentsComponent],
-  imports: [BrowserModule, AppRoutingModule],
+  imports: [BrowserModule, AppRoutingModule, SharedModule],
   providers: [ListOfStudentsService],
   bootstrap: [AppComponent],
 })
