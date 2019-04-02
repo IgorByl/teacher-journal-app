@@ -9,8 +9,8 @@ import { DashboardComponent } from "../components/dashboard/dashboard.component"
 
 const routes: Routes = [
   { path: "", redirectTo: "/students", pathMatch: "full" },
-  // { path: "statistics", component: StatisticsComponent },
-  // { path: "export", component: ExportComponent },
+  { path: "statistics", component: StatisticsComponent },
+  { path: "export", component: ExportComponent },
   { path: "students", component: StudentsComponent },
   // { path: "subjects", component: SubjectsComponent },
   // { path: "subjects/:id", component: DashboardComponent },

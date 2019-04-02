@@ -1,19 +1,24 @@
-<h1>
-  {{ title }}
-</h1>
+<div class="titleWrapper">
+  <div class="titleWrapper__logo">
+    <div class="titleWrapper__logo_squire"></div>
+    <div class="titleWrapper__logo_triangle"></div>
+  </div>
+  <h1 class="titleWrapper__title">
+    {{ title | uppercase }}
+  </h1>
+</div>
 <nav class="navigation">
   <ul class="navigation__unorderedList">
-    <ng-template ngFor let-item [ngForOf]="routs">
-      <li
-        class="navigation__listItem"
-        routerLinkActive="activeLink"
-        [routerLinkActiveOptions]="{ exact: true }"
-      >
-        <a class="navigation__link" routerLink="{{ item }}">{{
-          item | slice: 1 | uppercase
-        }}</a>
-      </li>
-    </ng-template>
+    <li
+      *ngFor="let item of routs"
+      class="navigation__listItem"
+      routerLinkActive="activeLink"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      <a class="navigation__link" routerLink="{{ item }}">{{
+        item | slice: 1 | uppercase
+      }}</a>
+    </li>
   </ul>
 </nav>
 

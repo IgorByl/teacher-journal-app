@@ -6,10 +6,17 @@ import { StudentsComponent } from "../components/students/students.component";
 import { SharedModule } from "../shared/shared.module";
 import { AppRoutingModule } from "./app-routing.module";
 import { ListOfStudentsService } from "../common/services";
+import { StatisticsComponent } from "../components/statistics/statistics.component";
+import { ExportComponent } from "../components/export/export.component";
 
 @NgModule({
-  declarations: [AppComponent, StudentsComponent],
-  imports: [BrowserModule, AppRoutingModule],
+  declarations: [
+    AppComponent,
+    StudentsComponent,
+    StatisticsComponent,
+    ExportComponent,
+  ],
+  imports: [BrowserModule, AppRoutingModule, SharedModule],
   providers: [ListOfStudentsService],
   bootstrap: [AppComponent],
 })

@@ -1,15 +1,16 @@
 <div class="addFieldWrapper" *ngIf="addFlag">
-  <p>{{formRequestFields.title}}</p>
+  <p>{{ formRequestFields.title }}</p>
   <form class="form" [formGroup]="profileForm" (ngSubmit)="omSubmit()">
-    <label
-      >{{formRequestFields.firstRow}}:
+    <label class="form__label"
+      >{{ formRequestFields.firstRow }}:
       <input
+        class="form__input_needValidationField"
         type="text"
-        placeholder="{{formRequestFields.firstRow  | lowercase}}"
-        formControlName="{{formRequestFields.firstRow}}"
+        placeholder="{{ formRequestFields.firstRow | lowercase }}"
+        formControlName="{{ formRequestFields.firstRow }}"
     /></label>
     <div
-      class="alert alert-danger"
+      class="form__input_invalidFieldSignature"
       *ngIf="
         profileForm.controls[formRequestFields.firstRow].invalid &&
         profileForm.controls[formRequestFields.firstRow].touched
@@ -18,15 +19,16 @@
       Undefined or uncorrect name field.
     </div>
     <br />
-    <label
-      >{{formRequestFields.secondRow}}:
+    <label class="form__label"
+      >{{ formRequestFields.secondRow }}:
       <input
+        class="form__input_needValidationField"
         type="text"
-        placeholder="{{formRequestFields.secondRow  | lowercase}}"
-        formControlName="{{formRequestFields.secondRow}}"
+        placeholder="{{ formRequestFields.secondRow | lowercase }}"
+        formControlName="{{ formRequestFields.secondRow }}"
     /></label>
     <div
-      class="alert alert-danger"
+      class="form__input_invalidFieldSignature"
       *ngIf="
         profileForm.controls[formRequestFields.secondRow].invalid &&
         profileForm.controls[formRequestFields.secondRow].touched
@@ -35,22 +37,28 @@
       Undefined or uncorrect Lastname field.
     </div>
     <br />
-    <label
-      >[{{formRequestFields.thirdRow}}:
+    <label class="form__label"
+      >{{ formRequestFields.thirdRow }}:
       <input
         type="text"
-        placeholder="{{formRequestFields.thirdRow  | lowercase}}"
-        formControlName="{{formRequestFields.thirdRow}}"
+        placeholder="{{ formRequestFields.thirdRow | lowercase }}"
+        formControlName="{{ formRequestFields.thirdRow }}"
     /></label>
     <br />
-    <label
-      >{{formRequestFields.fourthRow}}:
+    <label class="form__label"
+      >{{ formRequestFields.fourthRow }}:
       <textarea
-        placeholder="{{formRequestFields.fourthRow  | lowercase}}"
-        formControlName="{{formRequestFields.fourthRow}}"
+        placeholder="{{ formRequestFields.fourthRow | lowercase }}"
+        formControlName="{{ formRequestFields.fourthRow }}"
       ></textarea
     ></label>
     <br />
-    <button type="submit" [disabled]="!profileForm.valid">Add</button>
+    <button
+      class="form__button_submit"
+      type="submit"
+      [disabled]="!profileForm.valid"
+    >
+      Add
+    </button>
   </form>
 </div>

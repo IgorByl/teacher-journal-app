@@ -11,11 +11,11 @@ import { IStudent } from "../../common/entities/interfaces";
   styleUrls: ["./students.component.less"],
 })
 export class StudentsComponent implements OnInit {
+  public addFlag: boolean = false;
   public students: IStudent[];
   public subjects: Array<string>;
   public tableHeaders: Array<string> = TABLE_HEADERS;
   public formRequestStudentsFields: object = FORM_REQUEST_STUDENTS_FIELDS;
-  public addFlag: boolean = false;
 
   // tslint:disable-next-line:no-parameter-properties
   constructor(private listOfStudentsService: ListOfStudentsService) {}
