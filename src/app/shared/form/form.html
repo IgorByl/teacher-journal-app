@@ -1,0 +1,126 @@
+<div class="addFieldWrapper" *ngIf="addFlag">
+  <p>{{ formRequestFields.title }}</p>
+  <form class="form" [formGroup]="profileForm" (ngSubmit)="save()">
+    <label
+      [ngClass]="{
+        form__label: true,
+        form__input_invalidField:
+          (profileForm.controls[formRequestFields.firstRow].touched ||
+            profileForm.controls[formRequestFields.firstRow].dirty) &&
+          profileForm.controls[formRequestFields.firstRow].invalid
+      }"
+      >{{ formRequestFields.firstRow }}:
+      <span class="flex-grow-template"></span>
+      <input
+        class="form__input form__input_needValidationField"
+        type="text"
+        placeholder="{{ formRequestFields.firstRow | lowercase }} (required)"
+        formControlName="{{ formRequestFields.firstRow }}"
+    /></label>
+    <span
+      class="form__input_invalidFieldSignature"
+      *ngIf="
+        (profileForm.controls[formRequestFields.firstRow].touched ||
+          profileForm.controls[formRequestFields.firstRow].dirty) &&
+        profileForm.controls[formRequestFields.firstRow].invalid
+      "
+    >
+      <span
+        class="form__input_invalidFieldSignature"
+        *ngIf="
+          profileForm.controls[formRequestFields.firstRow].hasError('required')
+        "
+        >Please enter your name.</span
+      >
+      <span
+        class="form__input_invalidFieldSignature"
+        *ngIf="
+          profileForm.controls[formRequestFields.firstRow].hasError('pattern')
+        "
+        >Must enclude only letters.</span
+      >
+      <span
+        *ngIf="
+          profileForm.controls[formRequestFields.firstRow].hasError('minlength')
+        "
+        >Name must be longer than 1 characters.</span
+      >
+    </span>
+    <br />
+
+    <label class="form__label"
+      >{{ formRequestFields.secondRow }}:
+      <span class="flex-grow-template"></span>
+      <input
+        class="form__input form__input_needValidationField"
+        type="text"
+        placeholder="{{ formRequestFields.secondRow | lowercase }} (required)"
+        formControlName="{{ formRequestFields.secondRow }}"
+    /></label>
+    <span
+      class="form__input_invalidFieldSignature"
+      *ngIf="
+        (profileForm.controls[formRequestFields.secondRow].touched ||
+          profileForm.controls[formRequestFields.secondRow].dirty) &&
+        profileForm.controls[formRequestFields.secondRow].invalid
+      "
+    >
+      <span
+        class="form__input_invalidFieldSignature"
+        *ngIf="
+          profileForm.controls[formRequestFields.secondRow].hasError('required')
+        "
+        >Please enter your name.</span
+      >
+      <span
+        class="form__input_invalidFieldSignature"
+        *ngIf="
+          profileForm.controls[formRequestFields.secondRow].hasError('pattern')
+        "
+        >Must enclude only letters.</span
+      >
+      <span
+        *ngIf="
+          profileForm.controls[formRequestFields.secondRow].hasError('minlength')
+        "
+        >Must be longer than 1 characters.</span
+      >
+    </span>
+    <br />
+    <label class="form__label"
+      >{{ formRequestFields.thirdRow }}:
+      <span class="flex-grow-template"></span>
+      <input
+        class="form__input"
+        type="text"
+        placeholder="{{ formRequestFields.thirdRow | lowercase }}"
+        formControlName="{{ formRequestFields.thirdRow }}"
+    /></label>
+    <br />
+    <label class="form__label"
+      >{{ formRequestFields.fourthRow }}:
+      <span class="flex-grow-template"></span>
+      <textarea
+        class="form__textarea"
+        placeholder="{{ formRequestFields.fourthRow | lowercase }}"
+        formControlName="{{ formRequestFields.fourthRow }}"
+      ></textarea
+    ></label>
+    <br />
+    <button
+      class="form__submitButton"
+      type="submit"
+      [disabled]="!profileForm.valid"
+      [ngClass]="{ form__submitButton_invalid: !profileForm.valid }"
+    >
+      Add
+    </button>
+  </form>
+
+  <br />
+  Dirty : {{ profileForm.dirty }} <br />
+  Touched : {{ profileForm.touched }} <br />
+  Valid : {{ profileForm.valid }} <br />
+  Value : {{ profileForm.value | json }} <br />
+  Form status : {{ profileForm.status }}
+</div>
