@@ -26,8 +26,13 @@
 </div>
 
 <app-form
-    [addFlag]="addFlag"
-    [formRequestFields]="formRequestStudentsFields"
-    (changedVisibility)="changedVisibility($event)"
-    (transferFormData)="transferFormData($event)"
-  ></app-form>
+  [addFlag]="addFlag"
+  [formRequestFields]="formRequestStudentsFields"
+  (changedVisibility)="changedVisibility($event)"
+  (transferFormData)="transferFormData($event)"
+  ><span data-form-title>Add new student</span>
+  <span data-form-firstInput>Name: </span>
+  <span data-form-secondInput>Lastname: </span>
+  <span data-form-thirdInput>Address: </span>
+  <span data-form-fourthInput>Description: </span>
+</app-form>

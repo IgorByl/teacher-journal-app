@@ -1,25 +1,27 @@
-<div class="titleWrapper">
-  <div class="titleWrapper__logo">
-    <div class="titleWrapper__logo_squire"></div>
-    <div class="titleWrapper__logo_triangle"></div>
+<header>
+  <div class="titleWrapper">
+    <div class="titleWrapper__logo">
+      <div class="titleWrapper__logo_squire"></div>
+      <div class="titleWrapper__logo_triangle"></div>
+    </div>
+    <h1 class="titleWrapper__title">
+      {{ title | uppercase }}
+    </h1>
   </div>
-  <h1 class="titleWrapper__title">
-    {{ title | uppercase }}
-  </h1>
-</div>
-<nav class="navigation">
-  <ul class="navigation__unorderedList">
-    <li
-      *ngFor="let item of routs"
-      class="navigation__listItem"
-      routerLinkActive="activeLink"
-      [routerLinkActiveOptions]="{ exact: true }"
-    >
-      <a class="navigation__link" routerLink="{{ item }}">{{
-        item | slice: 1 | uppercase
-      }}</a>
-    </li>
-  </ul>
-</nav>
+  <nav class="navigation">
+    <ul class="navigation__unorderedList">
+      <li
+        *ngFor="let item of routs"
+        class="navigation__listItem"
+        routerLinkActive="activeLink"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <a class="navigation__link" routerLink="{{ item }}">{{
+          item | slice: 1 | uppercase
+        }}</a>
+      </li>
+    </ul>
+  </nav>
+</header>
 
 <router-outlet></router-outlet>
