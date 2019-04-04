@@ -27,11 +27,11 @@ export class FormComponent implements OnInit, OnDestroy {
     Name: "",
     LastName: "",
   };
-  private validationMessages: any = [
-    { required: "Please enter your name." },
-    { minlength: "Must be longer than 1 characters." },
-    { pattern: "Must enclude only letters." },
-  ];
+  private validationMessages: any = {
+    required: "Please enter your name.",
+    minlength: "Must be longer than 1 characters.",
+    pattern: "Must enclude only letters."
+  };
 
   @Input() public formRequestFields: IRequest;
   @Input() public addFlag: boolean;
@@ -47,10 +47,10 @@ export class FormComponent implements OnInit, OnDestroy {
   constructor(private fb: FormBuilder) {}
 
   private setValidationMessage(c: AbstractControl, controlName: any): void {
-    this.validationMessage = "";
+    this.validationMessage[controlName] = "";
     if ((c.touched || c.dirty) && c.errors) {
-      this.validationMessage = Object.keys(c.errors)
-        .map(key => this.validationMessages[controlName][key])
+      this.validationMessage[controlName] = Object.keys(c.errors)
+        .map(key => this.validationMessages[key])
         .join(" ");
     }
   }
@@ -68,17 +68,16 @@ export class FormComponent implements OnInit, OnDestroy {
     const nameControl: AbstractControl = this.profileForm.get([
       this.formRequestFields.firstRow,
     ]);
-    // const lastNameControl: AbstractControl = this.profileForm.get([
-    //   this.formRequestFields.secondRow,
-    // ]);
+    const lastNameControl: AbstractControl = this.profileForm.get([
+      this.formRequestFields.secondRow,
+    ]);
     this.sub = nameControl.valueChanges.subscribe(value =>
       this.setValidationMessage(nameControl, "Name")
     );
-    // const subLastName: Subscription = lastNameControl.valueChanges.subscribe(value =>
-    //   this.setValidationMessage(lastNameControl, "Lastname")
-    // );
-    // this.sub.add(subName);
-    // this.sub.add(subLastName);
+    const subLastName: Subscription = lastNameControl.valueChanges.subscribe(value =>
+      this.setValidationMessage(lastNameControl, "LastName")
+    );
+    this.sub.add(subLastName);
   }
 
   public save(): void {
@@ -91,11 +90,11 @@ export class FormComponent implements OnInit, OnDestroy {
     const nameControl: AbstractControl = this.profileForm.get([
       this.formRequestFields.firstRow,
     ]);
-    // const lastNameControl: AbstractControl = this.profileForm.get([
-    //   this.formRequestFields.secondRow,
-    // ]);
+    const lastNameControl: AbstractControl = this.profileForm.get([
+      this.formRequestFields.secondRow,
+    ]);
     this.setValidationMessage(nameControl, "Name");
-    // this.setValidationMessage(lastNameControl, "Lastname");
+    this.setValidationMessage(lastNameControl, "Lastname");
   }
 
   public createForm(): void {
