@@ -1,0 +1,64 @@
+@import "../../common/constants/colors.less";
+
+@addedButtonParams: 2px solid @buttonCrossLinesColor;
+
+.buttonConteiner {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    width: 40px;
+    height: 40px;
+    margin: 15px auto;
+    border-radius: 50%;
+    background: @linkBgColor;
+    cursor: pointer;
+    &__centerElement {
+      position: absolute;
+      z-index: 1;
+      width: 8px;
+      height: 8px;
+      background: @linkBgColor;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+  .buttonConteiner__squiresWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    width: 30px;
+    height: 30px;
+    &_topLSquire,
+    &_topRSquire,
+    &_botRSquire,
+    &_botLSquire {
+      width: 13px;
+      height: 13px;
+    }
+    &_topLSquire {
+      border-right: @addedButtonParams;
+      border-bottom: @addedButtonParams;
+    }
+    &_topRSquire {
+      border-left: @addedButtonParams;
+      border-bottom: @addedButtonParams;
+    }
+    &_botRSquire {
+      border-right: @addedButtonParams;
+      border-top: @addedButtonParams;
+    }
+    &_botLSquire {
+      border-left: @addedButtonParams;
+      border-top: @addedButtonParams;
+    }
+  }
+  
+  .buttonConteiner:hover {
+    background-color: lighten(@linkBgColor, 15%);
+  }
+  
+  .buttonConteiner:hover .buttonConteiner__centerElement {
+    background-color: lighten(@linkBgColor, 15%);
+  }

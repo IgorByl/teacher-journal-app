@@ -1,10 +1,11 @@
 import {
   Component,
-  OnInit,
   Input,
   Output,
   EventEmitter,
   OnDestroy,
+  AfterContentInit,
+  ContentChildren,
 } from "@angular/core";
 import {
   FormGroup,
@@ -12,7 +13,6 @@ import {
   FormBuilder,
   AbstractControl,
 } from "@angular/forms";
-import { IRequest } from "../../common/entities/interfaces";
 import { Subscription } from "rxjs";
 
 @Component({
@@ -20,7 +20,7 @@ import { Subscription } from "rxjs";
   templateUrl: "./form.html",
   styleUrls: ["./form.less"],
 })
-export class FormComponent implements OnInit, OnDestroy {
+export class FormComponent implements OnDestroy, AfterContentInit {
   private sub: Subscription;
 
   private validationMessage: any = {
@@ -30,19 +30,20 @@ export class FormComponent implements OnInit, OnDestroy {
   private validationMessages: any = {
     required: "Please enter your name.",
     minlength: "Must be longer than 1 characters.",
-    pattern: "Must enclude only letters."
+    pattern: "Must enclude only letters.",
   };
 
-  @Input() public formRequestFields: IRequest;
-  @Input() public addFlag: boolean;
-  @Output() public changedVisibility: EventEmitter<boolean> = new EventEmitter<
+  @Input() public isVisible: boolean;
+  @Output() public hiddenForm: EventEmitter<boolean> = new EventEmitter<
     boolean
   >();
   @Output() public transferFormData: EventEmitter<object> = new EventEmitter<
     object
   >();
+  @ContentChildren("formControlsData") public childrens: any;
 
   public profileForm: FormGroup;
+  public formControlsNames: string[];
 
   constructor(private fb: FormBuilder) {}
 
@@ -55,7 +56,8 @@ export class FormComponent implements OnInit, OnDestroy {
     }
   }
 
-  public ngOnInit(): void {
+  public ngAfterContentInit(): void {
+    this.formControlsNames = [...this.childrens._results.map(item => item.nativeElement.innerText)];
     this.createForm();
     this.watchValueChanges();
   }
@@ -66,32 +68,32 @@ export class FormComponent implements OnInit, OnDestroy {
 
   public watchValueChanges(): void {
     const nameControl: AbstractControl = this.profileForm.get([
-      this.formRequestFields.firstRow,
+      this.formControlsNames[0],
     ]);
     const lastNameControl: AbstractControl = this.profileForm.get([
-      this.formRequestFields.secondRow,
+      this.formControlsNames[1],
     ]);
     this.sub = nameControl.valueChanges.subscribe(value =>
       this.setValidationMessage(nameControl, "Name")
     );
-    const subLastName: Subscription = lastNameControl.valueChanges.subscribe(value =>
-      this.setValidationMessage(lastNameControl, "LastName")
+    const subLastName: Subscription = lastNameControl.valueChanges.subscribe(
+      value => this.setValidationMessage(lastNameControl, "LastName")
     );
     this.sub.add(subLastName);
   }
 
   public save(): void {
     this.transferFormData.emit(this.profileForm);
-    this.changedVisibility.emit(false);
+    this.hiddenForm.emit(false);
     this.profileForm.reset();
   }
 
   public onBlur(): void {
     const nameControl: AbstractControl = this.profileForm.get([
-      this.formRequestFields.firstRow,
+      this.formControlsNames[0],
     ]);
     const lastNameControl: AbstractControl = this.profileForm.get([
-      this.formRequestFields.secondRow,
+      this.formControlsNames[1],
     ]);
     this.setValidationMessage(nameControl, "Name");
     this.setValidationMessage(lastNameControl, "Lastname");
@@ -100,7 +102,7 @@ export class FormComponent implements OnInit, OnDestroy {
   public createForm(): void {
     this.profileForm = this.fb.group(
       {
-        [this.formRequestFields.firstRow]: [
+        [this.formControlsNames[0]]: [
           "",
           [
             Validators.required,
@@ -110,7 +112,7 @@ export class FormComponent implements OnInit, OnDestroy {
             ),
           ],
         ],
-        [this.formRequestFields.secondRow]: [
+        [this.formControlsNames[1]]: [
           "",
           [
             Validators.required,
@@ -120,8 +122,8 @@ export class FormComponent implements OnInit, OnDestroy {
             ),
           ],
         ],
-        [this.formRequestFields.thirdRow]: [""],
-        [this.formRequestFields.fourthRow]: [""],
+        [this.formControlsNames[2]]: [""],
+        [this.formControlsNames[3]]: [""],
       },
       { updateOn: "blur" }
     );

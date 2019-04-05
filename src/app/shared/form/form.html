@@ -1,4 +1,4 @@
-<div class="addFieldWrapper" *ngIf="addFlag">
+<div class="addFieldWrapper" *ngIf="isVisible">
   <p><ng-content select="[data-form-title]"></ng-content></p>
   <form class="form" [formGroup]="profileForm" (ngSubmit)="save()">
     <label
@@ -6,13 +6,13 @@
         form__label: true,
         form__input_invalidField: validationMessage
       }"
-      ><p><ng-content select="[data-form-firstInput]"></ng-content></p>
+      ><p><ng-content select="[data-form-firstInput]"></ng-content>:</p>
       <span class="flex-grow-template"></span>
       <input
         class="form__input form__input_needValidationField"
         type="text"
-        placeholder="{{ formRequestFields.firstRow | lowercase }} (required)"
-        formControlName="{{ formRequestFields.firstRow }}"
+        placeholder="{{ formControlsNames[0] | lowercase }} (required)"
+        formControlName="{{ formControlsNames[0] }}"
         (blur)="onBlur()"
     /></label>
     <span class="form__input_invalidFieldSignature" *ngIf="validationMessage.Name">
@@ -20,13 +20,13 @@
     </span>
     <br />
     <label class="form__label"
-      ><p><ng-content select="[data-form-secondInput]"></ng-content></p>
+      ><p><ng-content select="[data-form-secondInput]"></ng-content>:</p>
       <span class="flex-grow-template"></span>
       <input
         class="form__input form__input_needValidationField"
         type="text"
-        placeholder="{{ formRequestFields.secondRow | lowercase }} (required)"
-        formControlName="{{ formRequestFields.secondRow }}"
+        placeholder="{{ formControlsNames[1] | lowercase }} (required)"
+        formControlName="{{ formControlsNames[1] }}"
         (blur)="onBlur()"
     /></label>
     <span class="form__input_invalidFieldSignature" *ngIf="validationMessage.LastName">
@@ -34,22 +34,22 @@
     </span>
     <br />
     <label class="form__label"
-      ><p><ng-content select="[data-form-thirdInput]"></ng-content></p>
+      ><p><ng-content select="[data-form-thirdInput]"></ng-content>:</p>
       <span class="flex-grow-template"></span>
       <input
         class="form__input"
         type="text"
-        placeholder="{{ formRequestFields.thirdRow | lowercase }}"
-        formControlName="{{ formRequestFields.thirdRow }}"
+        placeholder="{{ formControlsNames[2] | lowercase }}"
+        formControlName="{{ formControlsNames[2] }}"
     /></label>
     <br />
     <label class="form__label"
-      ><p><ng-content select="[data-form-fourthInput]"></ng-content></p>
+      ><p><ng-content select="[data-form-fourthInput]"></ng-content>:</p>
       <span class="flex-grow-template"></span>
       <textarea
         class="form__textarea"
-        placeholder="{{ formRequestFields.fourthRow | lowercase }}"
-        formControlName="{{ formRequestFields.fourthRow }}"
+        placeholder="{{ formControlsNames[3] | lowercase }}"
+        formControlName="{{ formControlsNames[3] }}"
       ></textarea
     ></label>
     <br />

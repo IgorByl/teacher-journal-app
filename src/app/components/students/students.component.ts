@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { AddedStudent } from "../../common/entities/classes";
+import { CreateNewStudent } from "../../common/entities/classes";
 import { TABLE_HEADERS } from "../../common/constants";
-import { FORM_REQUEST_STUDENTS_FIELDS } from "../../common/constants";
 import { ListOfStudentsService } from "../../common/services";
 import { IStudent } from "../../common/entities/interfaces";
 
@@ -11,13 +10,11 @@ import { IStudent } from "../../common/entities/interfaces";
   styleUrls: ["./students.component.less"],
 })
 export class StudentsComponent implements OnInit {
-  public addFlag: boolean = false;
+  public isVisible: boolean = false;
   public students: IStudent[];
   public subjects: Array<string>;
   public tableHeaders: Array<string> = TABLE_HEADERS;
-  public formRequestStudentsFields: object = FORM_REQUEST_STUDENTS_FIELDS;
 
-  // tslint:disable-next-line:no-parameter-properties
   constructor(private listOfStudentsService: ListOfStudentsService) {}
 
   public ngOnInit(): void {
@@ -30,17 +27,17 @@ export class StudentsComponent implements OnInit {
       .subscribe(data => this.students = data);
   }
 
-  public addNewStudent(): void {
-    this.addFlag = !this.addFlag;
+  public toggleForm(): void {
+    this.isVisible = !this.isVisible;
   }
 
-  public changedVisibility(increased: any): void {
-    this.addFlag = increased;
+  public hiddenForm(increased: any): void {
+    this.isVisible = increased;
   }
 
   public transferFormData(increased: any): void {
     this.students.push(
-      new AddedStudent(
+      new CreateNewStudent(
         increased.value.Name,
         increased.value.Lastname,
         increased.value.Address,

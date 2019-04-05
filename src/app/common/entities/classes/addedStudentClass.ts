@@ -1,4 +1,4 @@
-export class AddedStudent {
+export class CreateNewStudent {
   constructor(
     public name: string,
     public lastName: string,

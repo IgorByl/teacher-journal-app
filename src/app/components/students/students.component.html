@@ -15,24 +15,15 @@
   </tbody>
 </table>
 
-<div class="buttonConteiner" (click)="addNewStudent()">
-  <div class="buttonConteiner__centerElement"></div>
-  <div class="buttonConteiner__squiresWrapper">
-    <div class="buttonConteiner__squiresWrapper_topLSquire"></div>
-    <div class="buttonConteiner__squiresWrapper_topRSquire"></div>
-    <div class="buttonConteiner__squiresWrapper_botRSquire"></div>
-    <div class="buttonConteiner__squiresWrapper_botLSquire"></div>
-  </div>
-</div>
+<app-button (toggleForm)="toggleForm()"></app-button>
 
 <app-form
-  [addFlag]="addFlag"
-  [formRequestFields]="formRequestStudentsFields"
-  (changedVisibility)="changedVisibility($event)"
+  [isVisible]="isVisible"
+  (hiddenForm)="hiddenForm($event)"
   (transferFormData)="transferFormData($event)"
   ><span data-form-title>Add new student</span>
-  <span data-form-firstInput>Name: </span>
-  <span data-form-secondInput>Lastname: </span>
-  <span data-form-thirdInput>Address: </span>
-  <span data-form-fourthInput>Description: </span>
+  <span #formControlsData data-form-firstInput>Name</span>
+  <span #formControlsData data-form-secondInput>Lastname</span>
+  <span #formControlsData data-form-thirdInput>Address</span>
+  <span #formControlsData data-form-fourthInput>Description</span>
 </app-form>
