@@ -13,28 +13,25 @@
     "main main"
     "main main";
   margin-bottom: 20px;
-}
-
-.subjectsWrapper__title {
-  grid-area: header;
-}
-
-.subjectsWrapper__box {
-  border-radius: 10px;
-  background-color: @mainEmblemColor;
-  font-size: 2.5vh;
-  text-align: center;
-  padding-top: 40%;
-  cursor: pointer;
-}
-
-.subjectsWrapper__box::first-letter {
-  text-transform: uppercase;
-}
-
-.subjectsWrapper__box:hover {
-  background-color: lighten(@mainEmblemColor, 5%);
-  text-shadow: @textColorShadow 0 1px 4px;
+  &__title {
+    grid-area: header;
+  }
+  &__box {
+    border-radius: 10px;
+    background-color: @mainEmblemColor;
+    font-size: 2.5vh;
+    text-align: center;
+    outline: none;
+    padding-top: 40%;
+    cursor: pointer;
+    &::first-letter {
+      text-transform: uppercase;
+    }
+    &:hover {
+      background-color: lighten(@mainEmblemColor, 5%);
+      text-shadow: @textColorShadow 0 1px 4px;
+    }
+  }
 }
 
 @media (max-width: 580px) {

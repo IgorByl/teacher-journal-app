@@ -1,0 +1,21 @@
+<h3>{{ subject }}</h3>
+
+<table class="table">
+  <tr>
+    <th class="table__header">
+      Name
+    </th>
+    <th class="table__header">
+      LastName
+    </th>
+    <!-- <th class="table__header" *ngFor="let i of ">
+        LastName
+      </th> -->
+  </tr>
+  <tbody>
+    <tr *ngFor="let i of students">
+      <td>{{ i.name }}</td>
+      <td>{{ i.lastName }}</td>
+    </tr>
+  </tbody>
+</table>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { CreateNewStudent } from "../../common/entities/classes";
 import { TABLE_HEADERS } from "../../common/constants";
 import { ListOfStudentsService } from "../../common/services";
@@ -8,12 +8,13 @@ import { IStudent } from "../../common/entities/interfaces";
   selector: "app-students",
   templateUrl: "./students.component.html",
   styleUrls: ["./students.component.less"],
+  encapsulation: ViewEncapsulation.None
 })
 export class StudentsComponent implements OnInit {
   public isVisible: boolean = false;
   public students: IStudent[];
-  public subjects: Array<string>;
-  public tableHeaders: Array<string> = TABLE_HEADERS;
+  public subjects: string[];
+  public tableHeaders: string[] = TABLE_HEADERS;
 
   constructor(private listOfStudentsService: ListOfStudentsService) {}
 

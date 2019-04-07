@@ -5,7 +5,7 @@ import { ExportComponent } from "../components/export/export.component";
 import { StudentsComponent } from "../components/students/students.component";
 import { SubjectsComponent } from "../components/subjects/subjects.component";
 // import { NotFoundComponent } from "../components/not-found-page/not-found-page.component";
-// import { DashboardComponent } from "../components/dashboard/dashboard.component";
+import { DashboardComponent } from "../components/dashboard/dashboard.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "/students", pathMatch: "full" },
@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: "export", component: ExportComponent },
   { path: "students", component: StudentsComponent },
   { path: "subjects", component: SubjectsComponent },
-  // { path: "subjects/:id", component: DashboardComponent },
+  { path: "subjects/:subject", component: DashboardComponent },
   // { path: "**", component: NotFoundComponent },
 ];
 

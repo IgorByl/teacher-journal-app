@@ -10,7 +10,7 @@ import { IStudent } from "../../common/entities/interfaces";
 })
 export class SubjectsComponent implements OnInit {
   public title: string = "List of subjects:";
-  public subjects: Array<string> = [];
+  public subjects: string[] = [];
   public students: IStudent[];
   public isVisible: boolean = false;
 
