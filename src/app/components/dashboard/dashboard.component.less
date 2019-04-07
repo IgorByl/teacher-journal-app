@@ -1,5 +1,13 @@
 @import "../../common/constants/colors.less";
 
+.subjectName {
+  text-transform: capitalize;
+}
+
+.teacherName, .subjectName {
+  margin-left: 20%;
+}
+
 .table {
   margin: 0 auto;
   margin-top: 50px;
@@ -7,6 +15,30 @@
   border-collapse: collapse;
   &__header {
     background-color: @tableHeaderColor;
+  }
+  &__input,
+  &__input_teacher {
+    max-width: 20px;
+    text-align: center;
+    background-color: @textColorUnvisible;
+    border: none;
+    color: @textColor;
+    &_header {
+      max-width: 40px;
+    }
+    &_teacher {
+      max-width: none;
+      padding: 5px;
+      border: 3px solid @formBorderColor;
+      border-radius: 3px;
+    }
+  }
+  &__input:focus,
+  &__input_teacher:focus {
+    min-width: 50px;
+    background-color: @textColor;
+    color: @textColorShadow;
+    outline: none;
   }
 }
 

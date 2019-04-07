@@ -1,4 +1,4 @@
-<h3>{{ subject }}</h3>
+<h2 class="subjectName">{{ subject }}</h2>
 
 <table class="table">
   <tr>
@@ -8,17 +8,32 @@
     <th class="table__header">
       Lastname
     </th>
-    <th class="table__header" *ngFor="let i of listOfDate">
-       {{i}}
-      </th>
+    <th
+      class="table__header"
+      *ngFor="let i of students[0].subjects[subject].date"
+    >
+      <input class="table__input table__input_header" [(ngModel)]="i" />
+    </th>
   </tr>
   <tbody>
     <tr *ngFor="let i of students">
       <td>{{ i.name }}</td>
       <td>{{ i.lastName }}</td>
-      <td *ngFor="let i of students">{{i.subjects[subject].marks}}</td>
+      <td *ngFor="let j of i.subjects[subject].marks">
+        <input
+          *ngIf="i.subjects[subject].marks"
+          class="table__input"
+          [(ngModel)]="j"
+        />
+      </td>
     </tr>
   </tbody>
 </table>
 
-<h2>Teacher: <input [(ngModul)]="teacher">{{teacher}}</h2>
+<h3 class="teacherName">
+  Teacher:
+  <input
+    class="table__input_teacher"
+    [(ngModel)]="students[0].subjects[subject].teacher"
+  />
+</h3>

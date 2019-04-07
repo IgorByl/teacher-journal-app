@@ -15,7 +15,7 @@
 
 <app-form
   [isVisible]="isVisible"
-  (changedVisibility)="changedVisibility($event)"
+  (hiddenForm)="hiddenForm($event)"
   (transferFormData)="transferFormData($event)"
   ><span data-form-title>Add new student</span>
   <span #formControlsData data-form-firstInput>Subject</span>

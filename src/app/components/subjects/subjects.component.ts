@@ -49,7 +49,7 @@ export class SubjectsComponent implements OnInit {
     });
   }
 
-  public changedVisibility(increased: any): void {
+  public hiddenForm(increased: any): void {
     this.isVisible = increased;
     this.subjects = this.getSubjects();
   }
