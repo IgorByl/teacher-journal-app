@@ -6,16 +6,19 @@
       Name
     </th>
     <th class="table__header">
-      LastName
+      Lastname
     </th>
-    <!-- <th class="table__header" *ngFor="let i of ">
-        LastName
-      </th> -->
+    <th class="table__header" *ngFor="let i of listOfDate">
+       {{i}}
+      </th>
   </tr>
   <tbody>
     <tr *ngFor="let i of students">
       <td>{{ i.name }}</td>
       <td>{{ i.lastName }}</td>
+      <td *ngFor="let i of students">{{i.subjects[subject].marks}}</td>
     </tr>
   </tbody>
 </table>
+
+<h2>Teacher: <input [(ngModul)]="teacher">{{teacher}}</h2>

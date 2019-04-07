@@ -11,7 +11,7 @@ import { IStudent } from "src/app/common/entities/interfaces";
 export class DashboardComponent implements OnInit {
   public subject: string;
   public students: IStudent[];
-  public listOfDate: string[] = [];
+  public teacher: string;
 
   constructor(
     private activateRoute: ActivatedRoute,
@@ -20,17 +20,13 @@ export class DashboardComponent implements OnInit {
     this.subject = activateRoute.snapshot.params.subject;
   }
 
-  private getListOfDate(): void {
-    this.students[0].subjects[this.subject].marks.forEach(item => {
-      console.log(Object.keys(item));
-    });
+  private getTeacher(): void {
+    this.teacher = this.students[0].subjects[this.subject].teacher;
   }
 
   public ngOnInit(): void {
     this.getStudents();
-    this.getListOfDate();
-    console.log(this.students);
-    console.log(this.listOfDate);
+    this.getTeacher();
   }
 
   public getStudents(): void {

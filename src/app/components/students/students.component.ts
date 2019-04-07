@@ -8,7 +8,7 @@ import { IStudent } from "../../common/entities/interfaces";
   selector: "app-students",
   templateUrl: "./students.component.html",
   styleUrls: ["./students.component.less"],
-  encapsulation: ViewEncapsulation.None
+  // encapsulation: ViewEncapsulation.None
 })
 export class StudentsComponent implements OnInit {
   public isVisible: boolean = false;
