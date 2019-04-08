@@ -1,4 +1,4 @@
-<table class="table">
+<table class="table" *ngIf="!isVisible">
   <tr>
     <th class="table__header" *ngFor="let item of tableHeaders">
       {{ item }}
@@ -15,8 +15,6 @@
   </tbody>
 </table>
 
-<app-button (toggleForm)="toggleForm()"></app-button>
-
 <app-form
   [isVisible]="isVisible"
   (hiddenForm)="hiddenForm($event)"
@@ -27,3 +25,5 @@
   <span #formControlsData data-form-thirdInput>Address</span>
   <span #formControlsData data-form-fourthInput>Description</span>
 </app-form>
+
+<app-button (toggleForm)="toggleForm()"></app-button>

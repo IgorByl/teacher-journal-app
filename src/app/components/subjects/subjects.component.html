@@ -1,4 +1,4 @@
-<section class="subjectsWrapper">
+<section class="subjectsWrapper" *ngIf="!isVisible">
   <h2 class="subjectsWrapper__title">
     {{ title }}
   </h2>
@@ -11,8 +11,6 @@
   </div>
 </section>
 
-<app-button (toggleForm)="toggleForm()"></app-button>
-
 <app-form
   [isVisible]="isVisible"
   (hiddenForm)="hiddenForm($event)"
@@ -24,3 +22,5 @@
   <span #formControlsData data-form-fourthInput>Description</span>
   ></app-form
 >
+
+<app-button (toggleForm)="toggleForm()"></app-button>
