@@ -1,5 +1,6 @@
 export class CreateNewStudent {
   constructor(
+    public id: number,
     public name: string,
     public lastName: string,
     public address: string,

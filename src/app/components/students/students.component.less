@@ -7,6 +7,14 @@
   border-collapse: collapse;
   &__header {
     background-color: @tableHeaderColor;
+    &_sortItem::after {
+      content: "▼";
+      cursor: pointer;
+      opacity: 0.1;
+    }
+    &_sortItem:hover::after {
+      opacity: 0.5;
+    }
   }
 }
 

@@ -1,7 +1,7 @@
 export const TABLE_HEADERS: Array<string> = [
-  "Id",
-  "Name",
-  "Lastname",
-  "Address",
-  "Description",
+  "id",
+  "name",
+  "lastName",
+  "address",
+  "description",
 ];

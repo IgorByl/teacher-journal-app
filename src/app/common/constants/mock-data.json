@@ -1,5 +1,6 @@
 [
   {
+    "id": 1,
     "name": "Ivan",
     "lastName": "Ruster",
     "address": "St.Pavlov str. 7",
@@ -36,6 +37,7 @@
     }
   },
   {
+    "id": 2,
     "name": "Genia",
     "lastName": "Petrova",
     "address": "Nekrasova str. 12",

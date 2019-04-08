@@ -1,12 +1,12 @@
 <table class="table" *ngIf="!isVisible">
   <tr>
-    <th class="table__header" *ngFor="let item of tableHeaders">
+    <th (click)="sortRows(item)" class="table__header table__header_sortItem" *ngFor="let item of tableHeaders">
       {{ item }}
     </th>
   </tr>
   <tbody>
     <tr *ngFor="let i of students; index as ind">
-      <td>{{ ind + 1 }}</td>
+      <td>{{ i.id }}</td>
       <td>{{ i.name }}</td>
       <td>{{ i.lastName }}</td>
       <td>{{ i.address }}</td>

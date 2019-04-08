@@ -15,6 +15,7 @@ export class StudentsComponent implements OnInit {
   public students: IStudent[];
   public subjects: string[];
   public tableHeaders: string[] = TABLE_HEADERS;
+  public toggleSort: boolean = false;
 
   constructor(private listOfStudentsService: ListOfStudentsService) {}
 
@@ -25,7 +26,7 @@ export class StudentsComponent implements OnInit {
   public getStudents(): void {
     this.listOfStudentsService
       .getStudents()
-      .subscribe(data => this.students = data);
+      .subscribe(data => (this.students = data));
   }
 
   public toggleForm(): void {
@@ -39,11 +40,34 @@ export class StudentsComponent implements OnInit {
   public transferFormData(increased: any): void {
     this.students.push(
       new CreateNewStudent(
+        this.students.length + 1,
         increased.value.Name,
         increased.value.Lastname,
         increased.value.Address,
         increased.value.Description
       )
     );
+  }
+
+  public sortRows(field: string): void {
+    this.toggleSort = !this.toggleSort;
+    this.students = this.students.sort((a, b) => {
+      if (this.toggleSort) {
+        if (a[field] > b[field]) {
+          return -1;
+        }
+        if (a[field] < b[field]) {
+          return 1;
+        }
+      } else {
+        if (a[field] > b[field]) {
+          return 1;
+        }
+        if (a[field] < b[field]) {
+          return -1;
+        }
+      }
+      return 0;
+    });
   }
 }
