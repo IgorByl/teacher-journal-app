@@ -1,4 +1,4 @@
-export const TITLE_ROOTS: Array<string> = [
+export const TITLE_ROOTS: string[] = [
   "/students",
   "/subjects",
   "/statistics",

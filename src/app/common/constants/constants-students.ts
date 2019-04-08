@@ -1,4 +1,4 @@
-export const TABLE_HEADERS: Array<string> = [
+export const TABLE_HEADERS: string[] = [
   "id",
   "name",
   "lastName",

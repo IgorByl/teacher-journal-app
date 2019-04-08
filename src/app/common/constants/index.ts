@@ -1,2 +1,2 @@
-export { TABLE_HEADERS } from "./students-table-headers";
-export { TITLE_ROOTS } from "./titleRouts";
+export { TABLE_HEADERS } from "./constants-students";
+export { TITLE_ROOTS } from "./constants-root";
