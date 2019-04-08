@@ -7,7 +7,7 @@ import {
 } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { ListOfStudentsService } from "src/app/common/services";
-import { IStudent } from "src/app/common/entities/interfaces";
+import { IStudent } from "src/app/common/entities";
 
 @Component({
   selector: "app-dashboard",

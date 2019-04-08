@@ -1,14 +1,12 @@
-import { Component, OnInit, ViewEncapsulation } from "@angular/core";
-import { CreateNewStudent } from "../../common/entities/classes";
+import { Component, OnInit } from "@angular/core";
+import { CreateNewStudent, IStudent } from "../../common/entities";
 import { TABLE_HEADERS } from "../../common/constants";
 import { ListOfStudentsService } from "../../common/services";
-import { IStudent } from "../../common/entities/interfaces";
 
 @Component({
   selector: "app-students",
   templateUrl: "./students.component.html",
   styleUrls: ["./students.component.less"],
-  // encapsulation: ViewEncapsulation.None
 })
 export class StudentsComponent implements OnInit {
   public isVisible: boolean = false;

@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { GetListOfSubjectsService } from "../../common/services";
 import { ListOfStudentsService } from "../../common/services";
-import { IStudent } from "../../common/entities/interfaces";
+import { IStudent } from "../../common/entities";
 
 @Component({
   selector: "app-subjects",

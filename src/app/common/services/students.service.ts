@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
 import student from "../constants/mock-data.json";
-import { IStudent } from "../entities/interfaces";
+import { IStudent } from "../entities";
 
 @Injectable({
   providedIn: "root",
