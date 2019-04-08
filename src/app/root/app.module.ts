@@ -14,6 +14,7 @@ import { StatisticsComponent } from "../components/statistics/statistics.compone
 import { ExportComponent } from "../components/export/export.component";
 import { SubjectsComponent } from "../components/subjects/subjects.component";
 import { DashboardComponent } from "../components/dashboard/dashboard.component";
+import { NotFoundComponent } from "../components/not-found-page/not-found-page.component";
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { DashboardComponent } from "../components/dashboard/dashboard.component"
     ExportComponent,
     SubjectsComponent,
     DashboardComponent,
+    NotFoundComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, SharedModule, FormsModule],
   providers: [ListOfStudentsService, GetListOfSubjectsService],

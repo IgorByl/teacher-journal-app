@@ -4,7 +4,7 @@ import { StatisticsComponent } from "../components/statistics/statistics.compone
 import { ExportComponent } from "../components/export/export.component";
 import { StudentsComponent } from "../components/students/students.component";
 import { SubjectsComponent } from "../components/subjects/subjects.component";
-// import { NotFoundComponent } from "../components/not-found-page/not-found-page.component";
+import { NotFoundComponent } from "../components/not-found-page/not-found-page.component";
 import { DashboardComponent } from "../components/dashboard/dashboard.component";
 
 const routes: Routes = [
@@ -14,7 +14,8 @@ const routes: Routes = [
   { path: "students", component: StudentsComponent },
   { path: "subjects", component: SubjectsComponent },
   { path: "subjects/:subject", component: DashboardComponent },
-  // { path: "**", component: NotFoundComponent },
+  { path: "**", redirectTo: "/not-found" },
+  { path: "not-found", component: NotFoundComponent },
 ];
 
 @NgModule({
