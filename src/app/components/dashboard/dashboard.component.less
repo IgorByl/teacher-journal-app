@@ -4,11 +4,13 @@
   text-transform: capitalize;
 }
 
-.teacherName, .subjectName {
+.teacherName,
+.subjectName {
   margin-left: 20%;
 }
 
 .table {
+  position: relative;
   margin: 0 auto;
   margin-top: 50px;
   margin-bottom: 50px;
@@ -18,13 +20,13 @@
   }
   &__input,
   &__input_teacher {
-    max-width: 20px;
+    max-width: 30px;
     text-align: center;
     background-color: @textColorUnvisible;
     border: none;
     color: @textColor;
     &_header {
-      max-width: 40px;
+      max-width: 60px;
     }
     &_teacher {
       max-width: none;
@@ -40,6 +42,33 @@
     color: @textColorShadow;
     outline: none;
   }
+  &__button_addColumn {
+    position: absolute;
+    top: -25%;
+    right: -4%;
+    width: 30px;
+    height: 30px;
+    background-color: @mainEmblemColor;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 30px;
+    &:hover {
+      background-color: lighten(@mainEmblemColor, 10%);
+    }
+    &::after {
+      content: "";
+      position: relative;
+      display: block;
+      width: 10px;
+      height: 40px;
+      left: 50%;
+      margin-left: -5px;
+      background-color: @formBorderColor;
+    }
+  }
 }
 
 .table__header,
@@ -54,4 +83,20 @@ td {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.button__post {
+  margin: 0 auto;
+  margin-top: 40px;
+  width: 80px;
+  text-align: center;
+  padding: 5px;
+  border-radius: 5px;
+  color: @mainEmblemColor;
+  background-color: @linkBgColor;
+  font-weight: 700;
+  cursor: pointer;
+  &:hover {
+    background-color: lighten(@linkBgColor, 50%);
+  }
 }

@@ -8,17 +8,22 @@
     <th class="table__header">
       Lastname
     </th>
+    <th class="table__header">
+      Average
+    </th>
     <th
       class="table__header"
       *ngFor="let i of students[0].subjects[subject].date"
     >
       <input class="table__input table__input_header" [(ngModel)]="i" />
     </th>
+    <div class="table__button_addColumn" (click)="addDateColumn()">+</div>
   </tr>
   <tbody>
     <tr *ngFor="let i of students">
       <td>{{ i.name }}</td>
       <td>{{ i.lastName }}</td>
+      <td>0</td>
       <td *ngFor="let j of i.subjects[subject].marks">
         <input
           *ngIf="i.subjects[subject].marks"
@@ -37,3 +42,5 @@
     [(ngModel)]="students[0].subjects[subject].teacher"
   />
 </h3>
+
+<div *ngIf="changes" class="button__post" (click)="postData()">Save</div>
