@@ -1,25 +1,33 @@
+@import "../../../styles/variables.less";
+
 .table {
   margin: 0 auto;
-  margin-bottom: 20px;
+  margin-top: 50px;
+  margin-bottom: 50px;
   border-collapse: collapse;
+  &__header {
+    background-color: @tableHeaderColor;
+    &_sortItem::after {
+      content: "▼";
+      cursor: pointer;
+      opacity: 0.1;
+    }
+    &_sortItem:hover::after {
+      opacity: 0.5;
+    }
+  }
 }
 
 .table__header,
 td {
-  border: 1px #fff solid;
+  max-width: 200px;
+  min-width: 100px;
+  height: 30px;
+  border: 1px @textColor solid;
   padding: 5px;
   text-align: center;
   vertical-align: middle;
-}
-
-.table__header {
-  background-color: rgb(14, 50, 107);
-}
-
-.table__tableData_description {
+  white-space: nowrap;
+  overflow: hidden;
   text-overflow: ellipsis;
-}
-
-.studentaAddedButton {
-  margin: 5px 20%;
 }
