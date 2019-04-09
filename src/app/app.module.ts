@@ -5,7 +5,7 @@ import { StudentsComponent } from "./components/students/students.component";
 import { FormsModule } from "@angular/forms";
 
 import { SharedModule } from "./shared/shared.module";
-import { AppRoutingModule } from "./app-routing.module";
+import { AppRoutingModule } from "./routing/app-routing.module";
 import {
   ListOfStudentsService,
   GetListOfSubjectsService,
@@ -15,6 +15,7 @@ import { ExportComponent } from "./components/export/export.component";
 import { SubjectsComponent } from "./components/subjects/subjects.component";
 import { DashboardComponent } from "./components/dashboard/dashboard.component";
 import { NotFoundComponent } from "./components/not-found-page/not-found-page.component";
+import { DatePipe, AveragePipe } from "./common/pipes";
 
 @NgModule({
   declarations: [
@@ -25,6 +26,8 @@ import { NotFoundComponent } from "./components/not-found-page/not-found-page.co
     SubjectsComponent,
     DashboardComponent,
     NotFoundComponent,
+    DatePipe,
+    AveragePipe
   ],
   imports: [BrowserModule, AppRoutingModule, SharedModule, FormsModule],
   providers: [ListOfStudentsService, GetListOfSubjectsService],
