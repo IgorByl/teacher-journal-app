@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { ListOfStudentsService } from "./students.service";
+import { unicValueSearch } from "../helpers";
 @Injectable({
   providedIn: "root",
 })
@@ -9,15 +10,9 @@ export class GetListOfSubjectsService {
   constructor(private listOfStudentsService: ListOfStudentsService) {}
 
   public getSubjects(): Array<string> {
-    const subjects: object = {};
     this.listOfStudentsService
       .getStudents()
       .subscribe(data => (this.students = data));
-    this.students.forEach(item => {
-      Object.keys(item.subjects).forEach(it => {
-        subjects[it] = 1;
-      });
-    });
-    return Object.keys(subjects);
+    return unicValueSearch(this.students);
   }
 }

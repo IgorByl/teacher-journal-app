@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { CreateNewStudent, IStudent } from "../../common/entities";
 import { TABLE_HEADERS } from "../../common/constants";
 import { ListOfStudentsService } from "../../common/services";
+import { sorting } from "../../common/helpers";
 
 @Component({
   selector: "app-students",
@@ -49,23 +50,6 @@ export class StudentsComponent implements OnInit {
 
   public sortRows(field: string): void {
     this.toggleSort = !this.toggleSort;
-    this.students = this.students.sort((a, b) => {
-      if (this.toggleSort) {
-        if (a[field] > b[field]) {
-          return -1;
-        }
-        if (a[field] < b[field]) {
-          return 1;
-        }
-      } else {
-        if (a[field] > b[field]) {
-          return 1;
-        }
-        if (a[field] < b[field]) {
-          return -1;
-        }
-      }
-      return 0;
-    });
+    this.students = sorting(this.students, field, this.toggleSort);
   }
 }

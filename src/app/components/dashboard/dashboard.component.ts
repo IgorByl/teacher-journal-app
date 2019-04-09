@@ -1,13 +1,8 @@
-import {
-  Component,
-  OnInit,
-  DoCheck,
-  KeyValueDiffers,
-  IterableDiffers,
-} from "@angular/core";
+import { Component, OnInit, DoCheck, KeyValueDiffers } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { ListOfStudentsService } from "src/app/common/services";
 import { IStudent } from "src/app/common/entities";
+import { setDate } from "../../common/helpers";
 
 @Component({
   selector: "app-dashboard",
@@ -24,22 +19,18 @@ export class DashboardComponent implements OnInit, DoCheck {
   constructor(
     private activateRoute: ActivatedRoute,
     private listOfStudentsService: ListOfStudentsService,
-    private differs: IterableDiffers
+    private differs: KeyValueDiffers
   ) {
     this.subject = activateRoute.snapshot.params.subject;
   }
 
   public ngOnInit(): void {
     this.getStudents();
-    this.differ = this.differs
-      .find(this.students[0].subjects[this.subject].date)
-      .create(null);
+    this.differ = this.differs.find(this.students).create();
   }
 
   public ngDoCheck(): void {
-    let changes: any = this.differ.diff(
-      this.students[0].subjects[this.subject].date
-    );
+    let changes: any = this.differ.diff(this.students);
     if (changes) {
       changes.forEachAddedItem(item => console.log("added", item));
       changes.forEachRemovedItem(item => console.log("Remove", item));
@@ -53,12 +44,8 @@ export class DashboardComponent implements OnInit, DoCheck {
   }
 
   public addDateColumn(): void {
-    this.changes = "p";
-    if (this.date) {
-      this.date.setDate(this.date.getDate() + 1);
-    } else {
-      this.date = new Date();
-    }
+    this.changes = true;
+    this.date = setDate(this.date);
     this.students[0].subjects[this.subject].date.push(
       `${this.date.getDate()}.${this.date.getMonth()}`
     );
