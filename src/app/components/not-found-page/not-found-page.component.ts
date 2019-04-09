@@ -1,12 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
 @Component({
-    selector: 'app-name',
-    templateUrl: './name.component.html',
-    styleUrls: ['./name.component.scss']
+  selector: "app-not-found",
+  template: `
+    <h2>Page don\'t found!</h2>
+    <h4>
+      Do you want to visit <a routerLink="/students">Teacher Journal</a> ?
+    </h4>
+  `,
 })
 export class NotFoundComponent implements OnInit {
-    constructor() { }
+  constructor() {}
 
-    ngOnInit(): void { }
+  public ngOnInit(): void {
+  }
 }

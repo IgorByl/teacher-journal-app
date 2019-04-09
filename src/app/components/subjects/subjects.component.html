@@ -1,0 +1,26 @@
+<section class="subjectsWrapper" *ngIf="!isVisible">
+  <h2 class="subjectsWrapper__title">
+    {{ title }}
+  </h2>
+  <div
+    class="subjectsWrapper__box"
+    *ngFor="let i of subjects"
+    routerLink="{{ i }}"
+  >
+    {{ i }}
+  </div>
+</section>
+
+<app-form
+  [isVisible]="isVisible"
+  (hiddenForm)="hiddenForm($event)"
+  (transferFormData)="transferFormData($event)"
+  ><span data-form-title>Add new student</span>
+  <span #formControlsData data-form-firstInput>Subject</span>
+  <span #formControlsData data-form-secondInput>Teacher</span>
+  <span #formControlsData data-form-thirdInput>Cabinet</span>
+  <span #formControlsData data-form-fourthInput>Description</span>
+  ></app-form
+>
+
+<app-button (toggleForm)="toggleForm()"></app-button>

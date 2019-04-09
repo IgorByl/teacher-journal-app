@@ -1,0 +1,63 @@
+@import "../../styles/variables.less";
+@fontSize: 2.5vh;
+
+.titleWrapper {
+  display: flex;
+  padding: 20px;
+  &__logo {
+    &_squire {
+      width: 50px;
+      height: 40px;
+      background-color: @mainEmblemColor;
+    }
+    &_triangle {
+      border: 25px solid transparent;
+      border-top: 25px solid @mainEmblemColor;
+    }
+  }
+  &__title {
+    margin: 10px;
+    font-size: @fontSize + 1vh;
+  }
+}
+
+.navigation__unorderedList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 10px;
+  margin-bottom: 40px;
+  padding: 0;
+}
+
+.navigation__listItem {
+  list-style-type: none;
+  margin: 10px 2%;
+  background-color: @linkBgColor;
+  border-radius: 3px;
+  min-width: 170px;
+  text-align: center;
+  .navigation__link {
+    padding: 20px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: @fontSize;
+  }
+}
+
+.navigation__link:visited {
+  color: @tableHeaderColor;
+}
+
+.navigation__listItem:hover {
+  background-color: lighten(@linkBgColor, 15%);
+}
+
+.activeLink a {
+  color: @mainEmblemColor;
+  text-shadow: @textColorShadow 0 1px 1px;
+}
+
+a:active {
+  color: inherit;
+}
