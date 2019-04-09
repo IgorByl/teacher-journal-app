@@ -16,6 +16,7 @@ import { SubjectsComponent } from "./components/subjects/subjects.component";
 import { DashboardComponent } from "./components/dashboard/dashboard.component";
 import { NotFoundComponent } from "./components/not-found-page/not-found-page.component";
 import { DatePipe, AveragePipe } from "./common/pipes";
+import { TableDirective, SendButtonDirective } from "./common/directives";
 
 @NgModule({
   declarations: [
@@ -27,7 +28,9 @@ import { DatePipe, AveragePipe } from "./common/pipes";
     DashboardComponent,
     NotFoundComponent,
     DatePipe,
-    AveragePipe
+    AveragePipe,
+    TableDirective,
+    SendButtonDirective,
   ],
   imports: [BrowserModule, AppRoutingModule, SharedModule, FormsModule],
   providers: [ListOfStudentsService, GetListOfSubjectsService],

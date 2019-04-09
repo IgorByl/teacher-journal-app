@@ -14,7 +14,7 @@ export class DashboardComponent implements OnInit, DoCheck {
   public students: IStudent[];
   public differ: any;
   public date: Date;
-  public changes: any;
+  public isChanged: any;
 
   constructor(
     private activateRoute: ActivatedRoute,
@@ -44,7 +44,7 @@ export class DashboardComponent implements OnInit, DoCheck {
   }
 
   public addDateColumn(): void {
-    this.changes = true;
+    this.isChanged = true;
     this.date = setDate(this.date);
     this.students[0].subjects[this.subject].date.push(
       `${this.date.getDate()}.${this.date.getMonth()}`

@@ -14,6 +14,7 @@ import {
   AbstractControl,
 } from "@angular/forms";
 import { Subscription } from "rxjs";
+import { message, messages } from "../../../common/constants";
 
 @Component({
   selector: "app-form",
@@ -23,15 +24,8 @@ import { Subscription } from "rxjs";
 export class FormComponent implements OnDestroy, AfterContentInit {
   private sub: Subscription;
 
-  private validationMessage: any = {
-    Name: "",
-    LastName: "",
-  };
-  private validationMessages: any = {
-    required: "Please enter your name.",
-    minlength: "Must be longer than 1 characters.",
-    pattern: "Must enclude only letters.",
-  };
+  private validationMessage: any = message;
+  private validationMessages: any = messages;
 
   @Input() public isVisible: boolean;
   @Output() public hiddenForm: EventEmitter<boolean> = new EventEmitter<

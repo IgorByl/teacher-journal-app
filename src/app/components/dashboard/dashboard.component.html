@@ -43,4 +43,4 @@
   />
 </h3>
 
-<div *ngIf="changes" class="button__post" (click)="postData()">Save</div>
+<div *ngIf="isChanged" appSomeDirective="isChanged" (click)="postData()"></div>
