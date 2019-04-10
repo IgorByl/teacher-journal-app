@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Observable, throwError } from "rxjs";
+import { throwError } from "rxjs";
 import { map, catchError } from "rxjs/operators";
 import { IStudent } from "../entities";
 import { HttpClient } from "@angular/common/http";
@@ -11,7 +11,7 @@ import { URL } from "../constants";
 export class HttpService {
   constructor(private http: HttpClient) {}
 
-  public getData(): Observable<IStudent[]> {
+  public getData(): any {
     return this.http.get(URL.get).pipe(
       map(data => {
         return data.map(item => {

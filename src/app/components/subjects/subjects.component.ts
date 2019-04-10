@@ -1,13 +1,16 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { SubjectsService, StoreService } from "../../common/services";
 import { IStudent } from "../../common/entities";
+import { Subscription } from "rxjs";
+import { unicSubjectSearch } from "src/app/common/helpers";
 
 @Component({
   selector: "app-subjects",
   templateUrl: "./subjects.component.html",
   styleUrls: ["./subjects.component.less"],
 })
-export class SubjectsComponent implements OnInit {
+export class SubjectsComponent implements OnInit, OnDestroy {
+  private sub: Subscription;
   public title: string = "List of subjects:";
   public subjects: string[] = [];
   public students: IStudent[];
@@ -19,18 +22,16 @@ export class SubjectsComponent implements OnInit {
   ) {}
 
   public ngOnInit(): void {
-    this.subjects = this.getSubjects();
-    this.getStudents();
-  }
-
-  public getSubjects(): Array<string> {
-    return this.subjectsService.getSubjects();
-  }
-
-  public getStudents(): void {
-    this.storeService
+    this.sub = this.storeService
       .getStudents()
-      .subscribe(students => (this.students = students));
+      .subscribe(data => {
+        this.subjects = unicSubjectSearch(data);
+        this.students = data;
+      });
+  }
+
+  public ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 
   public toggleForm(): void {
@@ -46,10 +47,10 @@ export class SubjectsComponent implements OnInit {
         description: increased.value.Description,
       };
     });
+    console.log(this.students);
   }
 
   public hiddenForm(increased: any): void {
     this.isVisible = increased;
-    this.subjects = this.getSubjects();
   }
 }

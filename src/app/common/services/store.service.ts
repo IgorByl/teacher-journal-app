@@ -1,5 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpService } from "./http.service";
+import { Observable } from "rxjs";
+
 
 @Injectable({ providedIn: "root" })
 export class StoreService {
@@ -9,8 +11,11 @@ export class StoreService {
   public getStudents(): any {
     if (this.students) {
       console.log("хранилище", this.students);
-      // тут подписка observable
-      return this.students;
+      return new Observable(observer => {
+        observer.next(this.students);
+        observer.complete();
+      });
+
     } else {
       console.log("запрос");
       this.httpService.getData().subscribe(data => this.students = data);

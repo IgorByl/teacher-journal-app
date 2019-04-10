@@ -24,8 +24,6 @@ export class StudentsComponent implements OnInit, OnDestroy {
     this.sub = this.storeService
       .getStudents()
       .subscribe(data => (this.students = data));
-    // this.students = this.storeService.getStudents();
-    // console.log(this.students);
   }
 
   public ngOnDestroy(): void {
