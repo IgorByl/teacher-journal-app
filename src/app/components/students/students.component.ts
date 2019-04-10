@@ -1,31 +1,35 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { CreateNewStudent, IStudent } from "../../common/entities";
 import { TABLE_HEADERS } from "../../common/constants";
-import { ListOfStudentsService } from "../../common/services";
+import { StoreService } from "../../common/services";
 import { sorting } from "../../common/helpers";
+import { Observable, Subscription } from "rxjs";
 
 @Component({
   selector: "app-students",
   templateUrl: "./students.component.html",
   styleUrls: ["./students.component.less"],
 })
-export class StudentsComponent implements OnInit {
+export class StudentsComponent implements OnInit, OnDestroy {
+  private sub: Subscription;
   public isVisible: boolean = false;
-  public students: IStudent[];
+  public students: IStudent[] = [];
   public subjects: string[];
   public tableHeaders: string[] = TABLE_HEADERS;
   public toggleSort: boolean = false;
 
-  constructor(private listOfStudentsService: ListOfStudentsService) {}
+  constructor(private storeService: StoreService) {}
 
   public ngOnInit(): void {
-    this.getStudents();
-  }
-
-  public getStudents(): void {
-    this.listOfStudentsService
+    this.sub = this.storeService
       .getStudents()
       .subscribe(data => (this.students = data));
+    // this.students = this.storeService.getStudents();
+    // console.log(this.students);
+  }
+
+  public ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 
   public toggleForm(): void {
@@ -37,7 +41,7 @@ export class StudentsComponent implements OnInit {
   }
 
   public transferFormData(increased: any): void {
-    this.students.push(
+    this.storeService.addStudent(
       new CreateNewStudent(
         this.students.length + 1,
         increased.value.Name,

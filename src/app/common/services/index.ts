@@ -1,2 +1,3 @@
-export { ListOfStudentsService } from "./students.service";
-export { GetListOfSubjectsService } from "./subjects.service";
+export { HttpService } from "./http.service";
+export { SubjectsService } from "./subjects.service";
+export { StoreService } from "./store.service";

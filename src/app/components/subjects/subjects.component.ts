@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { GetListOfSubjectsService } from "../../common/services";
-import { ListOfStudentsService } from "../../common/services";
+import { SubjectsService, StoreService } from "../../common/services";
 import { IStudent } from "../../common/entities";
 
 @Component({
@@ -15,8 +14,8 @@ export class SubjectsComponent implements OnInit {
   public isVisible: boolean = false;
 
   constructor(
-    private listOfSubjectsService: GetListOfSubjectsService,
-    private listOfStudentsService: ListOfStudentsService
+    private subjectsService: SubjectsService,
+    private storeService: StoreService
   ) {}
 
   public ngOnInit(): void {
@@ -25,11 +24,11 @@ export class SubjectsComponent implements OnInit {
   }
 
   public getSubjects(): Array<string> {
-    return this.listOfSubjectsService.getSubjects();
+    return this.subjectsService.getSubjects();
   }
 
   public getStudents(): void {
-    this.listOfStudentsService
+    this.storeService
       .getStudents()
       .subscribe(students => (this.students = students));
   }

@@ -6,4 +6,7 @@ export const TABLE_HEADERS: string[] = [
   "description",
 ];
 
-export const URL: string = "http://localhost:3005/dash";
+export const URL: any = {
+  get: "http://localhost:3005/dash",
+  post: "http://localhost:3005/dash/post",
+};

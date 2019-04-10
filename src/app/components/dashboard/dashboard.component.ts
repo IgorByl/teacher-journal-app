@@ -1,6 +1,6 @@
 import { Component, OnInit, DoCheck, KeyValueDiffers } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { ListOfStudentsService } from "src/app/common/services";
+import { StoreService, HttpService } from "src/app/common/services";
 import { IStudent } from "src/app/common/entities";
 import { setDate } from "../../common/helpers";
 
@@ -18,7 +18,8 @@ export class DashboardComponent implements OnInit, DoCheck {
 
   constructor(
     private activateRoute: ActivatedRoute,
-    private listOfStudentsService: ListOfStudentsService,
+    private storeService: StoreService,
+    private httpService: HttpService,
     private differs: KeyValueDiffers
   ) {
     this.subject = activateRoute.snapshot.params.subject;
@@ -38,7 +39,7 @@ export class DashboardComponent implements OnInit, DoCheck {
   }
 
   public getStudents(): void {
-    this.listOfStudentsService
+    this.storeService
       .getStudents()
       .subscribe(students => (this.students = students));
   }
@@ -55,6 +56,6 @@ export class DashboardComponent implements OnInit, DoCheck {
   }
 
   public postData(): void {
-    console.log("post to server");
+    this.httpService.postStudents(this.students);
   }
 }

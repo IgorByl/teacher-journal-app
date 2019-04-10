@@ -1,18 +1,16 @@
 import { Injectable } from "@angular/core";
-import { ListOfStudentsService } from "./students.service";
 import { unicValueSearch } from "../helpers";
+import { StoreService } from "./store.service";
 @Injectable({
   providedIn: "root",
 })
-export class GetListOfSubjectsService {
+export class SubjectsService {
   public students: any;
 
-  constructor(private listOfStudentsService: ListOfStudentsService) {}
+  constructor(private storeService: StoreService) {}
 
   public getSubjects(): Array<string> {
-    this.listOfStudentsService
-      .getStudents()
-      .subscribe(data => (this.students = data));
+    this.storeService.getStudents().subscribe(data => (this.students = data));
     return unicValueSearch(this.students);
   }
 }

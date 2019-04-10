@@ -7,8 +7,9 @@ import { FormsModule } from "@angular/forms";
 import { SharedModule } from "./shared/shared.module";
 import { AppRoutingModule } from "./app-routing.module";
 import {
-  ListOfStudentsService,
-  GetListOfSubjectsService,
+  HttpService,
+  SubjectsService,
+  StoreService,
 } from "./common/services";
 import { HttpClientModule } from "@angular/common/http";
 import { StatisticsComponent } from "./components/statistics/statistics.component";
@@ -28,7 +29,7 @@ import { NotFoundComponent } from "./components/not-found-page/not-found-page.co
     NotFoundComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, SharedModule, FormsModule, HttpClientModule],
-  providers: [ListOfStudentsService, GetListOfSubjectsService],
+  providers: [HttpService, SubjectsService, StoreService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
