@@ -10,6 +10,7 @@ import {
   ListOfStudentsService,
   GetListOfSubjectsService,
 } from "./common/services";
+import { HttpClientModule } from "@angular/common/http";
 import { StatisticsComponent } from "./components/statistics/statistics.component";
 import { ExportComponent } from "./components/export/export.component";
 import { SubjectsComponent } from "./components/subjects/subjects.component";
@@ -26,7 +27,7 @@ import { NotFoundComponent } from "./components/not-found-page/not-found-page.co
     DashboardComponent,
     NotFoundComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, SharedModule, FormsModule],
+  imports: [BrowserModule, AppRoutingModule, SharedModule, FormsModule, HttpClientModule],
   providers: [ListOfStudentsService, GetListOfSubjectsService],
   bootstrap: [AppComponent],
 })
