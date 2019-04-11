@@ -9,13 +9,11 @@ export class StoreService {
 
   public getStudents(): any {
     if (this.students) {
-      console.log("хранилище", this.students);
       return new Observable(observer => {
         observer.next(this.students);
         observer.complete();
       });
     } else {
-      console.log("запрос");
       this.httpService.getData().subscribe(data => this.students = data);
       return this.httpService.getData();
     }

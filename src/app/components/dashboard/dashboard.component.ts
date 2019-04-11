@@ -66,20 +66,25 @@ export class DashboardComponent implements DoCheck, OnDestroy {
   }
 
   public postData(): void {
-    this.httpService.postStudents(this.students);
+    this.httpService.postStudents(this.students).subscribe();
     this.isChanged = false;
   }
 
   public changeTeacher(teacher: string): void {
-    this.isChanged = true;
     this.students.forEach(item => {
-      item.subjects[this.subject].teacher = teacher;
+      if (item.subjects[this.subject].teacher !== teacher) {
+        item.subjects[this.subject].teacher = teacher;
+        this.isChanged = true;
+      }
     });
   }
 
   public changeMark(mark: string, index: string, student: any): void {
     this.students.forEach(item => {
-      if (item.id === student.id && item.subjects[this.subject].marks[index] !== mark) {
+      if (
+        item.id === student.id &&
+        item.subjects[this.subject].marks[index] !== mark
+      ) {
         item.subjects[this.subject].marks[index] = mark;
         this.isChanged = true;
       }
