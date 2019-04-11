@@ -67,6 +67,7 @@ export class DashboardComponent implements DoCheck, OnDestroy {
 
   public postData(): void {
     this.httpService.postStudents(this.students);
+    this.isChanged = false;
   }
 
   public changeTeacher(teacher: string): void {

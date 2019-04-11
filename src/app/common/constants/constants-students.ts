@@ -8,5 +8,5 @@ export const TABLE_HEADERS: string[] = [
 
 export const URL: any = {
   get: "http://localhost:3005/dash",
-  post: "http://localhost:3005/dash/post",
+  post: "http://localhost:3005/save",
 };

@@ -4,7 +4,6 @@ const { promisify } = require('util');
 
 
 const pathToData = path.join(__dirname, '../data/mock-data.json');
-const pathToResultData = path.join(__dirname, '../../data.json');
 
 const writeFile = promisify(fs.writeFile);
 const readFile = promisify(fs.readFile);
@@ -14,9 +13,8 @@ async function getMockDataFromFile() {
   return data;
 }
 
-async function saveDate() {
-  const data = await getMockDataFromFile();
-  return writeFile(pathToResultData, JSON.stringify(data), err => {
+async function saveDate(data) {
+  return writeFile(pathToData, JSON.stringify(data), err => {
     if (err) {
       console.log('Error: ', err);
       return;

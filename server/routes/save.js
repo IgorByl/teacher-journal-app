@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
 
-const cntrl = require('../controllers/mentors');
+const cntrl = require('../controllers/studentsData');
 
-router.use('/', (req, res) => {
+router.post('/', (req, res) => {
+  console.log(req.body);
   cntrl
-    .saveDate()
+    .saveDate(req.body)
     .then (() => res.end('saved'))
     .catch(err => {
       res.status(500);

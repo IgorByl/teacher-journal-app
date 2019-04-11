@@ -26,7 +26,7 @@ export class HttpService {
   }
 
   public postStudents(data: IStudent[]): any {
-    const body: any = data;
-    return this.http.get(URL.post, body);
+    const body: IStudent[] = data;
+    return this.http.post(URL.post, body);
   }
 }

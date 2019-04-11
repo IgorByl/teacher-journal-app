@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const cntrl = require('../controllers/mentors');
+const cntrl = require('../controllers/studentsData');
 
 router.use('/', (req, res) => {
   cntrl
