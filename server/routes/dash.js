@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
-const mentorsCntrl = require('../controllers/mentors');
+const cntrl = require('../controllers/mentors');
 
 router.use('/', (req, res) => {
-  mentorsCntrl
+  cntrl
     .getMockDataFromFile()
     .then(data => res.json(data))
     .catch(err => {

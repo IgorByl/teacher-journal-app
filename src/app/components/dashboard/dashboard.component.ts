@@ -1,61 +1,96 @@
-import { Component, OnInit, DoCheck, KeyValueDiffers } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { Component, DoCheck, OnDestroy } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
 import { StoreService, HttpService } from "src/app/common/services";
 import { IStudent } from "src/app/common/entities";
-import { setDate } from "../../common/helpers";
+import { setDate, unicSubjectSearch } from "../../common/helpers";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: "app-dashboard",
   templateUrl: "./dashboard.component.html",
   styleUrls: ["./dashboard.component.less"],
 })
-export class DashboardComponent implements OnInit, DoCheck {
+export class DashboardComponent implements DoCheck, OnDestroy {
+  private sub: Subscription;
   public subject: string;
+  public subjects: string[];
   public students: IStudent[];
-  public differ: any;
   public date: Date;
-  public changes: any;
+  public isChanged: any;
+  public isFirstInit: boolean = true;
+  public Object: Object = Object;
 
   constructor(
     private activateRoute: ActivatedRoute,
+    private router: Router,
     private storeService: StoreService,
-    private httpService: HttpService,
-    private differs: KeyValueDiffers
+    private httpService: HttpService
   ) {
     this.subject = activateRoute.snapshot.params.subject;
   }
 
-  public ngOnInit(): void {
-    this.getStudents();
-    this.differ = this.differs.find(this.students).create();
+  public ngDoCheck(): void {
+    this.sub = this.storeService.getStudents().subscribe(data => {
+      this.students = data;
+      if (this.isFirstInit) {
+        if (
+          (this.subjects = unicSubjectSearch(data)).every(
+            item => item !== this.subject
+          )
+        ) {
+          this.router.navigate(["/subjects"]);
+        }
+      }
+    });
+    this.isFirstInit = false;
   }
 
-  public ngDoCheck(): void {
-    let changes: any = this.differ.diff(this.students);
-    if (changes) {
-      changes.forEachAddedItem(item => console.log("added", item));
-      changes.forEachRemovedItem(item => console.log("Remove", item));
+  public ngOnDestroy(): void {
+    if (this.sub) {
+      this.sub.unsubscribe();
     }
   }
 
-  public getStudents(): void {
-    this.storeService
-      .getStudents()
-      .subscribe(students => (this.students = students));
-  }
-
   public addDateColumn(): void {
-    this.changes = true;
+    this.isChanged = true;
     this.date = setDate(this.date);
-    this.students[0].subjects[this.subject].date.push(
-      `${this.date.getDate()}.${this.date.getMonth()}`
-    );
+    let key: number = ++Object.keys(
+      this.students[0].subjects[this.subject].date
+    ).length;
     this.students.forEach(item => {
-      item.subjects[this.subject].marks.push("");
+      item.subjects[this.subject].date[
+        key
+      ] = `${this.date.getDate()}.${this.date.getMonth()}`;
+      item.subjects[this.subject].marks[key] = "";
     });
   }
 
   public postData(): void {
     this.httpService.postStudents(this.students);
+  }
+
+  public changeTeacher(teacher: string): void {
+    this.isChanged = true;
+    this.students.forEach(item => {
+      item.subjects[this.subject].teacher = teacher;
+    });
+  }
+
+  public changeMark(mark: string, index: string, student: any): void {
+    this.students.forEach(item => {
+      if (item.id === student.id && item.subjects[this.subject].marks[index] !== mark) {
+        item.subjects[this.subject].marks[index] = mark;
+        this.isChanged = true;
+      }
+    });
+  }
+
+  public changeDate(date: string, index: string): void {
+    this.students.forEach(item => {
+      if (item.subjects[this.subject].date[index] !== date) {
+        item.subjects[this.subject].date[index] = date;
+        this.isChanged = true;
+      }
+    });
   }
 }

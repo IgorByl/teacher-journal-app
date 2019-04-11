@@ -14,7 +14,6 @@ export class StoreService {
         observer.next(this.students);
         observer.complete();
       });
-
     } else {
       console.log("запрос");
       this.httpService.getData().subscribe(data => this.students = data);
@@ -29,8 +28,8 @@ export class StoreService {
   public addSubject(increased: any): any {
     this.students.map(item => {
       item.subjects[increased.value.Subject] = {
-        date: [],
-        marks: [],
+        date: {},
+        marks: {},
         teacher: increased.value.Teacher,
         cabiner: Number(increased.value.Cabiner),
         description: increased.value.Description,
