@@ -1,5 +1,5 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
-import { SubjectsService, StoreService } from "../../common/services";
+import { Component, OnDestroy, DoCheck } from "@angular/core";
+import { StoreService } from "../../common/services";
 import { IStudent } from "../../common/entities";
 import { Subscription } from "rxjs";
 import { unicSubjectSearch } from "src/app/common/helpers";
@@ -9,7 +9,7 @@ import { unicSubjectSearch } from "src/app/common/helpers";
   templateUrl: "./subjects.component.html",
   styleUrls: ["./subjects.component.less"],
 })
-export class SubjectsComponent implements OnInit, OnDestroy {
+export class SubjectsComponent implements OnDestroy, DoCheck {
   private sub: Subscription;
   public title: string = "List of subjects:";
   public subjects: string[] = [];
@@ -17,11 +17,10 @@ export class SubjectsComponent implements OnInit, OnDestroy {
   public isVisible: boolean = false;
 
   constructor(
-    private subjectsService: SubjectsService,
     private storeService: StoreService
   ) {}
 
-  public ngOnInit(): void {
+  public ngDoCheck(): void {
     this.sub = this.storeService
       .getStudents()
       .subscribe(data => {
@@ -39,15 +38,7 @@ export class SubjectsComponent implements OnInit, OnDestroy {
   }
 
   public transferFormData(increased: any): void {
-    this.students.forEach(item => {
-      item.subjects[increased.value.Subject] = {
-        marks: [],
-        teacher: increased.value.Teacher,
-        cabiner: Number(increased.value.Cabiner),
-        description: increased.value.Description,
-      };
-    });
-    console.log(this.students);
+    this.storeService.addSubject(increased);
   }
 
   public hiddenForm(increased: any): void {

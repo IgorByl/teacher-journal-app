@@ -6,11 +6,7 @@ import { FormsModule } from "@angular/forms";
 
 import { SharedModule } from "./shared/shared.module";
 import { AppRoutingModule } from "./app-routing.module";
-import {
-  HttpService,
-  SubjectsService,
-  StoreService,
-} from "./common/services";
+import { HttpService, StoreService } from "./common/services";
 import { HttpClientModule } from "@angular/common/http";
 import { StatisticsComponent } from "./components/statistics/statistics.component";
 import { ExportComponent } from "./components/export/export.component";
@@ -28,8 +24,14 @@ import { NotFoundComponent } from "./components/not-found-page/not-found-page.co
     DashboardComponent,
     NotFoundComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, SharedModule, FormsModule, HttpClientModule],
-  providers: [HttpService, SubjectsService, StoreService],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    SharedModule,
+    FormsModule,
+    HttpClientModule,
+  ],
+  providers: [HttpService, StoreService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

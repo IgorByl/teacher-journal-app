@@ -2,7 +2,6 @@ import { Injectable } from "@angular/core";
 import { HttpService } from "./http.service";
 import { Observable } from "rxjs";
 
-
 @Injectable({ providedIn: "root" })
 export class StoreService {
   public students: any;
@@ -25,6 +24,17 @@ export class StoreService {
 
   public addStudent(student: any): any {
     this.students.push(student);
-    console.log(this.students);
+  }
+
+  public addSubject(increased: any): any {
+    this.students.map(item => {
+      item.subjects[increased.value.Subject] = {
+        date: [],
+        marks: [],
+        teacher: increased.value.Teacher,
+        cabiner: Number(increased.value.Cabiner),
+        description: increased.value.Description,
+      };
+    });
   }
 }

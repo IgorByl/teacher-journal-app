@@ -1,16 +1,16 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Component, OnDestroy, DoCheck } from "@angular/core";
 import { CreateNewStudent, IStudent } from "../../common/entities";
 import { TABLE_HEADERS } from "../../common/constants";
 import { StoreService } from "../../common/services";
 import { sorting } from "../../common/helpers";
-import { Observable, Subscription } from "rxjs";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: "app-students",
   templateUrl: "./students.component.html",
   styleUrls: ["./students.component.less"],
 })
-export class StudentsComponent implements OnInit, OnDestroy {
+export class StudentsComponent implements OnDestroy, DoCheck {
   private sub: Subscription;
   public isVisible: boolean = false;
   public students: IStudent[] = [];
@@ -20,7 +20,7 @@ export class StudentsComponent implements OnInit, OnDestroy {
 
   constructor(private storeService: StoreService) {}
 
-  public ngOnInit(): void {
+  public ngDoCheck(): void {
     this.sub = this.storeService
       .getStudents()
       .subscribe(data => (this.students = data));
