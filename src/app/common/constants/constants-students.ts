@@ -7,6 +7,6 @@ export const TABLE_HEADERS: string[] = [
 ];
 
 export const URL: any = {
-  get: "http://localhost:3005/dash",
-  post: "http://localhost:3005/save",
+  get: "https://app-teacher-journal.herokuapp.com/dash",
+  post: "https://app-teacher-journal.herokuapp.com/save",
 };
