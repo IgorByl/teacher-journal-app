@@ -6,7 +6,7 @@ import { FormsModule } from "@angular/forms";
 
 import { SharedModule } from "./shared/shared.module";
 
-import { AppRoutingModule } from "./app-routing.module";
+import { AppRoutingModule } from "./routing/app-routing.module";
 import { HttpService, StoreService } from "./common/services";
 import { HttpClientModule } from "@angular/common/http";
 
