@@ -18,6 +18,11 @@ import { NotFoundComponent } from "./components/not-found-page/not-found-page.co
 import { DatePipe, AveragePipe } from "./common/pipes";
 import { TableDirective, SendButtonDirective } from "./common/directives";
 
+import { NgReduxModule } from "@angular-redux/store";
+import { StoreModule } from "./redux/module";
+// import { rootReducer, IAppState, INITIAL_STATE } from "./redux/store/store";
+// import { CounterActions } from "./redux/actions/counter";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,8 +43,20 @@ import { TableDirective, SendButtonDirective } from "./common/directives";
     SharedModule,
     FormsModule,
     HttpClientModule,
+    NgReduxModule,
+    StoreModule
   ],
   providers: [HttpService, StoreService],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+  // constructor(ngRedux: NgRedux<IAppState>, devTools: DevToolsExtension) {
+  //   const storeEnhancers: any = devTools.isEnabled() ? [ devTools.enhancer() ] : [];
+
+  //   ngRedux.configureStore(
+  //     rootReducer,
+  //     INITIAL_STATE,
+  //     [],
+  //     storeEnhancers);
+  // }
+}

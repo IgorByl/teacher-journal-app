@@ -25,3 +25,9 @@
 </header>
 
 <router-outlet></router-outlet>
+<!--___________________________________________________________________________-->
+<div>
+  Count: {{ count$ | async}}
+  <button (click)="increment()">+</button>
+  <button (click)="decrement()">-</button>
+</div>
