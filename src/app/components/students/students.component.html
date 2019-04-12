@@ -1,11 +1,11 @@
-<table class="table" *ngIf="!isVisible">
+<table appTable *ngIf="!isVisible">
   <tr>
     <th (click)="sortRows(item)" class="table__header table__header_sortItem" *ngFor="let item of tableHeaders">
       {{ item }}
     </th>
   </tr>
   <tbody>
-    <tr *ngFor="let i of students; index as ind">
+    <tr *ngFor="let i of students">
       <td>{{ i.id }}</td>
       <td>{{ i.name }}</td>
       <td>{{ i.lastName }}</td>
