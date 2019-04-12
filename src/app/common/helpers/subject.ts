@@ -1,4 +1,4 @@
-export const unicValueSearch: any = (students): any => {
+export const unicSubjectSearch: any = (students): any => {
   const subjects: object = {};
   students.forEach(item => {
     Object.keys(item.subjects).forEach(it => {
