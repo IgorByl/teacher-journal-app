@@ -1,11 +1,4 @@
-import { Injectable } from "@angular/core";
-import { CounterEpics } from "./students";
+import { combineEpics, Epic } from "redux-observable";
+import { countEpic } from "./students";
 
-@Injectable()
-export class RootEpics {
-  constructor(private counterEpic: CounterEpics) {}
-
-  public createEpics() {
-    return [this.counterEpic.createEpic()];
-  }
-}
+export const rootEpic: Epic = combineEpics(countEpic);

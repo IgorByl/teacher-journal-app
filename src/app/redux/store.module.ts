@@ -8,23 +8,22 @@ import { createLogger } from "redux-logger";
 import { IAppState } from "./model";
 import { rootReducer } from "./reducer";
 import { CounterActions } from "./actions";
-import { RootEpics } from "./epics";
-import { CounterEpics } from "./epics/students";
+import { rootEpic } from "./epics";
+import { createEpicMiddleware, EpicMiddleware } from "redux-observable";
+import { IStudent } from "../common/entities";
 
 @NgModule({
   imports: [NgReduxModule],
-  providers: [CounterActions, RootEpics, CounterEpics],
+  providers: [CounterActions],
 })
 export class StoreModule {
-  constructor(
-    ngRedux: NgRedux<IAppState>,
-    devTools: DevToolsExtension,
-    rootEpics: RootEpics
-  ) {
+  constructor(ngRedux: NgRedux<IStudent>, devTools: DevToolsExtension) {
     const storeEnhancers: any = devTools.isEnabled()
       ? [devTools.enhancer()]
       : [];
-    const middleware: any = [createLogger(), ...rootEpics.createEpics()];
+    const epicMiddleware: EpicMiddleware<any> = createEpicMiddleware();
+    const middleware: any = [createLogger(), epicMiddleware];
     ngRedux.configureStore(rootReducer, {}, middleware, storeEnhancers);
+    epicMiddleware.run(rootEpic);
   }
 }

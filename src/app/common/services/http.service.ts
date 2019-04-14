@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { throwError } from "rxjs";
+import { throwError, Observable } from "rxjs";
 import { map, catchError } from "rxjs/operators";
 import { IStudent } from "../entities";
 import {
@@ -26,13 +26,13 @@ export class HttpService {
     return throwError(error);
   }
 
-  public getData(): any {
+  public getData(): Observable<IStudent> {
     return this.http.get(URL.get).pipe(
-      map(data => {
-        return data.map(item => {
+      map(data  =>
+        data.map(item => {
           return { ...item, id: item.number };
-        });
-      }),
+        })
+      ),
       catchError(err => {
         console.warn(`ERROR: ${err.status}: ${err.message}`);
         return throwError(err);
@@ -48,7 +48,7 @@ export class HttpService {
       }),
     };
     return this.http
-      .post(URL.post, data, httpOptions)
+      .post(URL.post, body, httpOptions)
       .pipe(catchError(err => this.handleError(err)));
   }
 }
