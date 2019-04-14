@@ -1,16 +1,19 @@
 import { Injectable } from "@angular/core";
-import { Action } from "redux";
+import { NgRedux } from "@angular-redux/store";
+import { IAppState } from "../model";
 
 @Injectable()
 export class CounterActions {
   public static INCREMENT: string = "INCREMENT";
   public static DECREMENT: string = "DECREMENT";
 
-  public increment(): Action {
-    return { type: CounterActions.INCREMENT };
+  constructor(private ngRedux: NgRedux<IAppState>) {}
+
+  public increment(): void {
+    this.ngRedux.dispatch({ type: CounterActions.INCREMENT });
   }
 
-  public decrement(): Action {
-    return { type: CounterActions.DECREMENT };
+  public decrement(): void {
+    this.ngRedux.dispatch({ type: CounterActions.DECREMENT });
   }
 }

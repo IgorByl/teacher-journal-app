@@ -4,8 +4,8 @@ import { Router } from "@angular/router";
 
 import { NgRedux, select } from "@angular-redux/store";
 import { CounterActions } from "../redux/actions/counter";
-import { IAppState } from "../redux/store/store";
-import { Subscription, Observable } from "rxjs";
+import { IAppState } from "../redux/model";
+import { Observable } from "rxjs";
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
@@ -15,19 +15,10 @@ export class AppComponent {
   public title: string = "Teacher journal";
   public routs: Array<string> = TITLE_ROOTS;
 
-  public count: number;
-  public sub: Subscription;
-  @select() readonly count$: Observable<number>;
+  @select(state => state.counterReducer.counter) public readonly count$: Observable<number>;
   constructor(
     private router: Router,
     private ngRedux: NgRedux<IAppState>,
     private actions: CounterActions
   ) {}
-
-  public increment(): void {
-    this.ngRedux.dispatch(this.actions.increment());
-  }
-  public decrement(): void {
-    this.ngRedux.dispatch(this.actions.decrement());
-  }
 }

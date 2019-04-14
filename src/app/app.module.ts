@@ -19,9 +19,7 @@ import { DatePipe, AveragePipe } from "./common/pipes";
 import { TableDirective, SendButtonDirective } from "./common/directives";
 
 import { NgReduxModule } from "@angular-redux/store";
-import { StoreModule } from "./redux/module";
-// import { rootReducer, IAppState, INITIAL_STATE } from "./redux/store/store";
-// import { CounterActions } from "./redux/actions/counter";
+import { StoreModule } from "./redux/store.module";
 
 @NgModule({
   declarations: [
@@ -49,14 +47,4 @@ import { StoreModule } from "./redux/module";
   providers: [HttpService, StoreService],
   bootstrap: [AppComponent],
 })
-export class AppModule {
-  // constructor(ngRedux: NgRedux<IAppState>, devTools: DevToolsExtension) {
-  //   const storeEnhancers: any = devTools.isEnabled() ? [ devTools.enhancer() ] : [];
-
-  //   ngRedux.configureStore(
-  //     rootReducer,
-  //     INITIAL_STATE,
-  //     [],
-  //     storeEnhancers);
-  // }
-}
+export class AppModule {}
