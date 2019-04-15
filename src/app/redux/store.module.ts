@@ -5,16 +5,15 @@ import {
   DevToolsExtension,
 } from "@angular-redux/store";
 import { createLogger } from "redux-logger";
-import { IAppState } from "./model";
 import { rootReducer } from "./reducer";
-import { CounterActions } from "./actions";
+import { StudentsActions } from "./actions";
 import { rootEpic } from "./epics";
 import { createEpicMiddleware, EpicMiddleware } from "redux-observable";
 import { IStudent } from "../common/entities";
 
 @NgModule({
   imports: [NgReduxModule],
-  providers: [CounterActions],
+  providers: [StudentsActions],
 })
 export class StoreModule {
   constructor(ngRedux: NgRedux<IStudent>, devTools: DevToolsExtension) {

@@ -28,11 +28,11 @@ export class FormComponent implements OnDestroy, AfterContentInit {
   private validationMessages: any = messages;
 
   @Input() public isVisible: boolean;
-  @Output() public hiddenForm: EventEmitter<boolean> = new EventEmitter<
+  @Output() public hiddenVisibility: EventEmitter<boolean> = new EventEmitter<
     boolean
   >();
-  @Output() public transferFormData: EventEmitter<object> = new EventEmitter<
-    object
+  @Output() public transferFormData: EventEmitter<any> = new EventEmitter<
+  any
   >();
   @ContentChildren("formControlsData") public childrens: any;
 
@@ -78,7 +78,7 @@ export class FormComponent implements OnDestroy, AfterContentInit {
 
   public save(): void {
     this.transferFormData.emit(this.profileForm);
-    this.hiddenForm.emit(false);
+    this.hiddenVisibility.emit(false);
     this.profileForm.reset();
   }
 

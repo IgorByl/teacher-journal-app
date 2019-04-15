@@ -1,45 +1,47 @@
-import { Component, OnDestroy, DoCheck } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { CreateNewStudent, IStudent } from "../../common/entities";
 import { TABLE_HEADERS } from "../../common/constants";
-import { StoreService } from "../../common/services";
+import { DataService } from "../../common/services";
 import { sorting } from "../../common/helpers";
-import { Subscription } from "rxjs";
+import { select } from "@angular-redux/store";
+import { Observable, Subscription } from "rxjs";
 
 @Component({
   selector: "app-students",
   templateUrl: "./students.component.html",
   styleUrls: ["./students.component.less"],
 })
-export class StudentsComponent implements OnDestroy, DoCheck {
-  private sub: Subscription;
+export class StudentsComponent implements OnInit, OnDestroy {
   public isVisible: boolean = false;
   public students: IStudent[] = [];
   public subjects: string[];
   public tableHeaders: string[] = TABLE_HEADERS;
   public toggleSort: boolean = false;
+  public sub: Subscription;
 
-  constructor(private storeService: StoreService) {}
+  @select(state => state.studentsReducer)
+  public readonly students$: Observable<any>;
 
-  public ngDoCheck(): void {
-    this.sub = this.storeService
-      .getStudents()
-      .subscribe(data => (this.students = data));
-  }
+  constructor(private dataService: DataService) {}
 
-  public ngOnDestroy(): void {
-    this.sub.unsubscribe();
-  }
+public ngOnInit(): void {
+  this.sub = this.students$.subscribe(data => this.students = data);
+}
 
-  public toggleForm(): void {
+public ngOnDestroy(): void {
+this.sub.unsubscribe();
+}
+
+  public toggleVisibility(): void {
     this.isVisible = !this.isVisible;
   }
 
-  public hiddenForm(increased: any): void {
+  public hiddenVisibility(increased: any): void {
     this.isVisible = increased;
   }
 
   public transferFormData(increased: any): void {
-    this.storeService.addStudent(
+    this.dataService.addStudent(
       new CreateNewStudent(
         this.students.length + 1,
         increased.value.Name,

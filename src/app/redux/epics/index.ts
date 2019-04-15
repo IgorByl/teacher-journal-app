@@ -1,4 +1,4 @@
 import { combineEpics, Epic } from "redux-observable";
-import { countEpic } from "./students";
+import { getStudentEpic } from "./students";
 
-export const rootEpic: Epic = combineEpics(countEpic);
+export const rootEpic: Epic = combineEpics(getStudentEpic);

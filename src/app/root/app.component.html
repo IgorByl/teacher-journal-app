@@ -1,4 +1,4 @@
-<header *ngIf="(router.url !== '/not-found')">
+<header *ngIf="router.url !== '/not-found'">
   <div class="titleWrapper">
     <div class="titleWrapper__logo">
       <div class="titleWrapper__logo_squire"></div>
@@ -25,9 +25,3 @@
 </header>
 
 <router-outlet></router-outlet>
-<!--___________________________________________________________________________-->
-<div>
-  Count: {{ count$ | async}}
-  <button (click)="actions.increment()">+</button>
-  <button (click)="actions.decrement()">-</button>
-</div>
