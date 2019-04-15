@@ -1,6 +1,6 @@
 export const TITLE_ROOTS: string[] = [
-  "/students",
-  "/subjects",
-  "/statistics",
-  "/export",
+  "students",
+  "subjects",
+  "statistics",
+  "export",
 ];

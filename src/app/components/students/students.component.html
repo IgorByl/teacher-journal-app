@@ -19,11 +19,11 @@
   [isVisible]="isVisible"
   (hiddenVisibility)="hiddenVisibility($event)"
   (transferFormData)="transferFormData($event)"
-  ><span data-form-title>Add new student</span>
-  <span #formControlsData data-form-firstInput>Name</span>
-  <span #formControlsData data-form-secondInput>Lastname</span>
-  <span #formControlsData data-form-thirdInput>Address</span>
-  <span #formControlsData data-form-fourthInput>Description</span>
+  ><span data-form-title>{{ "STUD.title" | translate}}</span>
+  <span #formControlsData data-form-firstInput>{{ "STUD.name" | translate}}</span>
+  <span #formControlsData data-form-secondInput>{{ "STUD.lastname" | translate}}</span>
+  <span #formControlsData data-form-thirdInput>{{ "STUD.address" | translate}}</span>
+  <span #formControlsData data-form-fourthInput>{{ "STUD.description" | translate}}</span>
 </app-form>
 
 <app-button (toggleVisibility)="toggleVisibility()"></app-button>

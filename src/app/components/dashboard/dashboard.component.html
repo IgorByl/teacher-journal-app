@@ -3,13 +3,13 @@
 <table class="table" *ngIf="students$">
   <tr>
     <th class="table__header">
-      Name
+     {{"DASH.name" | translate}}
     </th>
     <th class="table__header">
-      Lastname
+      {{"DASH.lastname" | translate}}
     </th>
     <th class="table__header">
-      Average
+      {{"DASH.average" | translate}}
     </th>
     <th
       class="table__header"
@@ -43,7 +43,7 @@
 </table>
 
 <h3 class="teacherName">
-  Teacher:
+  {{"DASH.teacher"| translate }}:
   <input
     class="table__input_teacher"
     [ngModel]="students[0].subjects[subject].teacher"
@@ -52,5 +52,5 @@
   />
 </h3>
 
-<div *ngIf="isChanged" appSomeDirective="isChanged" (click)="postData()"></div>
+<div *ngIf="isChanged" appSomeDirective="isChanged" (click)="postData()">{{"DASH.save" | translate}}</div>
 

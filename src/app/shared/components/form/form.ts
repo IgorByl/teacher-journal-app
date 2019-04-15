@@ -15,6 +15,7 @@ import {
 } from "@angular/forms";
 import { Subscription } from "rxjs";
 import { message, messages } from "../../../common/constants";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: "app-form",
@@ -32,14 +33,14 @@ export class FormComponent implements OnDestroy, AfterContentInit {
     boolean
   >();
   @Output() public transferFormData: EventEmitter<any> = new EventEmitter<
-  any
+    any
   >();
   @ContentChildren("formControlsData") public childrens: any;
 
   public profileForm: FormGroup;
   public formControlsNames: string[];
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, public translate: TranslateService) {}
 
   private setValidationMessage(c: AbstractControl, controlName: any): void {
     this.validationMessage[controlName] = "";
@@ -51,7 +52,9 @@ export class FormComponent implements OnDestroy, AfterContentInit {
   }
 
   public ngAfterContentInit(): void {
-    this.formControlsNames = [...this.childrens._results.map(item => item.nativeElement.innerText)];
+    this.formControlsNames = [
+      ...this.childrens._results.map(item => item.nativeElement.innerText),
+    ];
     this.createForm();
     this.watchValueChanges();
   }

@@ -1,0 +1,43 @@
+{
+  "APP": {
+    "title": "Teacher journal",
+    "select": "Change language",
+    "routs": {
+      "students": "students",
+      "subjects": "subjects",
+      "statistics": "statistics",
+      "export": "export"
+    }
+  },
+  "SUB": {
+    "title": "List of subjects",
+    "subject": "Subject",
+    "add": "Add new student",
+    "teacher": "Teacher",
+    "cabinet": "Cabinet",
+    "description": "Description"
+  },
+  "DASH": {
+    "teacher": "Teacher",
+    "name": "Name",
+    "lastname": "Lastname",
+    "average": "Average",
+    "save": "Save",
+    "physics": "physics",
+    "chemistry": "chemistry",
+    "biology": "biology",
+    "literature": "literature"
+  },
+  "FORM": {
+    "add": "Add",
+    "required": "required"
+  },
+  "STUD": {
+    "title": "Add new student",
+    "name": "Name",
+    "lastname": "Lastname",
+    "teacher": "Teacher",
+    "address": "Address",
+    "description": "Description"
+  }
+}
