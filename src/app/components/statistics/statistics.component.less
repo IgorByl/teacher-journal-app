@@ -1,0 +1,63 @@
+@import "../../../styles/variables.less";
+
+.wrapper {
+  display: flex;
+  width: 100%;
+  height: 600px;
+  border: 4px solid @formBorderColor;
+  box-sizing: border-box;
+}
+
+.filter {
+  width: 40%;
+  border-right: 4px solid @formBorderColor;
+  &__menu {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 10px;
+    border-bottom: 4px solid @formBorderColor;
+    &_title {
+      cursor: pointer;
+      &:hover {
+        color: lighten(@mainEmblemColor, 20%);
+      }
+    }
+  }
+  &__content {
+    display: flex;
+    &_unorderedList {
+      border-bottom: 2px solid @formBorderColor;
+      vertical-align: middle;
+      text-align: center;
+      padding: unset;
+      margin: unset;
+    }
+    &_list {
+      padding: 5px;
+      text-decoration: none;
+      list-style-type: none;
+      cursor: pointer;
+      &:hover {
+        background-color: @mainEmblemColor;
+      }
+    }
+  }
+}
+
+.presentation {
+  width: 60%;
+  padding-left: 15px;
+  box-sizing: border-box;
+}
+
+.activeStudent {
+  color: lighten(@mainEmblemColor, 10%);
+  font-weight: 500;
+}
+
+.activeTitle {
+  color: @mainEmblemColor;
+  text-shadow: @textColorShadow 0 1px 1px;
+  font-weight: 700;
+}

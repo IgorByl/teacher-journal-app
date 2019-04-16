@@ -1,0 +1,18 @@
+<div class="wrapper">
+  <section class="filter">
+    <div class="filter__menu">
+      <div [ngClass] = "{activeTitle: (isActiveLink === 'students') }" class="filter__menu_title" (click)="showFilterContent('students')">{{"Students" | uppercase}}</div>
+      <div [ngClass] = "{activeTitle: (isActiveLink === 'subjects') }" class="filter__menu_title" (click)="showFilterContent('subjects')">{{"Subjects" | uppercase}}</div>
+    </div>
+    <div *ngIf="(isActiveLink === 'students')" class="filter_content">
+        <ul class="filter__content_unorderedList" *ngFor="let i of students$ | async, let ind = index">
+            <li [ngClass] = "{activeStudent: (ind === listIndex) }" class="filter__content_list" (click)="showStudentDescription(ind)">{{i.name}} {{i.lastName}}</li>
+        </ul>
+    </div>
+  </section>
+  <section *ngIf="name && (isActiveLink === 'students')" class="presentation">
+      <h2>{{name }}</h2>
+      <p><span> Description: {{description}}</span></p>
+      <p><span> Address: {{address}}</span></p>
+  </section>
+</div>
