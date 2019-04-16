@@ -1,0 +1,41 @@
+@import "../../../../styles/variables.less";
+
+.dropdownWrapper {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  &__listOfDate {
+    display:none;
+  }
+  &__subjects {
+    position: relative;
+    margin-left: 40px;
+    &_input::before {
+        content: "▶";
+        position: absolute;
+        left: -25px;
+        color: @formBorderColor;
+        cursor: pointer;
+        opacity: 0.5;
+        top: 0px;
+      }
+      &_input:hover::before {
+        opacity: 1;
+      }
+      &_input {
+        margin: 5px;
+      }
+      &_input:checked::before {
+        content: "▼";
+        position: absolute;
+        left: -25px;
+        opacity: 1;
+        top: 0px;
+        color: @mainEmblemColor;
+      }
+  }
+}
+
+.activeListOfDate {
+  display:block;
+}

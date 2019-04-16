@@ -1,0 +1,12 @@
+<div class="dropdownWrapper">
+  <div *ngFor="let i of subjects">
+    <label class="dropdownWrapper__subjects">
+      <input class="dropdownWrapper__subjects_input" type="checkbox" (change)="toggle($event)"/>{{ i }}
+    </label>
+    <div [ngClass]="{ activeListOfDate: flag}" class="dropdownWrapper__listOfDate" *ngFor="let d of date">
+      <label class="dropdownWrapper__date">
+        <input class="dropdownWrapper__date_input" type="checkbox"/>{{ d }}
+      </label>
+    </div>
+  </div>
+</div>

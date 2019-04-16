@@ -32,12 +32,16 @@
       text-align: center;
       padding: unset;
       margin: unset;
+      animation: appending 2s;
     }
     &_list {
       padding: 5px;
       text-decoration: none;
       list-style-type: none;
       cursor: pointer;
+      transition-property: background-color;
+      transition-duration: 0.5s;
+      transition-timing-function: ease-in, ease, linear;
       &:hover {
         background-color: @mainEmblemColor;
       }
@@ -60,4 +64,13 @@
   color: @mainEmblemColor;
   text-shadow: @textColorShadow 0 1px 1px;
   font-weight: 700;
+}
+
+@keyframes appending {
+  0% {
+    transform: scale(0.2, 0.2)
+  }
+  100% {
+    transform: scale(1.0, 1.0);
+  }
 }
