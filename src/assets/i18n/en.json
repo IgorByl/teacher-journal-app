@@ -1,5 +1,29 @@
-{
-  "APP": {
+{"/students": "Students",
+  "/subjects": "Subjects",
+  "/statistics": "Statistics",
+  "/export": "Export",
+  "id":"Id",
+  "Name":"Name",
+  "LastName":"Lastname",
+  "Lastname":"Lastname",
+  "Address":"Address",
+  "Description": "Description",
+  "Subject": "Subject",
+  "Teacher": "Teacher",
+  "Cabinet": "Cabinet",
+  "name":"Name",
+  "Please enter your name.": "Please fill this field.",
+  "Must be longer than 1 characters.": "Must be longer than 1 characters.",
+  "Must enclude only letters.": "Must enclude only letters.",
+  "Must be longer than 1 characters. Must enclude only letters.": "Must consists of more then one literal.",
+  "lastName":"Lastname",
+  "lastname":"Lastname",
+  "address":"Address",
+  "description": "Description",
+  "subject": "Subject",
+  "teacher": "Teacher",
+  "cabinet": "Cabinet",
+    "APP": {
     "title": "Teacher journal",
     "select": "Change language",
     "routs": {
@@ -22,12 +46,16 @@
     "name": "Name",
     "lastname": "Lastname",
     "average": "Average",
-    "save": "Save",
-    "physics": "physics",
-    "chemistry": "chemistry",
-    "biology": "biology",
-    "literature": "literature"
+    "save": "Save"
   },
+  "physics": "physics",
+  "chemistry": "chemistry",
+  "biology": "biology",
+  "literature": "literature",
+  "geography":"geography",
+  "history": "history",
+  "music": "music",
+  "health": "health",
   "FORM": {
     "add": "Add",
     "required": "required"

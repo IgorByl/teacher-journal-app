@@ -7,7 +7,7 @@
     *ngFor="let i of subjects"
     routerLink="{{ i }}"
   >
-    {{ i }}
+    {{ i | translate }}
   </div>
 </section>
 
@@ -16,10 +16,10 @@
   (hiddenVisibility)="hiddenVisibility($event)"
   (transferFormData)="transferFormData($event)"
   ><span data-form-title>{{ "SUB.add" | translate}}</span>
-  <span #formControlsData data-form-firstInput>{{ "SUB.subject" | translate}}</span>
-  <span #formControlsData data-form-secondInput>{{ "SUB.teacher" | translate}}</span>
-  <span #formControlsData data-form-thirdInput>{{ "SUB.cabinet" | translate}}</span>
-  <span #formControlsData data-form-fourthInput>{{ "SUB.description" | translate}}</span>
+  <span #formControlsData data-form-firstInput>Subject</span>
+  <span #formControlsData data-form-secondInput>Teacher</span>
+  <span #formControlsData data-form-thirdInput>Cabinet</span>
+  <span #formControlsData data-form-fourthInput>Description</span>
   ></app-form
 >
 

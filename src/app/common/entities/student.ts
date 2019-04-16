@@ -5,8 +5,7 @@ export class CreateNewStudent {
     public lastName: string,
     public address: string,
     public desription: string,
-    public subjects: any = {
-    }
+    public subjects: any = {}
   ) {}
 }
 

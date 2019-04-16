@@ -5,11 +5,9 @@
       <div class="titleWrapper__logo_triangle"></div>
     </div>
     <h1 class="titleWrapper__title">
-      {{ "APP.title" | translate }}
+      {{ 'APP.title' | translate }}
     </h1>
     <div class="titleWrapper titleWrapper__languageChanger">
-      <label>
-        {{ "APP.select" | translate }}
         <select #langSelect (change)="translate.use(langSelect.value)">
           <option
             *ngFor="let lang of translate.getLangs()"
@@ -18,7 +16,6 @@
             >{{ lang }}</option
           >
         </select>
-      </label>
     </div>
   </div>
   <nav class="navigation">
@@ -30,7 +27,7 @@
         [routerLinkActiveOptions]="{ exact: true }"
       >
         <a class="navigation__link" routerLink="{{ item }}">
-          {{ "APP.routs['item']" | translate }}</a>
+          {{ item | translate }}</a>
       </li>
     </ul>
   </nav>
