@@ -6,8 +6,9 @@
   <div *ngFor="let i of subjects" class="dropdownWrapper__subject">
     <label class="dropdownWrapper__subjects">
       <input
+      type="checkbox"
         class="dropdownWrapper__subjects_input"
-        type="checkbox"
+        [(ngModel)]= checkboxSubjectFlag[i]
         (change)="toggleSubjectSelect($event)"
       />{{ i }}
     </label>
@@ -25,7 +26,7 @@
           class="dropdownWrapper__date"
           (change)="toggleSubjectDate($event, i)"
         >
-          <input class="dropdownWrapper__date_input" type="checkbox" />{{ d }}
+          <input class="dropdownWrapper__date_input" type="checkbox"   [(ngModel)]=checkboxDateFlag[i+d] />{{ d }}
         </label>
       </div>
     </div>

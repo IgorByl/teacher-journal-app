@@ -18,6 +18,9 @@ export class DropdownComponent implements OnInit, OnDestroy {
   public sub: Subscription;
   public dates: string[] = [];
 
+  public checkboxSubjectFlag: {} = {};
+  public checkboxDateFlag: {} = {};
+
   public conditionsOfSubjectsSelect: {} = {};
   public Object: Object = Object;
   public renderSelectData: {} = {};
@@ -33,6 +36,7 @@ export class DropdownComponent implements OnInit, OnDestroy {
           visibility: false,
           dates: {},
         };
+        this.checkboxSubjectFlag[item] = false;
       });
     });
   }
@@ -44,10 +48,10 @@ export class DropdownComponent implements OnInit, OnDestroy {
   public toggleSubjectSelect(event: any, customEvent: string): void {
     let eventSubject: string;
     event
-      ? (eventSubject = event.path[1].innerText)
+      ? ((eventSubject = event.path[1].innerText),
+        (this.conditionsOfSubjectsSelect[eventSubject].visibility = !this
+          .conditionsOfSubjectsSelect[eventSubject].visibility))
       : (eventSubject = customEvent);
-    this.conditionsOfSubjectsSelect[eventSubject].visibility = !this
-      .conditionsOfSubjectsSelect[eventSubject].visibility;
     const dates: number[] = searchUnicDate(this.students, eventSubject);
     dates.forEach(
       item =>
@@ -91,32 +95,47 @@ export class DropdownComponent implements OnInit, OnDestroy {
     const dates: {} = {};
     this.subjects.forEach(item => {
       this.toggleSubjectSelect(null, item);
+      this.checkboxSubjectFlag[item] = true;
       dates[item] = searchUnicDate(this.students, item);
-      dates[item].forEach(dat => this.conditionsOfSubjectsSelect[item][dat] = true);
+      dates[item].forEach(dat => {
+        this.conditionsOfSubjectsSelect[item][dat] = true;
+        this.checkboxDateFlag[item + dat] = true;
+      });
+      this.conditionsOfSubjectsSelect[item].visibility = true;
     });
+    this.getRenderData();
     console.log(this.conditionsOfSubjectsSelect);
+    console.log(this.renderSelectData);
   }
 
   public unCheckAll(): void {
     const dates: {} = {};
     this.subjects.forEach(item => {
       this.toggleSubjectSelect(null, item);
+      this.checkboxSubjectFlag[item] = true;
       dates[item] = searchUnicDate(this.students, item);
-      dates[item].forEach(dat => this.conditionsOfSubjectsSelect[item][dat] = false);
+      dates[item].forEach(dat => {
+        this.conditionsOfSubjectsSelect[item][dat] = false;
+        this.checkboxDateFlag[item + dat] = false;
+      });
     });
+    this.getRenderData();
     console.log(this.conditionsOfSubjectsSelect);
+    console.log(this.renderSelectData);
   }
 
   public expandAll(): void {
     this.subjects.forEach(item => {
       this.toggleSubjectSelect(null, item);
+      this.checkboxSubjectFlag[item] = true;
       this.conditionsOfSubjectsSelect[item].visibility = true;
     });
   }
 
   public collapseAll(): void {
-    this.subjects.forEach(
-      item => (this.conditionsOfSubjectsSelect[item].visibility = false)
-    );
+    this.subjects.forEach(item => {
+      this.conditionsOfSubjectsSelect[item].visibility = false;
+      this.checkboxSubjectFlag[item] = false;
+    });
   }
 }
