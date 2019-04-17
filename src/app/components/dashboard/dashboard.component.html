@@ -19,7 +19,7 @@
         class="table__input table__input_header"
         #date
         (focusout)="changeDate(date.value, ind+1)"
-        [ngModel]="i | date"
+        [ngModel]="i | dates"
       />
     </th>
     <div class="table__button_addColumn" (click)="addDateColumn()">+</div>

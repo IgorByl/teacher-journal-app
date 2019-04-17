@@ -3,39 +3,71 @@
 .dropdownWrapper {
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
+  overflow-y: auto;
+  height: 469px;
+  padding-top: 20px;
+  &__date {
+    &_input {
+      margin-right: 10px;
+    }
+  }
   &__listOfDate {
-    display:none;
+    display: none;
+    padding-left: 20%;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    &_item {
+      margin: 20px;
+    }
+  }
+  &__subject {
+    padding-bottom: 10px;
   }
   &__subjects {
     position: relative;
     margin-left: 40px;
     &_input::before {
-        content: "▶";
-        position: absolute;
-        left: -25px;
-        color: @formBorderColor;
-        cursor: pointer;
-        opacity: 0.5;
-        top: 0px;
-      }
-      &_input:hover::before {
-        opacity: 1;
-      }
-      &_input {
-        margin: 5px;
-      }
-      &_input:checked::before {
-        content: "▼";
-        position: absolute;
-        left: -25px;
-        opacity: 1;
-        top: 0px;
-        color: @mainEmblemColor;
-      }
+      content: "▶";
+      position: absolute;
+      left: -25px;
+      color: @formBorderColor;
+      cursor: pointer;
+      opacity: 0.5;
+      top: 0px;
+    }
+    &_input:hover::before {
+      opacity: 1;
+    }
+    &_input {
+      margin: 5px;
+    }
+    &_input:checked::before {
+      content: "▼";
+      position: absolute;
+      left: -25px;
+      opacity: 1;
+      top: 0px;
+      color: @mainEmblemColor;
+    }
   }
 }
 
 .activeListOfDate {
-  display:block;
+  display: block;
+}
+
+.controlsWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  background-color: @formBorderColor;
+  &__controller {
+    cursor: pointer;
+    font-size: 0.8rem;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    &:hover {
+      color: lighten(@mainEmblemColor, 20%);
+    }
+  }
 }

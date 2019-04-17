@@ -1,12 +1,37 @@
+<div class="controlsWrapper">
+  <div class="controlsWrapper__controller" (click)="checkAll()">CHECK ALL</div>
+  <div class="controlsWrapper__controller" (click)="unCheckAll()">UNCHECK ALL</div>
+</div>
 <div class="dropdownWrapper">
-  <div *ngFor="let i of subjects">
+  <div *ngFor="let i of subjects" class="dropdownWrapper__subject">
     <label class="dropdownWrapper__subjects">
-      <input class="dropdownWrapper__subjects_input" type="checkbox" (change)="toggle($event)"/>{{ i }}
+      <input
+        class="dropdownWrapper__subjects_input"
+        type="checkbox"
+        (change)="toggleSubjectSelect($event)"
+      />{{ i }}
     </label>
-    <div [ngClass]="{ activeListOfDate: flag}" class="dropdownWrapper__listOfDate" *ngFor="let d of date">
-      <label class="dropdownWrapper__date">
-        <input class="dropdownWrapper__date_input" type="checkbox"/>{{ d }}
-      </label>
+    <div
+      [ngClass]="{
+        activeListOfDate: conditionsOfSubjectsSelect[i].visibility
+      }"
+      class="dropdownWrapper__listOfDate"
+    >
+      <div
+        class="dropdownWrapper__listOfDate_item"
+        *ngFor="let d of Object.keys(conditionsOfSubjectsSelect[i].dates)"
+      >
+        <label
+          class="dropdownWrapper__date"
+          (change)="toggleSubjectDate($event, i)"
+        >
+          <input class="dropdownWrapper__date_input" type="checkbox" />{{ d }}
+        </label>
+      </div>
     </div>
   </div>
+</div>
+<div class="controlsWrapper">
+  <div class="controlsWrapper__controller" (click)="expandAll()">EXPAND ALL</div>
+  <div class="controlsWrapper__controller" (click)="collapseAll()">COLLAPSE ALL</div>
 </div>

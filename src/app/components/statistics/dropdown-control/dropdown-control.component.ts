@@ -3,7 +3,7 @@ import { TranslateService } from "@ngx-translate/core";
 import { Subscription, Observable } from "rxjs";
 import { IStudent } from "src/app/common/entities";
 import { select } from "@angular-redux/store";
-import { unicSubjectSearch } from "src/app/common/helpers";
+import { unicSubjectSearch, searchUnicDate } from "src/app/common/helpers";
 
 @Component({
   selector: "app-dropdown",
@@ -16,8 +16,11 @@ export class DropdownComponent implements OnInit, OnDestroy {
   public students: IStudent[] = [];
   public subjects: string[];
   public sub: Subscription;
-  public date;
-  public flag: boolean = false;
+  public dates: string[] = [];
+
+  public conditionsOfSubjectsSelect: {} = {};
+  public Object: Object = Object;
+  public renderSelectData: {} = {};
 
   constructor(public translate: TranslateService) {}
 
@@ -25,6 +28,12 @@ export class DropdownComponent implements OnInit, OnDestroy {
     this.sub = this.students$.subscribe(data => {
       this.students = data;
       this.subjects = unicSubjectSearch(data);
+      this.subjects.forEach(item => {
+        this.conditionsOfSubjectsSelect[item] = {
+          visibility: false,
+          dates: {},
+        };
+      });
     });
   }
 
@@ -32,16 +41,82 @@ export class DropdownComponent implements OnInit, OnDestroy {
     this.sub.unsubscribe();
   }
 
-  public toggle(event): void {
-    this.flag = !this.flag;
-    const dateObj: {} = {};
-    this.students.map(item =>
-      Object.values(item.subjects[event.path[1].innerText].date).forEach(
-        items => {
-          dateObj[items] = 1;
-        }
+  public toggleSubjectSelect(event: any, customEvent: string): void {
+    let eventSubject: string;
+    event
+      ? (eventSubject = event.path[1].innerText)
+      : (eventSubject = customEvent);
+    this.conditionsOfSubjectsSelect[eventSubject].visibility = !this
+      .conditionsOfSubjectsSelect[eventSubject].visibility;
+    const dates: number[] = searchUnicDate(this.students, eventSubject);
+    dates.forEach(
+      item =>
+        (this.conditionsOfSubjectsSelect[eventSubject].dates[item] = false)
+    );
+  }
+
+  public toggleSubjectDate(event: any, subject: string): void {
+    const eventDate: string = event.path[1].innerText;
+    this.conditionsOfSubjectsSelect[subject].dates[eventDate] = !this
+      .conditionsOfSubjectsSelect[subject].dates[eventDate];
+    this.getRenderData();
+  }
+
+  public getRenderData(): void {
+    const dateVariable: {} = {};
+    this.students.forEach(item => {
+      this.renderSelectData[`${item.name}` + " " + `${item.lastName}`] = {};
+      dateVariable[item.id] = {};
+    });
+    this.students.forEach(stud =>
+      Object.keys(stud.subjects).forEach(sub =>
+        Object.values(stud.subjects[sub].date).forEach((dat, index) => {
+          if (this.conditionsOfSubjectsSelect[sub].dates[dat]) {
+            dateVariable[stud.id][sub] =
+              dateVariable[stud.id][sub] +
+              Object.values(stud.subjects[sub].marks)[index];
+            let studentNameField: string =
+              `${stud.name}` + " " + `${stud.lastName}`;
+            this.renderSelectData[studentNameField][sub] = [
+              ...dateVariable[stud.id][sub].slice(9).split(""),
+            ];
+          }
+        })
       )
     );
-    this.date = Object.keys(dateObj);
+    console.log(this.renderSelectData);
+  }
+
+  public checkAll(): void {
+    const dates: {} = {};
+    this.subjects.forEach(item => {
+      this.toggleSubjectSelect(null, item);
+      dates[item] = searchUnicDate(this.students, item);
+      dates[item].forEach(dat => this.conditionsOfSubjectsSelect[item][dat] = true);
+    });
+    console.log(this.conditionsOfSubjectsSelect);
+  }
+
+  public unCheckAll(): void {
+    const dates: {} = {};
+    this.subjects.forEach(item => {
+      this.toggleSubjectSelect(null, item);
+      dates[item] = searchUnicDate(this.students, item);
+      dates[item].forEach(dat => this.conditionsOfSubjectsSelect[item][dat] = false);
+    });
+    console.log(this.conditionsOfSubjectsSelect);
+  }
+
+  public expandAll(): void {
+    this.subjects.forEach(item => {
+      this.toggleSubjectSelect(null, item);
+      this.conditionsOfSubjectsSelect[item].visibility = true;
+    });
+  }
+
+  public collapseAll(): void {
+    this.subjects.forEach(
+      item => (this.conditionsOfSubjectsSelect[item].visibility = false)
+    );
   }
 }

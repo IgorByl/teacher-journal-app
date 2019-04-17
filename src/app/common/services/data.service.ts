@@ -13,7 +13,7 @@ export class DataService {
     this.action.setStudentToStore(student);
   }
 
-  public addSubject(students: IStudent, increased: any): any {
+  public addSubject(students: IStudent[], increased: any): any {
     students.map(
       item =>
         (item.subjects[increased.value.Subject] = {
