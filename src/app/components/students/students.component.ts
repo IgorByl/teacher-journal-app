@@ -56,19 +56,7 @@ export class StudentsComponent implements OnInit, OnDestroy {
         increased.value.Lastname,
         increased.value.Address,
         increased.value.Description,
-        [
-          ...this.subjects.map(subject => {
-            return {
-              [subject]: {
-                marks: {},
-                date: {},
-                teacher: "",
-                cabinet: "",
-                description: "",
-              },
-            };
-          }),
-        ]
+        this.subjects,
       )
     );
   }

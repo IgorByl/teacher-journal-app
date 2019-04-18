@@ -7,7 +7,7 @@ export type StudentActionTypes =
 
 export interface ISetData {
   type: StudentActions.SET_DATA;
-  payload: [];
+  payload: IStudent[];
 }
 
 export interface ISetStudentToStore {

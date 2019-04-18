@@ -5,7 +5,7 @@ export class Student {
     public lastName: string,
     public address: string,
     public desription: string,
-    public subjects: {},
+    public subjects: {}
   ) {
     this.id = id;
     this.name = name;
@@ -22,5 +22,9 @@ export interface IStudent {
   lastName: string;
   address: string;
   desription: string;
-  subjects: any;
+  subjects: ISubjects[] | {};
+}
+
+interface ISubjects {
+  [key: string]: {};
 }

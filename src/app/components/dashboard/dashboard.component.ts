@@ -85,13 +85,13 @@ export class DashboardComponent implements DoCheck, OnDestroy {
   }
 
   public changeMark(mark: string, index: string, student: any): void {
+    console.log(index, student, mark);
     this.students.forEach(item => {
-      if (
-        item.id === student.id &&
-        item.subjects[this.subject].marks[index] !== mark
-      ) {
+      if (item.id === student.id) {
+        if (item.subjects[this.subject].marks[index] !== mark) {
+          this.isChanged = true;
+        }
         item.subjects[this.subject].marks[index] = mark;
-        this.isChanged = true;
       }
     });
   }
