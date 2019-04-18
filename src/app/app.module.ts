@@ -15,7 +15,7 @@ import { ExportComponent } from "./components/export/export.component";
 import { SubjectsComponent } from "./components/subjects/subjects.component";
 import { DashboardComponent } from "./components/dashboard/dashboard.component";
 import { NotFoundComponent } from "./components/not-found-page/not-found-page.component";
-import { DatePipe, AveragePipe } from "./common/pipes";
+import { DatePipe, AveragePipe, StatisticPipe } from "./common/pipes";
 import { TableDirective, SendButtonDirective } from "./common/directives";
 
 import { NgReduxModule } from "@angular-redux/store";
@@ -49,6 +49,7 @@ export class MyMissingTranslationHandler implements MissingTranslationHandler {
     NotFoundComponent,
     DatePipe,
     AveragePipe,
+    StatisticPipe,
     TableDirective,
     SendButtonDirective,
   ],

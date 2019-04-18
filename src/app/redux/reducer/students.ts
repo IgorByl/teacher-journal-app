@@ -6,7 +6,7 @@ import { IStudent } from "../../common/entities";
 
 // }
 
-// type StudentsActionTypes = 
+// type StudentsActionTypes =
 //   ISET_STUDENT;
 //   interface ISET_STUDENT {
 //     type: StudentsActions.SET_STUDENT,
@@ -14,13 +14,12 @@ import { IStudent } from "../../common/entities";
 //   }
 // в файл с экшен тайпами!!!
 
-
   // public static GET_DATA: string = "GET_DATA";
   // public static SET_STUDENT: string = "SET_STUDENT";
   // public static SET_SUBJECT: string = "SET_SUBJECT";
   // public static GET_DATA_REJECTED: string = "GET_DATA_REJECTED";
 
-export function studentsReducer(state: any = [], action: StudentsActionTypes ): IStudent[] {
+export function studentsReducer(state: any = [], action: any ): IStudent[] {
   switch (action.type) {
     case StudentsActions.SET_DATA:
       return [...state, ...action.payload];

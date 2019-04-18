@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { StudentsActions } from "src/app/redux/actions";
-import { IStudent } from "../entities/student";
+import { IStudent } from "../entities";
 
 @Injectable({ providedIn: "root" })
 export class DataService {

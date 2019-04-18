@@ -4,6 +4,7 @@ import { Subscription, Observable } from "rxjs";
 import { IStudent } from "src/app/common/entities";
 import { select } from "@angular-redux/store";
 import { unicSubjectSearch, searchUnicDate } from "src/app/common/helpers";
+import { StatisticService } from "../../../common/services";
 
 @Component({
   selector: "app-dropdown",
@@ -13,19 +14,21 @@ import { unicSubjectSearch, searchUnicDate } from "src/app/common/helpers";
 export class DropdownComponent implements OnInit, OnDestroy {
   @select(state => state.studentsReducer)
   public readonly students$: Observable<any>;
+
   public students: IStudent[] = [];
   public subjects: string[];
   public sub: Subscription;
   public dates: string[] = [];
-
-  public checkboxSubjectFlag: {} = {};
-  public checkboxDateFlag: {} = {};
-
+  public checkboxSubjectVisibility: {} = {};
+  public checkboxDateVisibility: {} = {};
   public conditionsOfSubjectsSelect: {} = {};
   public Object: Object = Object;
   public renderSelectData: {} = {};
 
-  constructor(public translate: TranslateService) {}
+  constructor(
+    public translate: TranslateService,
+    public statisticService: StatisticService
+  ) {}
 
   public ngOnInit(): void {
     this.sub = this.students$.subscribe(data => {
@@ -36,7 +39,7 @@ export class DropdownComponent implements OnInit, OnDestroy {
           visibility: false,
           dates: {},
         };
-        this.checkboxSubjectFlag[item] = false;
+        this.checkboxSubjectVisibility[item] = false;
       });
     });
   }
@@ -68,11 +71,9 @@ export class DropdownComponent implements OnInit, OnDestroy {
 
   public getRenderData(): void {
     const dateVariable: {} = {};
-    this.students.forEach(item => {
-      this.renderSelectData[`${item.name}` + " " + `${item.lastName}`] = {};
-      dateVariable[item.id] = {};
-    });
-    this.students.forEach(stud =>
+    this.students.forEach(stud => {
+      this.renderSelectData[`${stud.name}` + " " + `${stud.lastName}`] = {};
+      dateVariable[stud.id] = {};
       Object.keys(stud.subjects).forEach(sub =>
         Object.values(stud.subjects[sub].date).forEach((dat, index) => {
           if (this.conditionsOfSubjectsSelect[sub].dates[dat]) {
@@ -86,48 +87,48 @@ export class DropdownComponent implements OnInit, OnDestroy {
             ];
           }
         })
-      )
-    );
-    console.log(this.renderSelectData);
+      );
+    });
+    this.statisticService.addStatistic(this.renderSelectData);
   }
 
   public checkAll(): void {
     const dates: {} = {};
     this.subjects.forEach(item => {
       this.toggleSubjectSelect(null, item);
-      this.checkboxSubjectFlag[item] = true;
+      this.checkboxSubjectVisibility[item] = true;
       dates[item] = searchUnicDate(this.students, item);
       dates[item].forEach(dat => {
-        this.conditionsOfSubjectsSelect[item][dat] = true;
-        this.checkboxDateFlag[item + dat] = true;
+        this.conditionsOfSubjectsSelect[item].dates[dat] = true;
+        this.checkboxDateVisibility[item + dat] = true;
       });
       this.conditionsOfSubjectsSelect[item].visibility = true;
     });
     this.getRenderData();
-    console.log(this.conditionsOfSubjectsSelect);
-    console.log(this.renderSelectData);
   }
 
   public unCheckAll(): void {
     const dates: {} = {};
     this.subjects.forEach(item => {
       this.toggleSubjectSelect(null, item);
-      this.checkboxSubjectFlag[item] = true;
+      Object.keys(this.checkboxSubjectVisibility).map(
+        i => i.toString() === "false"
+      )
+        ? null
+        : (this.checkboxSubjectVisibility[item] = true);
       dates[item] = searchUnicDate(this.students, item);
       dates[item].forEach(dat => {
         this.conditionsOfSubjectsSelect[item][dat] = false;
-        this.checkboxDateFlag[item + dat] = false;
+        this.checkboxDateVisibility[item + dat] = false;
       });
     });
     this.getRenderData();
-    console.log(this.conditionsOfSubjectsSelect);
-    console.log(this.renderSelectData);
   }
 
   public expandAll(): void {
     this.subjects.forEach(item => {
       this.toggleSubjectSelect(null, item);
-      this.checkboxSubjectFlag[item] = true;
+      this.checkboxSubjectVisibility[item] = true;
       this.conditionsOfSubjectsSelect[item].visibility = true;
     });
   }
@@ -135,7 +136,7 @@ export class DropdownComponent implements OnInit, OnDestroy {
   public collapseAll(): void {
     this.subjects.forEach(item => {
       this.conditionsOfSubjectsSelect[item].visibility = false;
-      this.checkboxSubjectFlag[item] = false;
+      this.checkboxSubjectVisibility[item] = false;
     });
   }
 }

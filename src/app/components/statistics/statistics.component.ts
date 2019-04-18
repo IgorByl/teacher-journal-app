@@ -13,6 +13,10 @@ import { unicSubjectSearch } from "src/app/common/helpers";
 export class StatisticsComponent implements OnInit, OnDestroy {
   @select(state => state.studentsReducer)
   public readonly students$: Observable<any>;
+
+  @select(state => state.statisticReducer)
+  public readonly statistic$: Observable<any>;
+
   public description: string;
   public students: IStudent[] = [];
   public subjects: string[];
@@ -21,6 +25,7 @@ export class StatisticsComponent implements OnInit, OnDestroy {
   public address: string;
   public listIndex: number;
   public isActiveLink: string;
+  public Object: {} = Object;
 
   constructor(public translate: TranslateService) {}
 
@@ -29,6 +34,7 @@ export class StatisticsComponent implements OnInit, OnDestroy {
       this.students = data;
       this.subjects = unicSubjectSearch(data);
     });
+    this.isActiveLink = "students";
   }
 
   public ngOnDestroy(): void {

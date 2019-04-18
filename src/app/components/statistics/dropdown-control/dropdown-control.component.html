@@ -1,6 +1,6 @@
 <div class="controlsWrapper">
-  <div class="controlsWrapper__controller" (click)="checkAll()">CHECK ALL</div>
-  <div class="controlsWrapper__controller" (click)="unCheckAll()">UNCHECK ALL</div>
+  <div class="controlsWrapper__controller" (click)="checkAll()">{{ "CHECK ALL" | translate}}</div>
+  <div class="controlsWrapper__controller" (click)="unCheckAll()">{{ "UNCHECK ALL" | translate}}</div>
 </div>
 <div class="dropdownWrapper">
   <div *ngFor="let i of subjects" class="dropdownWrapper__subject">
@@ -8,7 +8,7 @@
       <input
       type="checkbox"
         class="dropdownWrapper__subjects_input"
-        [(ngModel)]= checkboxSubjectFlag[i]
+        [(ngModel)]= checkboxSubjectVisibility[i]
         (change)="toggleSubjectSelect($event)"
       />{{ i }}
     </label>
@@ -26,13 +26,13 @@
           class="dropdownWrapper__date"
           (change)="toggleSubjectDate($event, i)"
         >
-          <input class="dropdownWrapper__date_input" type="checkbox"   [(ngModel)]=checkboxDateFlag[i+d] />{{ d }}
+          <input class="dropdownWrapper__date_input" type="checkbox"   [(ngModel)]=checkboxDateVisibility[i+d] />{{ d }}
         </label>
       </div>
     </div>
   </div>
 </div>
 <div class="controlsWrapper">
-  <div class="controlsWrapper__controller" (click)="expandAll()">EXPAND ALL</div>
-  <div class="controlsWrapper__controller" (click)="collapseAll()">COLLAPSE ALL</div>
+  <div class="controlsWrapper__controller" (click)="expandAll()">{{ "EXPAND ALL" | translate }}</div>
+  <div class="controlsWrapper__controller" (click)="collapseAll()">{{ "COLLAPSE ALL" | translate }}</div>
 </div>

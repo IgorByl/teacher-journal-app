@@ -6,14 +6,14 @@
         class="filter__menu_title"
         (click)="showFilterContent('students')"
       >
-        {{ "Students" | uppercase }}
+        {{ "Students" | translate | uppercase}}
       </div>
       <div
         [ngClass]="{ activeTitle: isActiveLink === 'subjects' }"
         class="filter__menu_title"
         (click)="showFilterContent('subjects')"
       >
-        {{ "Subjects" | uppercase }}
+        {{ "Subjects" | translate | uppercase}}
       </div>
     </div>
     <div *ngIf="isActiveLink === 'students'" class="filter_content">
@@ -38,14 +38,22 @@
     <div *ngIf="name && isActiveLink === 'students'">
       <h2>{{ name }}</h2>
       <p>
-        <span> Description: {{ description }}</span>
+        <span> {{ "Description" | translate}}: {{ description }}</span>
       </p>
       <p>
-        <span> Address: {{ address }}</span>
+        <span> {{ "Address" | translate}}: {{ address }}</span>
       </p>
     </div>
     <div *ngIf="isActiveLink === 'subjects'">
-      <p><span>Hello subjects!</span></p>
+      <h2
+        class="presentation__student"
+        *ngFor="let student of Object.keys(statistic$ | async); let i = index"
+      >
+        {{ student }}
+        <p class="presentation__student_marks">
+          {{ Object.values(statistic$ | async)[i] | json | bracketsdelete }}
+        </p>
+      </h2>
     </div>
   </section>
 </div>

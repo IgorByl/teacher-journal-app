@@ -55,8 +55,16 @@
 
 .presentation {
   width: 70%;
-  padding-left: 15px;
+  padding: 15px;
   box-sizing: border-box;
+  overflow-y: auto;
+  &__student {
+    color: lighten(@mainEmblemColor, 20%);
+    &_marks {
+      font-weight: 400;
+      color: @textColor;
+    }
+  }
 }
 
 .activeStudent {

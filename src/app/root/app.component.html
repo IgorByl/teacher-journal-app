@@ -8,7 +8,7 @@
       {{ 'APP.title' | translate }}
     </h1>
     <div class="titleWrapper titleWrapper__languageChanger">
-        <select #langSelect (change)="translate.use(langSelect.value)">
+        <select #langSelect (change)="translate.use(langSelect.value)" class="languageSelect">
           <option
             *ngFor="let lang of translate.getLangs()"
             [value]="lang"
