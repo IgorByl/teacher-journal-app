@@ -16,7 +16,7 @@ export const getStudentEpic: Epic = (action$: ActionsObservable<Action>) =>
         catchError(error =>
           of({
             type: "GET_DATA_REJECTED",
-            payload: error.xhr.response,
+            payload: error.text,
             error: true,
           })
         )

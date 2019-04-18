@@ -1,2 +1,2 @@
-export { CreateNewStudent, IStudent } from "./student";
+export { Student, IStudent } from "./student";
 export { IStatistic } from "./statistic";
