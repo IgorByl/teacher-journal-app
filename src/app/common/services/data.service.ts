@@ -9,7 +9,7 @@ export class DataService {
     private action: StudentsActions
   ) {}
 
-  public addStudent(student: any): any {
+  public addStudent(student: any): void {
     this.action.setStudentToStore(student);
   }
 

@@ -20,7 +20,7 @@ export class SendDataService {
       console.error("An error occurred:", error.error.message);
     } else {
       console.warn(
-        `Backend returned code ${error.status}, ` + `body was: ${error.error}`
+        `Backend returned code ${error.status}, body was: ${error.error}`
       );
     }
     return throwError(error);
