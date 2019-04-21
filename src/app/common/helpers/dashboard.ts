@@ -1,4 +1,4 @@
-export const setDate: any = (date): any => {
+export const setDate: Function = (date): Date => {
   if (date) {
     date.setDate(date.getDate() + 1);
   } else {

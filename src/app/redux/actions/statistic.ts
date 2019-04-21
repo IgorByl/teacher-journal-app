@@ -8,7 +8,7 @@ export class StatisticActions {
 
   constructor(private ngRedux: NgRedux<IStatistic>) {}
 
-  public setStatisticToStore(payload: any): void {
+  public setStatisticToStore(payload: IStatistic): void {
     this.ngRedux.dispatch({ type: StatisticActions.SET_STATISTIC_DATA, payload });
   }
 }

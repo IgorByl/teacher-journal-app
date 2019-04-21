@@ -1,4 +1,4 @@
-export const TABLE_HEADERS: string[] = [
+const TABLE_HEADERS: string[] = [
   "id",
   "name",
   "lastName",
@@ -6,9 +6,11 @@ export const TABLE_HEADERS: string[] = [
   "description",
 ];
 
-export const URL: any = {
+const URL: any = {
   get: "https://app-teacher-journal.herokuapp.com/dash",
   post: "https://app-teacher-journal.herokuapp.com/save",
   // get: "https://localhost:3005/dash",
   // post: "https://localhost:3005/save",
 };
+
+export { TABLE_HEADERS, URL };

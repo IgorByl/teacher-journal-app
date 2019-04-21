@@ -1,7 +1,13 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 import { Subscription, Observable } from "rxjs";
-import { IStudent } from "src/app/common/entities";
+import {
+  IStudent,
+  IDropdownSelectedData,
+  ICheckboxSubjectVisibility,
+  ICheckboxDateVisibility,
+  IConditionsOfSubjectsSelect,
+} from "src/app/common/entities";
 import { select } from "@angular-redux/store";
 import { unicSubjectSearch, searchUnicDate } from "src/app/common/helpers";
 import { StatisticService } from "../../../common/services";
@@ -13,17 +19,17 @@ import { StatisticService } from "../../../common/services";
 })
 export class DropdownComponent implements OnInit, OnDestroy {
   @select(state => state.studentsReducer)
-  public readonly students$: Observable<any>;
+  public readonly students$: Observable<IStudent[]>;
 
   public students: IStudent[] = [];
   public subjects: string[];
   public sub: Subscription;
   public dates: string[] = [];
-  public checkboxSubjectVisibility: {} = {};
-  public checkboxDateVisibility: {} = {};
-  public conditionsOfSubjectsSelect: {} = {};
+  public checkboxSubjectVisibility: ICheckboxSubjectVisibility = {};
+  public checkboxDateVisibility: ICheckboxDateVisibility = {};
+  public conditionsOfSubjectsSelect: IConditionsOfSubjectsSelect = {};
   public Object: Object = Object;
-  public renderSelectData: {} = {};
+  public dropdownSelectedData: IDropdownSelectedData = {};
 
   constructor(
     public translate: TranslateService,
@@ -72,24 +78,24 @@ export class DropdownComponent implements OnInit, OnDestroy {
   public getRenderData(): void {
     const dateVariable: {} = {};
     this.students.forEach(stud => {
-      this.renderSelectData[`${stud.name}` + " " + `${stud.lastName}`] = {};
+      this.dropdownSelectedData[`${stud.name}` + " " + `${stud.lastName}`] = {};
       dateVariable[stud.id] = {};
       Object.keys(stud.subjects).forEach(sub =>
-        Object.values(stud.subjects[sub].date).forEach((dat, index) => {
+        (Object.values(stud.subjects[sub].date) as []).forEach((dat, index) => {
           if (this.conditionsOfSubjectsSelect[sub].dates[dat]) {
             dateVariable[stud.id][sub] =
               dateVariable[stud.id][sub] +
               Object.values(stud.subjects[sub].marks)[index];
             let studentNameField: string =
               `${stud.name}` + " " + `${stud.lastName}`;
-            this.renderSelectData[studentNameField][sub] = [
+            this.dropdownSelectedData[studentNameField][sub] = [
               ...dateVariable[stud.id][sub].slice(9).split(""),
             ];
           }
         })
       );
     });
-    this.statisticService.addStatistic(this.renderSelectData);
+    this.statisticService.addStatistic(this.dropdownSelectedData);
   }
 
   public checkAll(): void {

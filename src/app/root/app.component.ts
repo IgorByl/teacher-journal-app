@@ -12,7 +12,7 @@ import { TranslateService } from "@ngx-translate/core";
   styleUrls: ["./app.component.less"],
 })
 export class AppComponent implements OnInit {
-  public routs: Array<string> = TITLE_ROOTS;
+  public routs: string[] = TITLE_ROOTS;
 
   constructor(
     private router: Router,

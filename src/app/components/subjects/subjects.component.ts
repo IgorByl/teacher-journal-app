@@ -5,6 +5,7 @@ import { Subscription, Observable } from "rxjs";
 import { unicSubjectSearch } from "src/app/common/helpers";
 import { select } from "@angular-redux/store";
 import { TranslateService } from "@ngx-translate/core";
+import { FormGroup } from "@angular/forms";
 
 @Component({
   selector: "app-subjects",
@@ -18,7 +19,7 @@ export class SubjectsComponent implements OnDestroy, OnInit {
   public isVisible: boolean = false;
 
   @select(state => state.studentsReducer)
-  public readonly students$: Observable<any>;
+  public readonly students$: Observable<IStudent[]>;
 
   constructor(
     private dataService: DataService,
@@ -40,11 +41,11 @@ export class SubjectsComponent implements OnDestroy, OnInit {
     this.isVisible = !this.isVisible;
   }
 
-  public transferFormData(increased: any): void {
+  public transferFormData(increased: FormGroup): void {
     this.dataService.addSubject(this.students, increased);
   }
 
-  public hiddenVisibility(increased: any): void {
+  public hiddenVisibility(increased: boolean): void {
     this.isVisible = increased;
   }
 }

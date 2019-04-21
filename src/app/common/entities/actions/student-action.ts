@@ -12,7 +12,7 @@ export interface ISetData {
 
 export interface ISetStudentToStore {
   type: StudentActions.SET_STUDENT;
-  payload: IStudent[];
+  payload: IStudent;
 }
 
 export interface ISetNewSubject {

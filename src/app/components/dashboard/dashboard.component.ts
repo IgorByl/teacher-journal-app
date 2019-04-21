@@ -23,7 +23,7 @@ export class DashboardComponent implements DoCheck, OnDestroy {
   public Object: Object = Object;
 
   @select(state => state.studentsReducer)
-  public readonly students$: Observable<any>;
+  public readonly students$: Observable<IStudent[]>;
 
   constructor(
     private activateRoute: ActivatedRoute,
@@ -84,8 +84,7 @@ export class DashboardComponent implements DoCheck, OnDestroy {
     });
   }
 
-  public changeMark(mark: string, index: string, student: any): void {
-    console.log(index, student, mark);
+  public changeMark(mark: string, index: string, student: IStudent): void {
     this.students.forEach(item => {
       if (item.id === student.id) {
         if (item.subjects[this.subject].marks[index] !== mark) {

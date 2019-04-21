@@ -4,8 +4,12 @@ import { map, mergeMap, catchError } from "rxjs/operators";
 import { of } from "rxjs";
 import { ajax } from "rxjs/ajax";
 import { URL } from "../../common/constants";
+import { IStudent } from "src/app/common/entities";
 
-const fetchStudentsFulfilled: any = payload => ({ type: "SET_DATA", payload });
+const fetchStudentsFulfilled: Function = (payload: IStudent) => ({
+  type: "SET_DATA",
+  payload,
+});
 
 export const getStudentEpic: Epic = (action$: ActionsObservable<Action>) =>
   action$.pipe(

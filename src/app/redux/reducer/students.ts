@@ -7,10 +7,11 @@ export function studentsReducer(
 ): IStudent[] {
   switch (action.type) {
     case StudentsActions.SET_DATA:
-      return [...state, ...action.payload];
+      return [...state, ...(action.payload as IStudent[])];
     case StudentsActions.SET_STUDENT:
-      const student: any = action.payload;
-      const subjectsList: string[] = student.subjects;
+      const student: IStudent = action.payload as IStudent;
+      console.log(student.subjects);
+      const subjectsList: string[] = student.subjects as string[];
       student.subjects = {};
       subjectsList.map(
         item =>
@@ -19,13 +20,12 @@ export function studentsReducer(
             marks: {},
             teacher: "",
             descriptions: "",
-            cabinet: ""
+            cabinet: "",
           })
       );
-      console.log(action.payload, student);
       return [...state, student];
     case StudentsActions.SET_SUBJECT:
-      return [...(state = action.payload)];
+      return [...(state = action.payload as IStudent[])];
     default:
       return state;
   }

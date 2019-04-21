@@ -1,30 +1,42 @@
-export class Student {
+class Student {
   constructor(
     public id: number,
     public name: string,
     public lastName: string,
     public address: string,
     public desription: string,
-    public subjects: {}
-  ) {
-    this.id = id;
-    this.name = name;
-    this.lastName = lastName;
-    this.address = address;
-    this.desription = desription;
-    this.subjects = subjects;
-  }
+    public subjects: ISubjectsInfo | string[],
+  ) {}
 }
 
-export interface IStudent {
+interface IStudent {
   id: number;
+  number?: number;
   name: string;
   lastName: string;
   address: string;
   desription: string;
-  subjects: ISubjects[] | {};
+  subjects: ISubjectsInfo | string[];
 }
 
-interface ISubjects {
-  [key: string]: {};
+interface ISubjectsInfo {
+  [subject: string]: IScore;
 }
+
+interface IScore {
+  marks: IMark;
+  date: IDate;
+  teacher: string;
+  cabinet: number;
+  description: string;
+}
+
+interface IMark {
+  [mark: string]: string;
+}
+
+interface IDate {
+  [date: string]: string;
+}
+
+export { Student, IStudent, ISubjectsInfo, IScore, IMark, IDate };
