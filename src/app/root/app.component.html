@@ -8,29 +8,28 @@
       {{ 'APP.title' | translate }}
     </h1>
     <div class="titleWrapper titleWrapper__languageChanger">
-        <select #langSelect (change)="translate.use(langSelect.value)" class="languageSelect">
-          <option
-            *ngFor="let lang of translate.getLangs()"
-            [value]="lang"
-            [selected]="lang === translate.currentLang"
-            >{{ lang }}</option
-          >
-        </select>
+      <select #langSelect (change)="translate.use(langSelect.value)" class="languageSelect">
+        <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">
+          {{ lang }}</option>
+      </select>
     </div>
   </div>
   <nav class="navigation">
     <ul class="navigation__unorderedList">
-      <li
-        *ngFor="let item of routs"
-        class="navigation__listItem"
-        routerLinkActive="activeLink"
-        [routerLinkActiveOptions]="{ exact: true }"
-      >
+      <li *ngFor="let item of routs" class="navigation__listItem" routerLinkActive="activeLink"
+        [routerLinkActiveOptions]="{ exact: true }">
         <a class="navigation__link" routerLink="{{ item }}">
           {{ item | translate }}</a>
       </li>
     </ul>
   </nav>
 </header>
+
+<button (click)="createComponent('Welcome Foo ! ')">Welcome</button>
+<button (click)="createComponent('Foo Again ?')">Not Welcome</button>
+<button (click)="destroyComponent()">Destroy</button> 
+
+<app-message #messagecontainer>
+</app-message>
 
 <router-outlet></router-outlet>

@@ -27,6 +27,7 @@ import {
   MissingTranslationHandlerParams,
 } from "@ngx-translate/core";
 import { DropdownModule } from "./components/statistics/dropdown-control/dropdown-control.module";
+import { MessageComponent } from "./components/dynamic-pop-up/pop-up.component";
 
 export function HttpLoaderFactory(http: HttpClient): any {
   return new TranslateHttpLoader(http);
@@ -52,6 +53,7 @@ export class MyMissingTranslationHandler implements MissingTranslationHandler {
     StatisticPipe,
     TableDirective,
     SendButtonDirective,
+    MessageComponent,
   ],
   imports: [
     BrowserModule,
@@ -77,5 +79,6 @@ export class MyMissingTranslationHandler implements MissingTranslationHandler {
   ],
   providers: [SendDataService, DataService],
   bootstrap: [AppComponent],
+  entryComponents: [MessageComponent],
 })
 export class AppModule {}
