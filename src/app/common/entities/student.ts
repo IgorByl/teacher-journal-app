@@ -4,7 +4,7 @@ class Student {
     public name: string,
     public lastName: string,
     public address: string,
-    public desription: string,
+    public description: string,
     public subjects: ISubjectsInfo | string[],
   ) {}
 }
