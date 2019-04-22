@@ -3,6 +3,6 @@ import { Directive, ViewContainerRef } from "@angular/core";
 @Directive({
   selector: "[appPopup]",
 })
-export class AdDirective {
+export class PopupDirective {
   constructor(public viewContainerRef: ViewContainerRef) {}
 }

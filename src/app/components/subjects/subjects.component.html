@@ -11,6 +11,10 @@
   </div>
 </section>
 
+<div *ngIf="isNewSubjectAdded">
+  <app-popup [popUp]="popUp"></app-popup>
+</div>  
+
 <app-form
   [isVisible]="isVisible"
   (hiddenVisibility)="hiddenVisibility($event)"

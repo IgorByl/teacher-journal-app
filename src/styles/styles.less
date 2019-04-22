@@ -2,13 +2,52 @@
 @import "./variables.less";
 
 html {
-  margin:0 10%;
+  margin: 0 10%;
   height: 100%;
   overflow-y: auto;
   background: linear-gradient(to right, @bgColorFisrt, @bgColorSecond) no-repeat;
   background-color: @bgColorFisrt;
   background-size: cover;
   color: @textColor;
-  font-family: 'Fira Sans', sans-serif;
+  font-family: "Fira Sans", sans-serif;
   box-shadow: 23px 20px 85px @boxShadowColor;
+}
+
+.popup {
+  &__rejected {
+    background: linear-gradient(to right, #ed213a, #93291e);
+    .popupAnimated()
+  }
+  &__resolved {
+    background: linear-gradient(to right, #dce35b, #45b649);
+    .popupAnimated()
+  }
+}
+
+@keyframes widths {
+  0% {
+    width: 0%;
+    opacity: 0;
+    color: rgba(255, 255, 255, 0);
+  }
+  30% {
+    width: 100vw;
+    opacity: 1;
+    color: rgba(255, 255, 255, 0);
+  }
+  40% {
+    width: 100vw;
+    opacity: 1;
+    color: rgba(255, 255, 255, 1);
+  }
+  90% {
+    width: 100vw;
+    opacity: 1;
+    color: rgba(255, 255, 255, 1);
+  }
+  100% {
+    width: 0%;
+    opacity: 0;
+    color: rgba(255, 255, 255, 0);
+  }
 }

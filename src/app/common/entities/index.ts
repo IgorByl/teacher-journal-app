@@ -15,3 +15,4 @@ export {
   ICheckboxDateVisibility,
   IConditionsOfSubjectsSelect,
 } from "./dropdown";
+export  { IPopUpComponent, PopUpItem } from "./pop-up";

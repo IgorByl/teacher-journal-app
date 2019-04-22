@@ -7,6 +7,9 @@ import { select } from "@angular-redux/store";
 import { TranslateService } from "@ngx-translate/core";
 import { FormGroup } from "@angular/forms";
 
+import { PopUpItem } from "../../common/entities";
+import { PopUpService } from "../../common/services";
+
 @Component({
   selector: "app-subjects",
   templateUrl: "./subjects.component.html",
@@ -17,13 +20,16 @@ export class SubjectsComponent implements OnDestroy, OnInit {
   public subjects: string[] = [];
   public students: IStudent[];
   public isVisible: boolean = false;
+  public isNewSubjectAdded: boolean = false;
 
   @select(state => state.studentsReducer)
   public readonly students$: Observable<IStudent[]>;
+  public popUp: PopUpItem;
 
   constructor(
     private dataService: DataService,
-    public translate: TranslateService
+    public translate: TranslateService,
+    private popUpService: PopUpService
   ) {}
 
   public ngOnInit(): void {
@@ -39,6 +45,7 @@ export class SubjectsComponent implements OnDestroy, OnInit {
 
   public toggleVisibility(): void {
     this.isVisible = !this.isVisible;
+    this.isNewSubjectAdded = false;
   }
 
   public transferFormData(increased: FormGroup): void {
@@ -46,6 +53,8 @@ export class SubjectsComponent implements OnDestroy, OnInit {
   }
 
   public hiddenVisibility(increased: boolean): void {
+    this.popUp = this.popUpService.addNewSubjectResolvedPopUp();
     this.isVisible = increased;
+    this.isNewSubjectAdded = true;
   }
 }

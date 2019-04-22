@@ -11,3 +11,19 @@
 @tableHeaderColor: rgb(14, 50, 107);
 @inputInvalidFieldColor: rgb(255, 0, 0);
 @inputValidFieldColor: rgb(0, 128, 0);
+
+.popupAnimated {
+  position: absolute;
+  z-index: 3;
+  height: 20px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 5% 0 10%;
+  text-align: center;
+  font-size: 2rem;
+  background-size: cover;
+  color: rgba(255, 255, 255, 0);
+  user-select: none;
+  animation: widths 1.5s ease-in-out;
+}
