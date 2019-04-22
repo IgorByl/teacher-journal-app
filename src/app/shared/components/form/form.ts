@@ -80,6 +80,7 @@ export class FormComponent implements OnDestroy, AfterContentInit {
   }
 
   public save(): void {
+    console.log(this.profileForm);
     this.transferFormData.emit(this.profileForm);
     this.hiddenVisibility.emit(false);
     this.profileForm.reset();

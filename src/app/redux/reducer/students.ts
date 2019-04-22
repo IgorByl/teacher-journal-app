@@ -10,7 +10,6 @@ export function studentsReducer(
       return [...state, ...(action.payload as IStudent[])];
     case StudentsActions.SET_STUDENT:
       const student: IStudent = action.payload as IStudent;
-      console.log(student.subjects);
       const subjectsList: string[] = student.subjects as string[];
       student.subjects = {};
       subjectsList.map(

@@ -1,3 +1,3 @@
-export { DatePipe } from "./date.pipe";
-export { AveragePipe } from "./average.pipe";
+export { DatePipe } from "./date/date.pipe";
+export { AveragePipe } from "./average/average.pipe";
 export { StatisticPipe } from "./statistic.pipe";
