@@ -42,7 +42,7 @@ export class StatisticsComponent implements OnInit, OnDestroy {
   }
 
   public showStudentDescription(ind: number): void {
-    this.description = this.students[ind].desription;
+    this.description = this.students[ind].description;
     this.name =
       `${this.students[ind].name}` + " " + `${this.students[ind].lastName}`;
     this.address = this.students[ind].address;

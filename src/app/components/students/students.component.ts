@@ -44,7 +44,9 @@ export class StudentsComponent implements OnInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    this.sub.unsubscribe();
+    if (this.sub) {
+      this.sub.unsubscribe();
+    }
   }
 
   public toggleVisibility(): void {

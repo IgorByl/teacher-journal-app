@@ -15,7 +15,7 @@ interface IStudent {
   name: string;
   lastName: string;
   address: string;
-  desription: string;
+  description: string;
   subjects: ISubjectsInfo | string[];
 }
 

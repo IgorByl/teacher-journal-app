@@ -16,7 +16,7 @@ import { PopUpService } from "../../common/services";
   styleUrls: ["./subjects.component.less"],
 })
 export class SubjectsComponent implements OnDestroy, OnInit {
-  private sub: Subscription;
+  public sub: Subscription;
   public subjects: string[] = [];
   public students: IStudent[];
   public isVisible: boolean = false;
@@ -40,7 +40,9 @@ export class SubjectsComponent implements OnDestroy, OnInit {
   }
 
   public ngOnDestroy(): void {
-    this.sub.unsubscribe();
+    if (this.sub) {
+      this.sub.unsubscribe();
+    }
   }
 
   public toggleVisibility(): void {

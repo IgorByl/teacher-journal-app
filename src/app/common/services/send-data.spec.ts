@@ -1,23 +1,17 @@
 import { SendDataService } from "./send-data";
-import { IStudent } from "../entities";
-import { HttpClient } from "@angular/common/http";
+import {Subject } from "rxjs";
 
 describe("SendDataService", () => {
-  let service: SendDataService = new SendDataService();
-  it("should return Observable value", (done: DoneFn) => {
-    const data: IStudent[] = [
-      {
-        name: "Ivan",
-        lastName: "Popov",
-        id: 2,
-        desription: "none",
-        subjects: {},
-        address: " ",
-      },
-    ];
-    service.sendActualeDataToServer(data).subscribe(value => {
-      expect(value).toBe({});
-      done();
-    });
+  let service: SendDataService = new SendDataService(null);
+
+  it("should return value", (done: DoneFn) => {
+    const subValue: Subject<string> = new Subject<string>();
+    const spy: jasmine.Spy = spyOn(
+      service,
+      "sendActualeDataToServer"
+    ).and.returnValue(subValue.asObservable());
+    expect(service.sendActualeDataToServer(null)).toEqual(subValue.asObservable());
+    expect(spy.calls.count()).toBe(1);
+    done();
   });
 });

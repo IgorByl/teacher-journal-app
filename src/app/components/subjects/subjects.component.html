@@ -1,4 +1,4 @@
-<section class="subjectsWrapper" *ngIf="!isVisible">
+<section class="subjectsWrapper">
   <h2 class="subjectsWrapper__title">
     {{ "SUB.title" | translate }}
   </h2>
@@ -9,6 +9,7 @@
   >
     {{ i | translate }}
   </div>
+  <span>Singing</span>
 </section>
 
 <div *ngIf="isNewSubjectAdded">
