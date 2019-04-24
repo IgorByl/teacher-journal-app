@@ -4,8 +4,6 @@ import { Subscription, Observable } from "rxjs";
 import {
   IStudent,
   IDropdownSelectedData,
-  ICheckboxSubjectVisibility,
-  ICheckboxDateVisibility,
   IConditionsOfSubjectsSelect,
 } from "src/app/common/entities";
 import { select } from "@angular-redux/store";
@@ -25,8 +23,6 @@ export class DropdownComponent implements OnInit, OnDestroy {
   public subjects: string[];
   public sub: Subscription;
   public dates: string[] = [];
-  public checkboxSubjectVisibility: ICheckboxSubjectVisibility = {};
-  public checkboxDateVisibility: ICheckboxDateVisibility = {};
   public conditionsOfSubjectsSelect: IConditionsOfSubjectsSelect = {};
   public Object: Object = Object;
   public dropdownSelectedData: IDropdownSelectedData = {};
@@ -45,7 +41,6 @@ export class DropdownComponent implements OnInit, OnDestroy {
           visibility: false,
           dates: {},
         };
-        this.checkboxSubjectVisibility[item] = false;
       });
     });
   }
@@ -54,7 +49,7 @@ export class DropdownComponent implements OnInit, OnDestroy {
     this.sub.unsubscribe();
   }
 
-  public toggleSubjectSelect(event: any, customEvent: string): void {
+public toggleSubjectSelect(event: any, customEvent: string): void {
     let eventSubject: string;
     event
       ? ((eventSubject = event.path[1].innerText),
@@ -72,10 +67,10 @@ export class DropdownComponent implements OnInit, OnDestroy {
     const eventDate: string = event.path[1].innerText;
     this.conditionsOfSubjectsSelect[subject].dates[eventDate] = !this
       .conditionsOfSubjectsSelect[subject].dates[eventDate];
-    this.getRenderData();
+    this.getSelectedData();
   }
 
-  public getRenderData(): void {
+  public getSelectedData(): void {
     const dateVariable: {} = {};
     this.students.forEach(stud => {
       this.dropdownSelectedData[`${stud.name}` + " " + `${stud.lastName}`] = {};
@@ -95,46 +90,38 @@ export class DropdownComponent implements OnInit, OnDestroy {
         })
       );
     });
-    this.action.setStatisticToStore(this.dropdownSelectedData);
+    this.action.setSelectedStatisticToStore(this.dropdownSelectedData);
   }
 
   public checkAll(): void {
     const dates: {} = {};
     this.subjects.forEach(item => {
       this.toggleSubjectSelect(null, item);
-      this.checkboxSubjectVisibility[item] = true;
       dates[item] = searchUnicDate(this.students, item);
       dates[item].forEach(dat => {
         this.conditionsOfSubjectsSelect[item].dates[dat] = true;
-        this.checkboxDateVisibility[item + dat] = true;
+        console.log(this.conditionsOfSubjectsSelect[item].dates[dat]);
       });
       this.conditionsOfSubjectsSelect[item].visibility = true;
     });
-    this.getRenderData();
+    this.getSelectedData();
   }
 
   public unCheckAll(): void {
     const dates: {} = {};
     this.subjects.forEach(item => {
       this.toggleSubjectSelect(null, item);
-      Object.keys(this.checkboxSubjectVisibility).map(
-        i => i.toString() === "false"
-      )
-        ? null
-        : (this.checkboxSubjectVisibility[item] = true);
       dates[item] = searchUnicDate(this.students, item);
       dates[item].forEach(dat => {
         this.conditionsOfSubjectsSelect[item][dat] = false;
-        this.checkboxDateVisibility[item + dat] = false;
       });
     });
-    this.getRenderData();
+    this.getSelectedData();
   }
 
   public expandAll(): void {
     this.subjects.forEach(item => {
       this.toggleSubjectSelect(null, item);
-      this.checkboxSubjectVisibility[item] = true;
       this.conditionsOfSubjectsSelect[item].visibility = true;
     });
   }
@@ -142,7 +129,6 @@ export class DropdownComponent implements OnInit, OnDestroy {
   public collapseAll(): void {
     this.subjects.forEach(item => {
       this.conditionsOfSubjectsSelect[item].visibility = false;
-      this.checkboxSubjectVisibility[item] = false;
     });
   }
 }

@@ -6,12 +6,6 @@ interface ISubject {
   [subject: string]: string[];
 }
 
-interface ICheckboxSubjectVisibility {
-    [subject: string]: boolean;
-}
-
-interface ICheckboxDateVisibility extends ICheckboxSubjectVisibility {}
-
 interface IConditionsOfSubjectsSelect {
     [key: string]: ISelectedSubjectInfo;
 }
@@ -23,7 +17,5 @@ interface ISelectedSubjectInfo {
 
 export {
   IDropdownSelectedData,
-  ICheckboxSubjectVisibility,
-  ICheckboxDateVisibility,
   IConditionsOfSubjectsSelect,
 };
