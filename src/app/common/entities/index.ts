@@ -11,8 +11,6 @@ export { StatisticActionTypes } from "./actions/statistic";
 export { StudentActionTypes } from "./actions/student";
 export {
   IDropdownSelectedData,
-  ICheckboxSubjectVisibility,
-  ICheckboxDateVisibility,
   IConditionsOfSubjectsSelect,
 } from "./dropdown";
 export  { IPopUpComponent, PopUpItem } from "./pop-up";

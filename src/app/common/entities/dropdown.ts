@@ -1,21 +1,19 @@
 interface IDropdownSelectedData {
-  [key: string]: ISubject;
+  name: string;
+  subjects: ISubjects;
 }
 
-interface ISubject {
+interface ISubjects {
   [subject: string]: string[];
 }
 
 interface IConditionsOfSubjectsSelect {
-    [key: string]: ISelectedSubjectInfo;
+  [key: string]: ISelectedSubjectInfo;
 }
 
 interface ISelectedSubjectInfo {
-    visibility: boolean;
-    dates: {};
+  visibility: boolean;
+  dates: {};
 }
 
-export {
-  IDropdownSelectedData,
-  IConditionsOfSubjectsSelect,
-};
+export { IDropdownSelectedData, IConditionsOfSubjectsSelect };
