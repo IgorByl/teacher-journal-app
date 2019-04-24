@@ -1,4 +1,4 @@
-<table appTable *ngIf="!isVisible">
+<table appTable *ngIf="!isComponentTemplateHidden">
   <tr>
     <th (click)="sortRows(item)" class="table__header table__header_sortItem" *ngFor="let item of tableHeaders">
       {{ item | translate }}
@@ -15,12 +15,12 @@
   </tbody>
 </table>
 
-<app-popup [popUp]="popUp"></app-popup>
+<app-popup [popUpInfo]="popUpInfo"></app-popup>
 
 <app-form
-  [isVisible]="isVisible"
-  (hiddenVisibility)="hiddenVisibility($event)"
-  (transferFormData)="transferFormData($event)"
+  [isParentTemplateHidden]="isComponentTemplateHidden"
+  (hiddenParentTemplate)="hiddenTemplate($event)"
+  (transferFormData)="receiveFormData($event)"
   ><span data-form-title>{{ "STUD.title" | translate}}</span>
   <span #formControlsData data-form-firstInput>Name</span>
   <span #formControlsData data-form-secondInput>Lastname</span>
@@ -28,4 +28,4 @@
   <span #formControlsData data-form-fourthInput>Description</span>
 </app-form>
 
-<app-button (toggleVisibility)="toggleVisibility()"></app-button>
+<app-button (toggleParentTemplateVisibility)="toggleTemplateVisibility()"></app-button>

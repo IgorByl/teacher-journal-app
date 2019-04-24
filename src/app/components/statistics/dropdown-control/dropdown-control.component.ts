@@ -10,7 +10,7 @@ import {
 } from "src/app/common/entities";
 import { select } from "@angular-redux/store";
 import { unicSubjectSearch, searchUnicDate } from "src/app/common/helpers";
-import { StatisticService } from "../../../common/services";
+import { StatisticActions } from "src/app/redux/actions";
 
 @Component({
   selector: "app-dropdown",
@@ -33,7 +33,7 @@ export class DropdownComponent implements OnInit, OnDestroy {
 
   constructor(
     public translate: TranslateService,
-    public statisticService: StatisticService
+    private action: StatisticActions
   ) {}
 
   public ngOnInit(): void {
@@ -95,7 +95,7 @@ export class DropdownComponent implements OnInit, OnDestroy {
         })
       );
     });
-    this.statisticService.addStatistic(this.dropdownSelectedData);
+    this.action.setStatisticToStore(this.dropdownSelectedData);
   }
 
   public checkAll(): void {

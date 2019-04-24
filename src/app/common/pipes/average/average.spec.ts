@@ -1,4 +1,4 @@
-import { AveragePipe } from "./average.pipe";
+import { AveragePipe } from "./average";
 
 describe("AveragePipe", () => {
   it("should return average value with 2 signes after dot", () => {

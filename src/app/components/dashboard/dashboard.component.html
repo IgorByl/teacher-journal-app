@@ -19,7 +19,7 @@
         class="table__input table__input_header"
         #date
         (focusout)="changeDate(date.value, ind+1)"
-        [ngModel]="i | dates"
+        [ngModel]="i | prettyDate"
       />
     </th>
     <div class="table__button_addColumn" (click)="addDateColumn()">+</div>
@@ -52,8 +52,8 @@
   />
 </h3>
 
-<div *ngIf="isChanged" appSomeDirective="isChanged" (click)="postData()">{{"DASH.save" | translate}}</div>
+<div *ngIf="isTableDataChanged" appSomeDirective="isTableDataChanged" (click)="postDataToServer()">{{"DASH.save" | translate}}</div>
 
 <div>
-  <app-popup [popUp]="popUp"></app-popup>
+  <app-popup [popUpInfo]="popUpInfo"></app-popup>
 </div>

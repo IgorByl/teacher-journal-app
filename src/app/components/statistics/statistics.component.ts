@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 import { select } from "@angular-redux/store";
 import { Observable, Subscription } from "rxjs";
-import { IStudent } from "src/app/common/entities";
+import { IStudent, IStatistic } from "src/app/common/entities";
 import { unicSubjectSearch } from "src/app/common/helpers";
 
 @Component({
@@ -12,10 +12,10 @@ import { unicSubjectSearch } from "src/app/common/helpers";
 })
 export class StatisticsComponent implements OnInit, OnDestroy {
   @select(state => state.studentsReducer)
-  public readonly students$: Observable<any>;
+  public readonly students$: Observable<IStudent[]>;
 
   @select(state => state.statisticReducer)
-  public readonly statistic$: Observable<any>;
+  public readonly statistic$: Observable<IStatistic>;
 
   public description: string;
   public students: IStudent[] = [];
@@ -24,7 +24,7 @@ export class StatisticsComponent implements OnInit, OnDestroy {
   public name: string;
   public address: string;
   public listIndex: number;
-  public isActiveLink: string;
+  public activeLinkPointer: string;
   public Object: {} = Object;
 
   constructor(public translate: TranslateService) {}
@@ -34,7 +34,7 @@ export class StatisticsComponent implements OnInit, OnDestroy {
       this.students = data;
       this.subjects = unicSubjectSearch(data);
     });
-    this.isActiveLink = "students";
+    this.activeLinkPointer = "students";
   }
 
   public ngOnDestroy(): void {
@@ -43,13 +43,14 @@ export class StatisticsComponent implements OnInit, OnDestroy {
 
   public showStudentDescription(ind: number): void {
     this.description = this.students[ind].description;
+    console.log(this.description);
     this.name =
       `${this.students[ind].name}` + " " + `${this.students[ind].lastName}`;
     this.address = this.students[ind].address;
     this.listIndex = ind;
   }
 
-  public showFilterContent(identif: string): void {
-    this.isActiveLink = identif;
+  public showFilterContent(atFirstloadedFilterName: string): void {
+    this.activeLinkPointer = atFirstloadedFilterName;
   }
 }

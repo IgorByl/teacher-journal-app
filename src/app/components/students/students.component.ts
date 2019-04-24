@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Student, IStudent } from "../../common/entities";
 import { TABLE_HEADERS } from "../../common/constants";
-import { DataService } from "../../common/services";
 import { sorting } from "../../common/helpers";
 import { select } from "@angular-redux/store";
 import { Observable, Subscription } from "rxjs";
@@ -11,6 +10,7 @@ import { FormGroup } from "@angular/forms";
 
 import { PopUpItem } from "../../common/entities";
 import { PopUpService } from "../../common/services";
+import { StudentsActions } from "src/app/redux/actions";
 
 @Component({
   selector: "app-students",
@@ -18,7 +18,7 @@ import { PopUpService } from "../../common/services";
   styleUrls: ["./students.component.less"],
 })
 export class StudentsComponent implements OnInit, OnDestroy {
-  public isVisible: boolean = false;
+  public isComponentTemplateHidden: boolean = false;
   public students: IStudent[] = [];
   public subjects: string[];
   public tableHeaders: string[] = TABLE_HEADERS;
@@ -27,17 +27,19 @@ export class StudentsComponent implements OnInit, OnDestroy {
 
   @select(state => state.studentsReducer)
   public readonly students$: Observable<IStudent[]>;
-  public popUp: PopUpItem;
+  public popUpInfo: PopUpItem;
 
   constructor(
-    private dataService: DataService,
     public translate: TranslateService,
-    private popUpService: PopUpService
+    private popUpService: PopUpService,
+    private action: StudentsActions
   ) {}
 
   public ngOnInit(): void {
     this.sub = this.students$.subscribe(data => {
-      (data) ? this.popUp = this.popUpService.getResolvedLoadedPopUp() : this.popUp = this.popUpService.getRejectedLoadedPopUp();
+      data[0]
+        ? (this.popUpInfo = this.popUpService.getResolvedLoadedPopUp())
+        : (this.popUpInfo = this.popUpService.getRejectedLoadedPopUp());
       this.students = data;
       this.subjects = unicSubjectSearch(data);
     });
@@ -49,17 +51,17 @@ export class StudentsComponent implements OnInit, OnDestroy {
     }
   }
 
-  public toggleVisibility(): void {
-    this.isVisible = !this.isVisible;
+  public toggleTemplateVisibility(): void {
+    this.isComponentTemplateHidden = !this.isComponentTemplateHidden;
   }
 
-  public hiddenVisibility(increased: boolean): void {
-    this.isVisible = increased;
-    this.popUp = this.popUpService.addNewStudentResolvedPopUp();
+  public hiddenTemplate(increased: boolean): void {
+    this.isComponentTemplateHidden = increased;
+    this.popUpInfo = this.popUpService.addNewStudentResolvedPopUp();
   }
 
-  public transferFormData(increased: FormGroup): void {
-    this.dataService.addStudent(
+  public receiveFormData(increased: FormGroup): void {
+    this.action.setStudentToStore(
       new Student(
         this.students.length + 1,
         increased.value.Name,

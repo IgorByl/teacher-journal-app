@@ -4,6 +4,9 @@ import { Pipe, PipeTransform } from "@angular/core";
 export class AveragePipe implements PipeTransform {
   public transform(value: {}): string {
     let counter: number = 0;
+    if (!(Object.values(value) as []).length || (Object.values(value) as []).every(item => item === "")) {
+      return "0";
+    }
     return (
       (Object.values(value) as []).reduce((acc, item) => {
         if (item) {

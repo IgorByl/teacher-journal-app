@@ -7,8 +7,8 @@ export {
   IDate,
 } from "./student";
 export { IStatistic } from "./statistic";
-export { StatisticActionTypes } from "./actions/statistic-action";
-export { StudentActionTypes } from "./actions/student-action";
+export { StatisticActionTypes } from "./actions/statistic";
+export { StudentActionTypes } from "./actions/student";
 export {
   IDropdownSelectedData,
   ICheckboxSubjectVisibility,

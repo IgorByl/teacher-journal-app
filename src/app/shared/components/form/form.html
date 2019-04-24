@@ -1,4 +1,4 @@
-<div class="addFieldWrapper" *ngIf="isVisible">
+<div class="addFieldWrapper" *ngIf="isParentTemplateHidden">
   <p><ng-content select="[data-form-title]"></ng-content></p>
   <form class="form" [formGroup]="profileForm" (ngSubmit)="save()">
     <label

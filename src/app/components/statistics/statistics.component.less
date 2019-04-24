@@ -1,6 +1,6 @@
 @import "../../../styles/variables.less";
 
-.wrapper {
+.statisticWrapper {
   display: flex;
   width: 100%;
   height: 600px;
@@ -24,13 +24,13 @@
       }
     }
   }
-  &_content {
+  &__box {
     overflow-y: auto;
     height: 92%;
   }
   &__content {
     display: flex;
-    &_unorderedList {
+    &_unOrderedList {
       border-bottom: 2px solid @formBorderColor;
       vertical-align: middle;
       text-align: center;
@@ -38,7 +38,7 @@
       margin: unset;
       animation: appending 2s;
     }
-    &_list {
+    &_listItem {
       padding: 5px;
       text-decoration: none;
       list-style-type: none;

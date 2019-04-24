@@ -1,4 +1,4 @@
-import { IStudent, PopUpItem } from "../entities";
+import { IStudent } from "../entities";
 
 export const data: IStudent[] = [
   {

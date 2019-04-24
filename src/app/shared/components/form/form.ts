@@ -6,6 +6,7 @@ import {
   OnDestroy,
   AfterContentInit,
   ContentChildren,
+  QueryList,
 } from "@angular/core";
 import {
   FormGroup,
@@ -25,24 +26,26 @@ import { TranslateService } from "@ngx-translate/core";
 export class FormComponent implements OnDestroy, AfterContentInit {
   private sub: Subscription;
 
-  private validationMessage: any = message;
-  private validationMessages: any = messages;
+  private validationMessage: {} = message;
+  private validationMessages: {} = messages;
 
-  @Input() public isVisible: boolean;
-  @Output() public hiddenVisibility: EventEmitter<boolean> = new EventEmitter<
+  @Input() public isParentTemplateHidden: boolean;
+  @Output() public hiddenParentTemplate: EventEmitter<boolean> = new EventEmitter<
     boolean
   >();
-  @Output() public transferFormData: EventEmitter<any> = new EventEmitter<
-    any
+  @Output() public transferFormData: EventEmitter<FormGroup> = new EventEmitter<
+  FormGroup
   >();
-  @ContentChildren("formControlsData") public childrens: any;
+  @ContentChildren("formControlsData")
+  public childrens: any;
+  // QueryList<FormComponent>
 
   public profileForm: FormGroup;
   public formControlsNames: string[];
 
   constructor(private fb: FormBuilder, public translate: TranslateService) {}
 
-  private setValidationMessage(c: AbstractControl, controlName: any): void {
+  private setValidationMessage(c: AbstractControl, controlName: string): void {
     this.validationMessage[controlName] = "";
     if ((c.touched || c.dirty) && c.errors) {
       this.validationMessage[controlName] = Object.keys(c.errors)
@@ -81,7 +84,7 @@ export class FormComponent implements OnDestroy, AfterContentInit {
 
   public save(): void {
     this.transferFormData.emit(this.profileForm);
-    this.hiddenVisibility.emit(false);
+    this.hiddenParentTemplate.emit(false);
     this.profileForm.reset();
   }
 

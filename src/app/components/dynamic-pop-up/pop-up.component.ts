@@ -20,7 +20,7 @@ import { IPopUpComponent, PopUpItem } from "../../common/entities/pop-up";
 })
 export class PopUpComponent implements OnChanges, OnDestroy {
 
-  @Input() public popUp: PopUpItem;
+  @Input() public popUpInfo: PopUpItem;
   @ViewChild(PopupDirective) public popUpHost: PopupDirective;
   public componentRef: ComponentRef<PopUpItem>;
 
@@ -41,16 +41,15 @@ export class PopUpComponent implements OnChanges, OnDestroy {
   }
 
   public loadComponent(): void {
-    console.log(this.popUp);
     let componentFactory: ComponentFactory<
       PopUpItem
     > = this.componentFactoryResolver.resolveComponentFactory(
-      this.popUp.component
+      this.popUpInfo.component
     );
     let viewContainerRef: ViewContainerRef = this.popUpHost.viewContainerRef;
     viewContainerRef.clear();
     this.componentRef = viewContainerRef.createComponent(componentFactory);
-    (<IPopUpComponent>this.componentRef.instance).data = this.popUp.data;
+    (<IPopUpComponent>this.componentRef.instance).data = this.popUpInfo.data;
     setTimeout(this.destroyComponent, 1500);
   }
 }

@@ -4,11 +4,11 @@ import { IStatistic } from "../../common/entities";
 
 @Injectable()
 export class StatisticActions {
-  public static SET_STATISTIC_DATA: string = "SET_STATISTIC_DATA";
+  public static SET_STATISTIC_DATA_TO_STORE: string = "SET_STATISTIC_DATA_TO_STORE";
 
   constructor(private ngRedux: NgRedux<IStatistic>) {}
 
   public setStatisticToStore(payload: IStatistic): void {
-    this.ngRedux.dispatch({ type: StatisticActions.SET_STATISTIC_DATA, payload });
+    this.ngRedux.dispatch({ type: StatisticActions.SET_STATISTIC_DATA_TO_STORE, payload });
   }
 }

@@ -6,7 +6,6 @@ import { SubjectsComponent } from "./subjects.component";
 import { PopUpService, DataService } from "src/app/common/services";
 import { HttpClient, HttpClientModule } from "@angular/common/http";
 import {
-  MyMissingTranslationHandler,
   HttpLoaderFactory,
 } from "src/app/app.module";
 import {
@@ -36,10 +35,6 @@ describe("SubjectsComponent", () => {
             provide: TranslateLoader,
             useFactory: HttpLoaderFactory,
             deps: [HttpClient],
-          },
-          missingTranslationHandler: {
-            provide: MissingTranslationHandler,
-            useClass: MyMissingTranslationHandler,
           },
           useDefaultLang: false,
         }),
@@ -95,7 +90,7 @@ describe("SubjectsComponent", () => {
 
   it("should show dynamic component OnInit", () => {
     component.ngOnInit();
-    expect(component.popUp).toBeFalsy();
+    expect(component.popUpInfo).toBeFalsy();
   });
 
   it("should destroy subscription", () => {

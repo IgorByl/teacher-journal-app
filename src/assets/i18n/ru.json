@@ -32,7 +32,7 @@
     "APP": {
       "title": "Учительский журнал",
       "select": "Выберете язык",
-      "routs": {
+      "routes": {
         "students": "ученик",
         "subjects": "предметы",
         "statistics": "успеваемость",

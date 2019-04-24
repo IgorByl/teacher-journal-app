@@ -16,7 +16,6 @@ import {
 } from "@angular/forms";
 import { HttpClient, HttpClientModule } from "@angular/common/http";
 import {
-  MyMissingTranslationHandler,
   HttpLoaderFactory,
 } from "src/app/app.module";
 import { formControlNames } from "src/app/common/constants/__mock-data__";
@@ -26,12 +25,12 @@ describe("FormComponent-isolated", () => {
     const component: FormComponent = new FormComponent(null, null);
     const isVisible: boolean = false;
 
-    component.isVisible = isVisible;
-    const stubValue: any = undefined;
+    component.isParentDataVisible = isVisible;
+    const stubValue: undefined = undefined;
     const spy: jasmine.Spy = spyOn(component, "save").and.returnValue(
       stubValue
     );
-    component.hiddenVisibility.subscribe(d => expect(d).toBe(isVisible));
+    component.hiddenParentDataVisibility.subscribe(d => expect(d).toBe(isVisible));
     component.save();
   });
 });
@@ -54,10 +53,6 @@ describe("FormComponent-integration", () => {
             provide: TranslateLoader,
             useFactory: HttpLoaderFactory,
             deps: [HttpClient],
-          },
-          missingTranslationHandler: {
-            provide: MissingTranslationHandler,
-            useClass: MyMissingTranslationHandler,
           },
           useDefaultLang: false,
         }),

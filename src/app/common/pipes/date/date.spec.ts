@@ -1,4 +1,4 @@
-import { DatePipe } from "./date.pipe";
+import { DatePipe } from "./date";
 
 describe("DatePipe", () => {
   let pipe: DatePipe = new DatePipe();

@@ -1,50 +1,50 @@
-<div class="wrapper">
+<div class="statisticWrapper">
   <section class="filter">
     <div class="filter__menu">
       <div
-        [ngClass]="{ activeTitle: isActiveLink === 'students' }"
+        [ngClass]="{ activeTitle: activeLinkPointer === 'students' }"
         class="filter__menu_title"
         (click)="showFilterContent('students')"
       >
-        {{ "Students" | translate | uppercase}}
+        {{ "Students" | translate | uppercase }}
       </div>
       <div
-        [ngClass]="{ activeTitle: isActiveLink === 'subjects' }"
+        [ngClass]="{ activeTitle: activeLinkPointer === 'subjects' }"
         class="filter__menu_title"
         (click)="showFilterContent('subjects')"
       >
-        {{ "Subjects" | translate | uppercase}}
+        {{ "Subjects" | translate | uppercase }}
       </div>
     </div>
-    <div *ngIf="isActiveLink === 'students'" class="filter_content">
+    <div *ngIf="activeLinkPointer === 'students'" class="filter__box">
       <ul
-        class="filter__content_unorderedList"
+        class="filter__content_unOrderedList"
         *ngFor="let i of (students$ | async); let ind = index"
       >
         <li
           [ngClass]="{ activeStudent: ind === listIndex }"
-          class="filter__content_list"
+          class="filter__content_listItem"
           (click)="showStudentDescription(ind)"
         >
           {{ i.name }} {{ i.lastName }}
         </li>
       </ul>
     </div>
-    <div *ngIf="isActiveLink === 'subjects'">
+    <div *ngIf="activeLinkPointer === 'subjects'">
       <app-dropdown></app-dropdown>
     </div>
   </section>
   <section class="presentation">
-    <div *ngIf="name && isActiveLink === 'students'">
+    <div *ngIf="name && activeLinkPointer === 'students'">
       <h2>{{ name }}</h2>
       <p>
-        <span> {{ "Description" | translate}}: {{ description }}</span>
+        <span> {{ "Description" | translate }}: {{ description }}</span>
       </p>
       <p>
-        <span> {{ "Address" | translate}}: {{ address }}</span>
+        <span> {{ "Address" | translate }}: {{ address }}</span>
       </p>
     </div>
-    <div *ngIf="isActiveLink === 'subjects'">
+    <div *ngIf="activeLinkPointer === 'subjects'">
       <h2
         class="presentation__student"
         *ngFor="let student of Object.keys(statistic$ | async); let i = index"

@@ -7,7 +7,7 @@ import { FormsModule } from "@angular/forms";
 import { SharedModule } from "./shared/shared.module";
 
 import { AppRoutingModule } from "./routing/app-routing.module";
-import { SendDataService, DataService } from "./common/services";
+import { SendDataService } from "./common/services";
 import { HttpClientModule, HttpClient } from "@angular/common/http";
 
 import { StatisticsComponent } from "./components/statistics/statistics.component";
@@ -22,10 +22,7 @@ import { NgReduxModule } from "@angular-redux/store";
 import { StoreModule } from "./redux/store.module";
 import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
-import {
-  MissingTranslationHandler,
-  MissingTranslationHandlerParams,
-} from "@ngx-translate/core";
+
 import { DropdownModule } from "./components/statistics/dropdown-control/dropdown-control.module";
 
 import { ResolvedPopUpComponent } from "./components/dynamic-pop-up/resolved-pop-up.component";
@@ -34,14 +31,8 @@ import { PopupDirective } from "./common/directives";
 import { PopUpComponent } from "./components/dynamic-pop-up/pop-up.component";
 import { PopUpService } from "./common/services";
 
-export function HttpLoaderFactory(http: HttpClient): any {
+export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
-}
-
-export class MyMissingTranslationHandler implements MissingTranslationHandler {
-  public handle(params: MissingTranslationHandlerParams): string {
-    return "???";
-  }
 }
 
 @NgModule({
@@ -78,14 +69,10 @@ export class MyMissingTranslationHandler implements MissingTranslationHandler {
         useFactory: HttpLoaderFactory,
         deps: [HttpClient],
       },
-      missingTranslationHandler: {
-        provide: MissingTranslationHandler,
-        useClass: MyMissingTranslationHandler,
-      },
       useDefaultLang: false,
     }),
   ],
-  providers: [SendDataService, DataService, PopUpService],
+  providers: [SendDataService, PopUpService],
   bootstrap: [AppComponent],
   entryComponents: [ResolvedPopUpComponent, RejectedPopUpComponent],
 })

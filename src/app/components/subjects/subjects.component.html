@@ -1,4 +1,4 @@
-<section class="subjectsWrapper">
+<section class="subjectsWrapper" *ngIf="!isComponentTemplateHidden">
   <h2 class="subjectsWrapper__title">
     {{ "SUB.title" | translate }}
   </h2>
@@ -9,17 +9,16 @@
   >
     {{ i | translate }}
   </div>
-  <span>Singing</span>
 </section>
 
 <div *ngIf="isNewSubjectAdded">
-  <app-popup [popUp]="popUp"></app-popup>
+  <app-popup [popUpInfo]="popUpInfo"></app-popup>
 </div>  
 
 <app-form
-  [isVisible]="isVisible"
-  (hiddenVisibility)="hiddenVisibility($event)"
-  (transferFormData)="transferFormData($event)"
+  [isParentTemplateHidden]="isComponentTemplateHidden"
+  (hiddenParentTemplate)="hiddenTemplate($event)"
+  (transferFormData)="receiveFormData($event)"
   ><span data-form-title>{{ "SUB.add" | translate}}</span>
   <span #formControlsData data-form-firstInput>Subject</span>
   <span #formControlsData data-form-secondInput>Teacher</span>
@@ -28,4 +27,4 @@
   ></app-form
 >
 
-<app-button (toggleVisibility)="toggleVisibility()"></app-button>
+<app-button (toggleParentTemplateVisibility)="toggleTemplateVisibility()"></app-button>
