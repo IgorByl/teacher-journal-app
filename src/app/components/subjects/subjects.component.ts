@@ -5,7 +5,7 @@ import { unicSubjectSearch, addNewSubject } from "src/app/common/helpers";
 import { select } from "@angular-redux/store";
 import { TranslateService } from "@ngx-translate/core";
 import { FormGroup } from "@angular/forms";
-
+import { SUBJECT_FORM_CONTROL } from "../../common/constants";
 import { PopUpItem } from "../../common/entities";
 import { PopUpService } from "../../common/services";
 import { StudentsActions } from "src/app/redux/actions";
@@ -21,6 +21,7 @@ export class SubjectsComponent implements OnDestroy, OnInit {
   public students: IStudent[];
   public isComponentTemplateHidden: boolean = false;
   public isNewSubjectAdded: boolean = false;
+  public formControles: string[];
 
   @select(state => state.studentsReducer)
   public readonly students$: Observable<IStudent[]>;
@@ -30,7 +31,9 @@ export class SubjectsComponent implements OnDestroy, OnInit {
     private action: StudentsActions,
     public translate: TranslateService,
     private popUpService: PopUpService
-  ) {}
+  ) {
+    this.formControles = SUBJECT_FORM_CONTROL;
+  }
 
   public ngOnInit(): void {
     this.sub = this.students$.subscribe(data => {
@@ -51,7 +54,6 @@ export class SubjectsComponent implements OnDestroy, OnInit {
   }
 
   public receiveFormData(increased: FormGroup): void {
-    console.log(increased);
     const listOfStudents: IStudent[] = addNewSubject(this.students, increased);
     this.action.setStudentsWithNewSubjectToStore(listOfStudents);
   }

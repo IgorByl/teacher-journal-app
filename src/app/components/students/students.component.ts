@@ -59,13 +59,11 @@ export class StudentsComponent implements OnInit, OnDestroy {
   }
 
   public hiddenTemplate(increased: boolean): void {
-    console.log(increased);
     this.isComponentTemplateHidden = increased;
     this.popUpInfo = this.popUpService.addNewStudentResolvedPopUp();
   }
 
   public receiveFormData(increased: FormGroup): void {
-    console.log(increased);
     this.action.setStudentToStore(
       new Student(
         this.students.length + 1,

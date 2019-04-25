@@ -30,6 +30,7 @@ import { RejectedPopUpComponent } from "./components/dynamic-pop-up/rejected-pop
 import { PopupDirective } from "./common/directives";
 import { PopUpComponent } from "./components/dynamic-pop-up/pop-up.component";
 import { PopUpService } from "./common/services";
+import { FormComponent } from "./components/form/form.component";
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -52,6 +53,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     ResolvedPopUpComponent,
     RejectedPopUpComponent,
     PopupDirective,
+    FormComponent,
   ],
   imports: [
     BrowserModule,

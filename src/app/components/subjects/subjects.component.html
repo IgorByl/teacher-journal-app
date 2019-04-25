@@ -15,4 +15,12 @@
   <app-popup [popUpInfo]="popUpInfo"></app-popup>
 </div>  
 
+<app-form
+  [isParentTemplateHidden]="isComponentTemplateHidden"
+  [formControles]="formControles"
+  (hiddenParentTemplate)="hiddenTemplate($event)"
+  (transferFormData)="receiveFormData($event)"
+>
+</app-form>
+
 <app-button (raiseEventUp)="toggleTemplateVisibility()"></app-button>
