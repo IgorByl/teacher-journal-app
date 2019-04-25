@@ -6,11 +6,11 @@ import { Component, Output, EventEmitter } from "@angular/core";
   styleUrls: ["./button.less"],
 })
 export class ButtonComponent {
-  @Output() public toggleParentTemplateVisibility: EventEmitter<boolean> = new EventEmitter<
+  @Output() public raiseEventUp: EventEmitter<boolean> = new EventEmitter<
     boolean
   >();
 
-  public changeParentVisibility(): void {
-    this.toggleParentTemplateVisibility.emit();
+  public eventHandler(): void {
+    this.raiseEventUp.emit();
   }
 }
