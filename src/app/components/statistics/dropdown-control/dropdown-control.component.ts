@@ -67,14 +67,12 @@ export class DropdownComponent implements OnInit, OnDestroy {
   }
 
   public getSelectedData(): void {
-    console.log(this.conditionsOfSubjectsSelect);
     const dropdownSelectedData: IDropdownSelectedData[] = prepareSelectedDataForRender(
       this.students,
       this.conditionsOfSubjectsSelect,
       this.subjects
     );
-    console.log(dropdownSelectedData);
-    // this.action.setSelectedStatisticToStore(dropdownSelectedData);
+    this.action.setSelectedStatisticToStore(dropdownSelectedData);
   }
 
   public checkAll(): void {

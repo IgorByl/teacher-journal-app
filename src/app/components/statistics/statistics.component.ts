@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 import { select } from "@angular-redux/store";
 import { Observable, Subscription } from "rxjs";
-import { IStudent, IStatistic } from "src/app/common/entities";
+import { IStudent, IDropdownSelectedData } from "src/app/common/entities";
 import { unicSubjectSearch } from "src/app/common/helpers";
 
 @Component({
@@ -15,7 +15,7 @@ export class StatisticsComponent implements OnInit, OnDestroy {
   public readonly students$: Observable<IStudent[]>;
 
   @select(state => state.statisticReducer)
-  public readonly statistic$: Observable<IStatistic>;
+  public readonly statistic$: Observable<IDropdownSelectedData[]>;
 
   public description: string;
   public students: IStudent[] = [];
@@ -45,7 +45,7 @@ export class StatisticsComponent implements OnInit, OnDestroy {
     this.description = this.students[ind].description;
     console.log(this.description);
     this.name =
-      `${this.students[ind].name}` + " " + `${this.students[ind].lastName}`;
+      `${this.students[ind].name} ${this.students[ind].lastName}`;
     this.address = this.students[ind].address;
     this.listIndex = ind;
   }

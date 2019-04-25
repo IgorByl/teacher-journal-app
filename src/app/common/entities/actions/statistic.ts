@@ -1,10 +1,10 @@
-import { IStatistic } from "../statistic";
+import { IDropdownSelectedData } from "../dropdown";
 
 export type StatisticActionTypes = ISetStatisticToStoreAction;
 
 export interface ISetStatisticToStoreAction {
   type: StatisticActions.SET_STATISTIC_DATA_TO_STORE;
-  payload: IStatistic;
+  payload: IDropdownSelectedData[];
 }
 
 enum StatisticActions {

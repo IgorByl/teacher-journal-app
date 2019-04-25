@@ -15,7 +15,7 @@ import { ExportComponent } from "./components/export/export.component";
 import { SubjectsComponent } from "./components/subjects/subjects.component";
 import { DashboardComponent } from "./components/dashboard/dashboard.component";
 import { NotFoundComponent } from "./components/not-found-page/not-found-page.component";
-import { DatePipe, AveragePipe, StatisticPipe } from "./common/pipes";
+import { DatePipe, AveragePipe } from "./common/pipes";
 import { TableDirective, SendButtonDirective } from "./common/directives";
 
 import { NgReduxModule } from "@angular-redux/store";
@@ -46,7 +46,6 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     NotFoundComponent,
     DatePipe,
     AveragePipe,
-    StatisticPipe,
     TableDirective,
     SendButtonDirective,
     PopUpComponent,

@@ -6,7 +6,6 @@ export {
   IMark,
   IDate,
 } from "./student";
-export { IStatistic } from "./statistic";
 export { StatisticActionTypes } from "./actions/statistic";
 export { StudentActionTypes } from "./actions/student";
 export {

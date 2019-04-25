@@ -45,15 +45,20 @@
       </p>
     </div>
     <div *ngIf="activeLinkPointer === 'subjects'">
-      <h2
-        class="presentation__student"
-        *ngFor="let student of Object.keys(statistic$ | async); let i = index"
-      >
-        {{ student }}
-        <p class="presentation__student_marks">
-          {{ Object.values(statistic$ | async)[i] | json | bracketsdelete }}
-        </p>
-      </h2>
+      <div *ngFor="let subj of subjects">
+        {{ subj }}
+        <div
+          class="presentation__student"
+          *ngFor="let stud of (statistic$ | async)"
+        >
+          <div *ngIf="stud.subjects[subj].length">
+            {{ stud.name }}
+            <span *ngFor="let marks of stud.subjects[subj]">
+              {{ marks }}
+            </span>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 </div>
