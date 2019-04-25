@@ -9,6 +9,7 @@ import { ButtonComponent } from "./components/button/button";
 import { HttpClient } from "@angular/common/http";
 import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
+import { FormSchemaComponent } from "../components/form/form.component";
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -28,7 +29,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
       useDefaultLang: false,
     }),
   ],
-  exports: [FormComponent, ButtonComponent],
-  declarations: [FormComponent, ButtonComponent],
+  exports: [FormComponent, ButtonComponent, FormSchemaComponent],
+  declarations: [FormComponent, ButtonComponent, FormSchemaComponent],
 })
 export class SharedModule {}

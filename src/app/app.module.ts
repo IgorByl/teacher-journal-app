@@ -2,7 +2,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { AppComponent } from "./root/app.component";
 import { StudentsComponent } from "./components/students/students.component";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 import { SharedModule } from "./shared/shared.module";
 
@@ -62,6 +62,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     NgReduxModule,
     StoreModule,
     DropdownModule,
+    ReactiveFormsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

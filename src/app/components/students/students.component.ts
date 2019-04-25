@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Student, IStudent } from "../../common/entities";
-import { TABLE_HEADERS } from "../../common/constants";
+import { TABLE_HEADERS, STUDENT_FORM_CONTROL } from "../../common/constants";
 import { sorting } from "../../common/helpers";
 import { select } from "@angular-redux/store";
 import { Observable, Subscription } from "rxjs";
@@ -24,6 +24,7 @@ export class StudentsComponent implements OnInit, OnDestroy {
   public tableHeaders: string[] = TABLE_HEADERS;
   public toggleSort: boolean = false;
   public sub: Subscription;
+  public formControles: string[];
 
   @select(state => state.studentsReducer)
   public readonly students$: Observable<IStudent[]>;
@@ -33,7 +34,9 @@ export class StudentsComponent implements OnInit, OnDestroy {
     public translate: TranslateService,
     private popUpService: PopUpService,
     private action: StudentsActions
-  ) {}
+  ) {
+    this.formControles = STUDENT_FORM_CONTROL;
+  }
 
   public ngOnInit(): void {
     this.sub = this.students$.subscribe(data => {
@@ -56,18 +59,20 @@ export class StudentsComponent implements OnInit, OnDestroy {
   }
 
   public hiddenTemplate(increased: boolean): void {
+    console.log(increased);
     this.isComponentTemplateHidden = increased;
     this.popUpInfo = this.popUpService.addNewStudentResolvedPopUp();
   }
 
   public receiveFormData(increased: FormGroup): void {
+    console.log(increased);
     this.action.setStudentToStore(
       new Student(
         this.students.length + 1,
-        increased.value.Name,
-        increased.value.Lastname,
-        increased.value.Address,
-        increased.value.Description,
+        increased.value.name,
+        increased.value.lastname,
+        increased.value.address,
+        increased.value.description,
         this.subjects
       )
     );

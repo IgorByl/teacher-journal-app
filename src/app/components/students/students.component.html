@@ -1,11 +1,15 @@
 <table appTable *ngIf="!isComponentTemplateHidden">
   <tr>
-    <th (click)="sortRows(item)" class="table__header table__header_sortItem" *ngFor="let item of tableHeaders">
+    <th
+      (click)="sortRows(item)"
+      class="table__header table__header_sortItem"
+      *ngFor="let item of tableHeaders"
+    >
       {{ item | translate }}
     </th>
   </tr>
   <tbody>
-    <tr *ngFor="let i of students$ | async">
+    <tr *ngFor="let i of (students$ | async)">
       <td>{{ i.id }}</td>
       <td>{{ i.name }}</td>
       <td>{{ i.lastName }}</td>
@@ -19,13 +23,10 @@
 
 <app-form
   [isParentTemplateHidden]="isComponentTemplateHidden"
+  [formControles]="formControles"
   (hiddenParentTemplate)="hiddenTemplate($event)"
   (transferFormData)="receiveFormData($event)"
-  ><span data-form-title>{{ "STUD.title" | translate}}</span>
-  <span #formControlsData data-form-firstInput>Name</span>
-  <span #formControlsData data-form-secondInput>Lastname</span>
-  <span #formControlsData data-form-thirdInput>Address</span>
-  <span #formControlsData data-form-fourthInput>Description</span>
+>
 </app-form>
 
 <app-button (raiseEventUp)="toggleTemplateVisibility()"></app-button>

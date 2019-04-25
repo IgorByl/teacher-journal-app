@@ -8,4 +8,18 @@ const messages: {} = {
   pattern: "Must enclude only letters.",
 };
 
-export { message, messages };
+const STUDENT_FORM_CONTROL: string[] = [
+  "name",
+  "lastname",
+  "address",
+  "description",
+];
+
+const SUBJECT_FORM_CONTROL: string[] = [
+  "subject",
+  "teacher",
+  "cabinet",
+  "description",
+];
+
+export { message, messages, STUDENT_FORM_CONTROL, SUBJECT_FORM_CONTROL };

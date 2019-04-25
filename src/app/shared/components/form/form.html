@@ -1,75 +1,35 @@
 <div class="addFieldWrapper" *ngIf="isParentTemplateHidden">
-  <p><ng-content select="[data-form-title]"></ng-content></p>
-  <form class="form" [formGroup]="profileForm" (ngSubmit)="save()">
-    <label
-      [ngClass]="{
-        form__label: true,
-        form__input_invalidField: validationMessage
-      }"
-      ><p>{{ formControlsNames[0] | translate }}:</p>
-      <span class="flex-grow-template"></span>
-      <input
-        class="form__input form__input_needValidationField"
-        type="text"
-        placeholder="{{ formControlsNames[0] | lowercase | translate }} ({{
-          'FORM.required' | translate
-        }})"
-        formControlName="{{ formControlsNames[0] }}"
-        (blur)="onBlur()"
-    /></label>
-    <span
-      class="form__input_invalidFieldSignature"
-      *ngIf="validationMessage.Name"
-    >
-      {{ validationMessage.Name | translate }}
-    </span>
-    <br />
-    <label class="form__label"
-      ><p>{{ formControlsNames[1] | translate }}:</p>
-      <span class="flex-grow-template"></span>
-      <input
-        class="form__input form__input_needValidationField"
-        type="text"
-        placeholder="{{ formControlsNames[1] | lowercase | translate }} ({{
-          'FORM.required' | translate
-        }})"
-        formControlName="{{ formControlsNames[1] }}"
-        (blur)="onBlur()"
-    /></label>
-    <span
-      class="form__input_invalidFieldSignature"
-      *ngIf="validationMessage.LastName"
-    >
-      {{ validationMessage.LastName | translate }}
-    </span>
-    <br />
-    <label class="form__label"
-      ><p>{{ formControlsNames[2] | translate }}:</p>
-      <span class="flex-grow-template"></span>
-      <input
-        class="form__input"
-        type="text"
-        placeholder="{{ formControlsNames[2] | lowercase | translate }}"
-        formControlName="{{ formControlsNames[2] }}"
-    /></label>
-    <br />
-    <label class="form__label"
-      ><p>{{ formControlsNames[3] | translate }}:</p>
-      <span class="flex-grow-template"></span>
-      <textarea
-        class="form__textarea"
-        placeholder="{{ formControlsNames[3] | lowercase | translate }}"
-        formControlName="{{ formControlsNames[3] }}"
-      ></textarea
-    ></label>
-    <br />
-    <button
-      class="form__submitButton"
-      type="submit"
-      [disabled]="!profileForm.valid"
-      [ngClass]="{ form__submitButton_invalid: !profileForm.valid }"
-    >
-      {{ "FORM.add" | translate }}
-    </button>
-  </form>
+  <app-form-schema
+    [profileForm]="profileForm"
+    [formControles]="formControles"
+    [formGroup]="profileForm"
+    (raiseBooleanValueUp)="hiddenTempl($event)"
+    (transferDataUp)="transferData($event)"
+  >
+    <div form-schema-control>
+      <ng-container *ngFor="let controls of formControles">
+        <label class="form__label">{{controls}}
+          <input
+          *ngIf="controls !== formControles[formControles.length - 1]"
+            type="text"
+            placeholder={{controls}}
+            [formControlName]=controls
+        /></label>
+        <br />
+        <label class="form__label">
+          <textarea
+          *ngIf="controls === formControles[formControles.length - 1]"
+            placeholder={{controls}}
+            [formControlName]=controls
+          ></textarea
+        ></label>
+      </ng-container>
+    </div>
+
+    <div form-schema-actions>
+      <button type="submit">
+        Add
+      </button>
+    </div>
+  </app-form-schema>
 </div>
