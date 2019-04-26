@@ -1,10 +1,19 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  ElementRef,
+  ViewChild,
+} from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 import { select } from "@angular-redux/store";
 import { Observable, Subscription } from "rxjs";
 import { IStudent, IDropdownSelectedData } from "src/app/common/entities";
-import { unicSubjectSearch } from "src/app/common/helpers";
-
+import {
+  unicSubjectSearch,
+  donutChart,
+  unicNumbersAndTheirCount,
+} from "src/app/common/helpers";
 @Component({
   selector: "app-statistics",
   templateUrl: "./statistics.component.html",
@@ -26,6 +35,7 @@ export class StatisticsComponent implements OnInit, OnDestroy {
   public listIndex: number;
   public activeLinkPointer: string;
   public Object: {} = Object;
+  @ViewChild("chart") public chart: ElementRef;
 
   constructor(public translate: TranslateService) {}
 
@@ -42,12 +52,16 @@ export class StatisticsComponent implements OnInit, OnDestroy {
   }
 
   public showStudentDescription(ind: number): void {
+    this.chart.nativeElement.innerHTML = "";
     this.description = this.students[ind].description;
-    console.log(this.description);
-    this.name =
-      `${this.students[ind].name} ${this.students[ind].lastName}`;
+    this.name = `${this.students[ind].name} ${this.students[ind].lastName}`;
     this.address = this.students[ind].address;
     this.listIndex = ind;
+    const donutchartData: {} = unicNumbersAndTheirCount(
+      this.students[ind],
+      this.subjects
+    );
+    donutChart(donutchartData);
   }
 
   public showFilterContent(atFirstloadedFilterName: string): void {

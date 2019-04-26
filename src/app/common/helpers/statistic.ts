@@ -4,7 +4,7 @@ import {
   IDropdownSelectedData,
 } from "../entities";
 
-export const prepareSelectedDataForRender: Function = (
+const prepareSelectedDataForRender: Function = (
   students: IStudent[],
   selectedData: IConditionsOfSubjectsSelect,
   subjects: string[]
@@ -34,3 +34,25 @@ export const prepareSelectedDataForRender: Function = (
   });
   return collectionData;
 };
+
+const unicNumbersAndTheirCount: Function = (student, subjects) => {
+  let marks: Array<string | number> = [];
+  subjects.forEach(subject => {
+    marks = [
+      ...marks,
+      ...(Object.values(student.subjects[subject].marks) as number[]),
+    ];
+  });
+  marks = marks.filter(item => (item !== ""));
+  const result: {} = {};
+  for (let i in marks) {
+    if (result[marks[i]] !== undefined) {
+      result[marks[i]]++;
+    } else {
+      result[marks[i]] = 1;
+    }
+  }
+  return result;
+};
+
+export { prepareSelectedDataForRender, unicNumbersAndTheirCount };
