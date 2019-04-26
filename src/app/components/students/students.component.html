@@ -9,9 +9,9 @@
     </th>
   </tr>
   <tbody>
-    <tr *ngFor="let i of (students$ | async)">
+    <tr *ngFor="let i of students">
       <td>{{ i.id }}</td>
-      <td>{{ i.name }}</td>
+      <td class="table__tableData_studentName">{{ i.name }}</td>
       <td>{{ i.lastName }}</td>
       <td>{{ i.address }}</td>
       <td class="table__tableData_description">{{ i.description }}</td>

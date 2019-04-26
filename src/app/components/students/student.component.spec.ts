@@ -3,27 +3,20 @@ import { By } from "@angular/platform-browser";
 import { DebugElement, NO_ERRORS_SCHEMA } from "@angular/core";
 
 import { StudentsComponent } from "./students.component";
-import { PopUpService, DataService } from "src/app/common/services";
+import { PopUpService } from "src/app/common/services";
 import { data } from "../../common/constants";
 import { HttpClient, HttpClientModule } from "@angular/common/http";
-import {
-  MyMissingTranslationHandler,
-  HttpLoaderFactory,
-} from "src/app/app.module";
+import { HttpLoaderFactory } from "src/app/app.module";
 import {
   TranslateService,
   TranslateModule,
-  MissingTranslationHandler,
   TranslateLoader,
 } from "@ngx-translate/core";
-import {
-  MockDataService,
-  MockPopUpService,
-} from "src/app/common/constants/__mock-data__";
-import { Subscription, Observable } from "rxjs";
+import { MockPopUpService } from "src/app/common/constants/__tests-mock-data__";
 import { of } from "rxjs";
 import { NgReduxModule } from "@angular-redux/store";
 import { StoreModule } from "src/app/redux/store.module";
+import { StudentsActions } from "src/app/redux/actions";
 
 describe("StudentsComponent", () => {
   let compt: StudentsComponent,
@@ -45,10 +38,6 @@ describe("StudentsComponent", () => {
             useFactory: HttpLoaderFactory,
             deps: [HttpClient],
           },
-          missingTranslationHandler: {
-            provide: MissingTranslationHandler,
-            useClass: MyMissingTranslationHandler,
-          },
           useDefaultLang: false,
         }),
       ],
@@ -59,17 +48,13 @@ describe("StudentsComponent", () => {
           provide: PopUpService,
           useClass: MockPopUpService,
         },
-        {
-          provide: DataService,
-          useClass: MockDataService,
-        },
         TranslateService,
+        StudentsActions,
       ],
     });
     fixture = TestBed.createComponent(StudentsComponent);
     compt = fixture.componentInstance;
     popupService = fixture.debugElement.injector.get(PopUpService);
-    de = fixture.debugElement.query(By.css("td"));
   });
 
   it("should create compt", () => {
@@ -90,47 +75,44 @@ describe("StudentsComponent", () => {
     expect(addNewStudentResolvedPopUpSpy.calls.any()).toBe(false);
   });
 
-  it("should get data after resieve async", async(() => {
-    spyOn(popupService, "addNewStudentResolvedPopUp").and.returnValue(
-      Promise.resolve({ message: "Student succesfully added!" })
-    );
+  it("should display table header", () => {
+    compt.isComponentTemplateHidden = false;
     fixture.detectChanges();
-    fixture.whenStable().then(() => {
-      fixture.detectChanges();
-      expect(addNewStudentResolvedPopUpSpy.calls.any()).toBe(true);
-      expect(compt.popUp).toBe({ message: "Student succesfully added!" });
-    });
-  }));
-
-  // it("should display original title", () => {
-  //   el = de.nativeElement;
-  //   fixture.detectChanges();
-  //   expect(Number(el.textContent)).toContain(compt.students[0].id);
-  // });
-
-  // it("should display different data", () => {
-  //   compt.students = data;
-  //   fixture.detectChanges();
-  //   expect(el.textContent).toContain("Dmitry");
-  // });
-
-  it("clicked should toggle isVisible", () => {
-    expect(compt.isVisible).toBe(false, "false at first");
-    compt.toggleVisibility();
-    expect(compt.isVisible).toBe(true, "true after click");
-    compt.toggleVisibility();
-    expect(compt.isVisible).toBe(false, "false on second click");
+    de = fixture.debugElement.query(By.css("th"));
+    el = de.nativeElement;
+    expect(el.textContent).toContain("id");
   });
 
-  // it("should initialize data correct", () => {
-    // fixture.detectChanges();
-  //   expect(compt.subjects).toEqual([]);
-  //   expect(compt.students).toEqual([]);
-  // });
+  it("should display different data in table", () => {
+    compt.isComponentTemplateHidden = false;
+    fixture.detectChanges();
+    compt.students = data;
+    fixture.detectChanges();
+    de = fixture.debugElement.query(By.css(".table__tableData_studentName"));
+    el = de.nativeElement;
+    expect(el.textContent).toContain("Ivan");
+  });
+
+  it("clicked should toggle visibility", () => {
+    expect(compt.isComponentTemplateHidden).toBe(false, "false at first");
+    compt.toggleTemplateVisibility();
+    expect(compt.isComponentTemplateHidden).toBe(true, "true after click");
+    compt.toggleTemplateVisibility();
+    expect(compt.isComponentTemplateHidden).toBe(
+      false,
+      "false on second click"
+    );
+  });
+
+  it("should initialize data correct", () => {
+    fixture.detectChanges();
+    expect(compt.subjects).toEqual([]);
+    expect(compt.students).toEqual([]);
+  });
 
   it("should show dynamic compt OnInit", () => {
     fixture.detectChanges();
-    expect(compt.popUp).not.toBeDefined();
+    expect(compt.popUpInfo).toBeDefined();
   });
 
   it("should destroy subscription", () => {
@@ -141,10 +123,10 @@ describe("StudentsComponent", () => {
 
   it("should sort correct", () => {
     compt.toggleSort = false;
+    fixture.detectChanges();
     compt.students = data;
     compt.sortRows("id");
-    fixture.detectChanges();
     expect(compt.toggleSort).toBe(true);
-    expect(compt.students).toBe(data.sort());
+    expect(compt.students).toBe(data.sort((a, b) => b.id - a.id));
   });
 });

@@ -3,20 +3,18 @@ import { By } from "@angular/platform-browser";
 import { DebugElement, NO_ERRORS_SCHEMA } from "@angular/core";
 
 import { SubjectsComponent } from "./subjects.component";
-import { PopUpService, DataService } from "src/app/common/services";
+import { PopUpService } from "src/app/common/services";
 import { HttpClient, HttpClientModule } from "@angular/common/http";
-import {
-  HttpLoaderFactory,
-} from "src/app/app.module";
+import { HttpLoaderFactory } from "src/app/app.module";
 import {
   TranslateService,
   TranslateModule,
-  MissingTranslationHandler,
   TranslateLoader,
 } from "@ngx-translate/core";
-import { MockPopUpService, MockDataService } from "src/app/common/constants/";
+import { MockPopUpService } from "src/app/common/constants/";
 import { NgReduxModule } from "@angular-redux/store";
 import { StoreModule } from "src/app/redux/store.module";
+import { StudentsActions } from "src/app/redux/actions";
 
 describe("SubjectsComponent", () => {
   let component: SubjectsComponent,
@@ -46,11 +44,8 @@ describe("SubjectsComponent", () => {
           provide: PopUpService,
           useClass: MockPopUpService,
         },
-        {
-          provide: DataService,
-          useClass: MockDataService,
-        },
         TranslateService,
+        StudentsActions,
       ],
     }).compileComponents();
   }));
@@ -58,29 +53,29 @@ describe("SubjectsComponent", () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(SubjectsComponent);
     component = fixture.componentInstance;
-    component.isVisible = true;
-    de = fixture.debugElement.query(By.css(".subjectsWrapper__title"));
+    component.isComponentTemplateHidden = false;
   });
 
   it("should create component", () => {
     expect(component).toBeTruthy();
   });
 
-  // it("should display original title", () => {
-  //   component.isVisible = true;
-  //   fixture.detectChanges();
-  //   el = de.nativeElement;
-  //   expect(el.textContent).toContain(component.subjects[0]);
-  // });
+  it("should display original title", () => {
+    fixture.detectChanges();
+    de = fixture.debugElement.query(By.css(".subjectsWrapper__title"));
+    el = de.nativeElement;
+    fixture.detectChanges();
+    expect(el.textContent).toContain("SUB.title");
+  });
 
-  // it("should display different data", () => {
-  //   component.subjects = ["Singing", "Singing", "Singing", "Singing"];
-  //   component.isVisible = true;
-  //   fixture.detectChanges();
-  //   de = fixture.debugElement.query(By.css("div"));
-  //   el = de.nativeElement;
-  //   expect(el.textContent).toContain("Singing");
-  // });
+  it("should display different data", () => {
+    fixture.detectChanges();
+    component.subjects = ["Singing"];
+    fixture.detectChanges();
+    de = fixture.debugElement.query(By.css("div"));
+    el = de.nativeElement;
+    expect(el.textContent).toContain("Singing");
+  });
 
   it("should initialize data correct", () => {
     component.ngOnInit();
