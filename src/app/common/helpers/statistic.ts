@@ -35,15 +35,19 @@ const prepareSelectedDataForRender: Function = (
   return collectionData;
 };
 
-const unicNumbersAndTheirCount: Function = (student, subjects) => {
-  let marks: Array<string | number> = [];
+const findAllMarks: Function = (student, subjects): number[] => {
+  let marks: number[] = [];
   subjects.forEach(subject => {
     marks = [
       ...marks,
       ...(Object.values(student.subjects[subject].marks) as number[]),
     ];
   });
-  marks = marks.filter(item => (item !== ""));
+  return marks.filter(item => item !== "");
+};
+
+const unicNumbersAndTheirCount: Function = (student, subjects) => {
+  let marks: Array<string | number> = findAllMarks(student, subjects);
   const result: {} = {};
   for (let i in marks) {
     if (result[marks[i]] !== undefined) {
@@ -55,4 +59,4 @@ const unicNumbersAndTheirCount: Function = (student, subjects) => {
   return result;
 };
 
-export { prepareSelectedDataForRender, unicNumbersAndTheirCount };
+export { prepareSelectedDataForRender, unicNumbersAndTheirCount, findAllMarks };
