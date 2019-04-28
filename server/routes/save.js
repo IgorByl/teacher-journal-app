@@ -6,7 +6,7 @@ const cntrl = require('../controllers/studentsData');
 router.post('/', (req, res) => {
   console.log(req.body);
   try{
-  cntrl
+  cntrl.saveDate(req.body)
     .then (() => res.end('saved'))
     .catch(err => {
       res.status(500);

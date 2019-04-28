@@ -37,7 +37,7 @@
     <div *ngIf="activeLinkPointer === 'subjects'">
       <div *ngFor="let subj of subjects">
         <ng-container *ngIf="(statistic$| async)[0].subjects[subj].length">
-          {{ subj }}
+          {{ subj | translate }}
           <div class="presentation__student" *ngFor="let stud of (statistic$ | async)">
             <div *ngIf="stud.subjects[subj].length">
               {{ stud.name }}

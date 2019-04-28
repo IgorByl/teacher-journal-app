@@ -11,7 +11,7 @@
     <div *ngFor="let i of subjects" class="dropdownWrapper__subject">
       <label class="dropdownWrapper__subjects">
         <input type="checkbox" class="dropdownWrapper__subjects_input" (change)="toggleSubjectSelect($event)"
-          hidden />{{ i }}
+          hidden />{{ i | translate }}
       </label>
       <div [ngClass]="{
         activeListOfDate: conditionsOfSubjectsSelect[i].visibility
@@ -29,6 +29,6 @@
   <div class="controlsWrapper">
     <div class="controlsWrapper__controller" (click)="expandAll()">{{ "EXPAND ALL" | translate }}</div>
     <div class="controlsWrapper__controller" (click)="collapseAll()">{{ "COLLAPSE ALL" | translate }}</div>
-    <div class="controlsWrapper__controller" (click)="toggleFilterVisibility(false)">CLOSE</div>
+    <div class="controlsWrapper__controller" (click)="toggleFilterVisibility(false)">{{ "close" | translate}}</div>
   </div>
 </div>

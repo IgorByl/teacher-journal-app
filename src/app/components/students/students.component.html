@@ -1,4 +1,4 @@
-<table appTable *ngIf="!isComponentTemplateHidden">
+<table appTable *ngIf="!isComponentTemplateHidden && students[0]">
   <tr>
     <th
       (click)="sortRows(item)"

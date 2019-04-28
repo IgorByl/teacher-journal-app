@@ -18,6 +18,7 @@
   "Teacher": "Teacher",
   "Cabinet": "Cabinet",
   "name":"Name",
+  "close": "Close",
   "Please enter your name.": "Please fill this field.",
   "Must be longer than 1 characters.": "Must be longer than 1 characters.",
   "Must enclude only letters.": "Must enclude only letters.",

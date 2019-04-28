@@ -18,6 +18,7 @@
   "Teacher": "Учитель",
   "Cabinet": "Кабинет",
   "name":"Имя",
+  "close": "Закрыть",
   "Please enter your name.": "Заполните это поле.",
   "Must be longer than 1 characters.": "Должно быть больше одного знака.",
   "Must enclude only letters.": "Может содержать только буквы.",
