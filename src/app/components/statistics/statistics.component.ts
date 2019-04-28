@@ -70,7 +70,7 @@ export class StatisticsComponent implements OnInit, OnDestroy {
       this.subjects
     );
     const summ: number = allStudentSubmitedMarks.reduce(
-      (acc, item): number => acc + item
+      (acc, item): number => acc + Number(item), 0
     );
     const average: number = summ / allStudentSubmitedMarks.length;
     donutChart(donutchartData);

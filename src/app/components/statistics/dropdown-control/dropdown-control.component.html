@@ -1,38 +1,34 @@
-<div class="controlsWrapper">
-  <div class="controlsWrapper__controller" (click)="checkAll()">{{ "CHECK ALL" | translate}}</div>
-  <div class="controlsWrapper__controller" (click)="unCheckAll()">{{ "UNCHECK ALL" | translate}}</div>
+<div class="globalSelect">
+  <div class="globalSelect__dates">{{dates}}<span class="flex-grow-template"></span></div>
+  <div [ngClass]="{globalSelect__toggleSign: true, globalSelect__toggleSign_opend: isFilterVisible}" (click)="toggleFilterVisibility(true)">▼</div>
 </div>
-<div class="dropdownWrapper">
-  <div *ngFor="let i of subjects" class="dropdownWrapper__subject">
-    <label class="dropdownWrapper__subjects">
-      <input
-      type="checkbox"
-        class="dropdownWrapper__subjects_input"
-        (change)="toggleSubjectSelect($event)"
-        hidden
-      />{{ i }}
-    </label>
-    <div
-      [ngClass]="{
+<div *ngIf="isFilterVisible">
+  <div class="controlsWrapper">
+    <div class="controlsWrapper__controller" (click)="checkAll()">{{ "CHECK ALL" | translate}}</div>
+    <div class="controlsWrapper__controller" (click)="unCheckAll()">{{ "UNCHECK ALL" | translate}}</div>
+  </div>
+  <div class="dropdownWrapper">
+    <div *ngFor="let i of subjects" class="dropdownWrapper__subject">
+      <label class="dropdownWrapper__subjects">
+        <input type="checkbox" class="dropdownWrapper__subjects_input" (change)="toggleSubjectSelect($event)"
+          hidden />{{ i }}
+      </label>
+      <div [ngClass]="{
         activeListOfDate: conditionsOfSubjectsSelect[i].visibility
-      }"
-      class="dropdownWrapper__listOfDate"
-    >
-      <div
-        class="dropdownWrapper__listOfDate_item"
-        *ngFor="let date of Object.keys(conditionsOfSubjectsSelect[i].dates)"
-      >
-        <label
-          class="dropdownWrapper__date"
-          (change)="toggleSubjectDate($event, i)"
-        >
-          <input class="dropdownWrapper__date_input" type="checkbox" [ngModel]=conditionsOfSubjectsSelect[i].dates[date]/>{{ date }}
-        </label>
+      }" class="dropdownWrapper__listOfDate">
+        <div class="dropdownWrapper__listOfDate_item"
+          *ngFor="let date of Object.keys(conditionsOfSubjectsSelect[i].dates)">
+          <label class="dropdownWrapper__date" (change)="toggleSubjectDate($event, i)">
+            <input class="dropdownWrapper__date_input" type="checkbox"
+              [ngModel]=conditionsOfSubjectsSelect[i].dates[date] />{{ date }}
+          </label>
+        </div>
       </div>
     </div>
   </div>
-</div>
-<div class="controlsWrapper">
-  <div class="controlsWrapper__controller" (click)="expandAll()">{{ "EXPAND ALL" | translate }}</div>
-  <div class="controlsWrapper__controller" (click)="collapseAll()">{{ "COLLAPSE ALL" | translate }}</div>
+  <div class="controlsWrapper">
+    <div class="controlsWrapper__controller" (click)="expandAll()">{{ "EXPAND ALL" | translate }}</div>
+    <div class="controlsWrapper__controller" (click)="collapseAll()">{{ "COLLAPSE ALL" | translate }}</div>
+    <div class="controlsWrapper__controller" (click)="toggleFilterVisibility(false)">CLOSE</div>
+  </div>
 </div>

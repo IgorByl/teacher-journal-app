@@ -5,6 +5,7 @@ export { searchUnicDate } from "./dropdown";
 export {
   prepareSelectedDataForRender,
   unicNumbersAndTheirCount,
+  sortSelectedMarks
 } from "./statistic";
 export { donutChart } from "./d3/donut";
 export { paintStars } from "./d3/star";

@@ -37,13 +37,14 @@ const prepareSelectedDataForRender: Function = (
 
 const findAllMarks: Function = (student, subjects): number[] => {
   let marks: number[] = [];
+  const temp: string = "";
   subjects.forEach(subject => {
     marks = [
       ...marks,
       ...(Object.values(student.subjects[subject].marks) as number[]),
     ];
   });
-  return marks.filter(item => item !== "");
+  return marks.filter(item => Number(item) !== Number(temp));
 };
 
 const unicNumbersAndTheirCount: Function = (student, subjects) => {
@@ -59,4 +60,24 @@ const unicNumbersAndTheirCount: Function = (student, subjects) => {
   return result;
 };
 
-export { prepareSelectedDataForRender, unicNumbersAndTheirCount, findAllMarks };
+const sortSelectedMarks: Function = (selected, subjects): string => {
+  const dates: string[] = [];
+  subjects.forEach(subject => {
+    if (selected[subject].visibility) {
+      Object.keys(selected[subject].dates).forEach((date, ind) => {
+        if (selected[subject].dates[date]) {
+          dates.push(Object.keys(selected[subject].dates)[ind]);
+        }
+      });
+    }
+  });
+
+  return [...new Set(dates)].join("; ");
+};
+
+export {
+  prepareSelectedDataForRender,
+  unicNumbersAndTheirCount,
+  findAllMarks,
+  sortSelectedMarks,
+};
