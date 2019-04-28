@@ -7,7 +7,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { SharedModule } from "./shared/shared.module";
 
 import { AppRoutingModule } from "./routing/app-routing.module";
-import { SendDataService } from "./common/services";
+import { SendDataService, ExcelService } from "./common/services";
 import { HttpClientModule, HttpClient } from "@angular/common/http";
 
 import { StatisticsComponent } from "./components/statistics/statistics.component";
@@ -74,7 +74,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
       useDefaultLang: false,
     }),
   ],
-  providers: [SendDataService, PopUpService],
+  providers: [SendDataService, PopUpService, ExcelService],
   bootstrap: [AppComponent],
   entryComponents: [ResolvedPopUpComponent, RejectedPopUpComponent],
 })
