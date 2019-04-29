@@ -8,7 +8,7 @@ import { SharedModule } from "./shared/shared.module";
 
 import { AppRoutingModule } from "./routing/app-routing.module";
 import { SendDataService, DataService } from "./common/services";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HttpClient } from "@angular/common/http";
 
 import { StatisticsComponent } from "./components/statistics/statistics.component";
 import { ExportComponent } from "./components/export/export.component";
@@ -20,6 +20,22 @@ import { TableDirective, SendButtonDirective } from "./common/directives";
 
 import { NgReduxModule } from "@angular-redux/store";
 import { StoreModule } from "./redux/store.module";
+import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
+import { TranslateHttpLoader } from "@ngx-translate/http-loader";
+import {
+  MissingTranslationHandler,
+  MissingTranslationHandlerParams,
+} from "@ngx-translate/core";
+
+export function HttpLoaderFactory(http: HttpClient): any {
+  return new TranslateHttpLoader(http);
+}
+
+export class MyMissingTranslationHandler implements MissingTranslationHandler {
+  public handle(params: MissingTranslationHandlerParams): string {
+    return "???";
+  }
+}
 
 @NgModule({
   declarations: [
@@ -42,7 +58,19 @@ import { StoreModule } from "./redux/store.module";
     FormsModule,
     HttpClientModule,
     NgReduxModule,
-    StoreModule
+    StoreModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+      missingTranslationHandler: {
+        provide: MissingTranslationHandler,
+        useClass: MyMissingTranslationHandler,
+      },
+      useDefaultLang: false,
+    }),
   ],
   providers: [SendDataService, DataService],
   bootstrap: [AppComponent],

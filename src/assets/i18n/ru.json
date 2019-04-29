@@ -1,0 +1,71 @@
+{"/students": "Студенты",
+  "/subjects": "Предметы",
+  "/statistics": "Успеваемость",
+  "/export": "Закладки",
+  "id":"Номер",
+  "Name":"Имя",
+  "LastName":"Фамилия",
+  "Lastname":"Фамилия",
+  "Address":"Адрес",
+  "Description": "Для пометок",
+  "Subject": "Предмет",
+  "Teacher": "Учитель",
+  "Cabinet": "Кабинет",
+  "name":"Имя",
+  "Please enter your name.": "Заполните это поле.",
+  "Must be longer than 1 characters.": "Должно быть больше одного знака.",
+  "Must enclude only letters.": "Может содержать только буквы.",
+  "Must be longer than 1 characters. Must enclude only letters.": "Должно содержать не менее одного буквенного симвала.",
+  "lastName":"Фамилия",
+  "lastname":"Фамилия",
+  "address":"Адрес",
+  "description": "Для пометок",
+  "subject": "Предмет",
+  "teacher": "Учитель",
+  "cabinet": "Кабинет",
+    "APP": {
+      "title": "Учительский журнал",
+      "select": "Выберете язык",
+      "routs": {
+        "students": "ученик",
+        "subjects": "предметы",
+        "statistics": "успеваемость",
+        "export": "закладки"
+      }
+    },
+    "SUB":{
+      "title": "Список предметов",
+      "subject": "Предмет",
+      "add": "Добавить нового студента",
+      "teacher": "Учитель",
+      "cabinet": "Аудитория",
+      "description": "Для пометок"
+    },
+    "DASH": {
+      "teacher": "Учитель",
+      "name": "Имя",
+      "lastname": "Фамилия",
+      "average": "Среднее",
+      "save": "Сохранить"
+    },
+    "physics": "физика",
+    "chemistry": "химия",
+    "biology": "биология",
+    "literature": "литература",
+    "geography":"география",
+  "history": "история",
+  "music": "музыка",
+  "health": "охрана здоровья",
+    "FORM": {
+      "add": "Добавить",
+      "required": "требуется"
+    },
+    "STUD": {
+      "title": "Добавить нового ученика",
+      "name": "Имя",
+      "lastname": "Фамилия",
+      "teacher": "Учитель",
+      "address": "Адрес",
+      "description": "Для пометок"
+    }
+  }

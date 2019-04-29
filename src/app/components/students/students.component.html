@@ -1,7 +1,7 @@
 <table appTable *ngIf="!isVisible">
   <tr>
     <th (click)="sortRows(item)" class="table__header table__header_sortItem" *ngFor="let item of tableHeaders">
-      {{ item }}
+      {{ item | translate }}
     </th>
   </tr>
   <tbody>
@@ -19,7 +19,7 @@
   [isVisible]="isVisible"
   (hiddenVisibility)="hiddenVisibility($event)"
   (transferFormData)="transferFormData($event)"
-  ><span data-form-title>Add new student</span>
+  ><span data-form-title>{{ "STUD.title" | translate}}</span>
   <span #formControlsData data-form-firstInput>Name</span>
   <span #formControlsData data-form-secondInput>Lastname</span>
   <span #formControlsData data-form-thirdInput>Address</span>

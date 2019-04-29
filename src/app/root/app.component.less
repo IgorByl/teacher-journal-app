@@ -3,6 +3,7 @@
 
 .titleWrapper {
   display: flex;
+  flex-wrap: wrap;
   padding: 20px;
   &__logo {
     &_squire {
@@ -18,6 +19,9 @@
   &__title {
     margin: 10px;
     font-size: @fontSize + 1vh;
+  }
+  &__languageChanger {
+    margin-left: auto;
   }
 }
 
@@ -42,6 +46,9 @@
     text-decoration: none;
     font-weight: bold;
     font-size: @fontSize;
+    &::first-letter {
+      text-transform: uppercase;
+    }
   }
 }
 

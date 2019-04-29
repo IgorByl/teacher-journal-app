@@ -5,8 +5,6 @@ export class SendButtonDirective {
   constructor(private renderer: Renderer2, private el: ElementRef) {}
   @Input() set appSomeDirective(value: boolean) {
     if (value) {
-      const text: ElementRef = this.renderer.createText("Save");
-      this.renderer.appendChild(this.el.nativeElement, text);
       this.renderer.addClass(this.el.nativeElement, "button__post");
     }
   }

@@ -6,49 +6,59 @@
         form__label: true,
         form__input_invalidField: validationMessage
       }"
-      ><p><ng-content select="[data-form-firstInput]"></ng-content>:</p>
+      ><p>{{ formControlsNames[0] | translate }}:</p>
       <span class="flex-grow-template"></span>
       <input
         class="form__input form__input_needValidationField"
         type="text"
-        placeholder="{{ formControlsNames[0] | lowercase }} (required)"
+        placeholder="{{ formControlsNames[0] | lowercase | translate }} ({{
+          'FORM.required' | translate
+        }})"
         formControlName="{{ formControlsNames[0] }}"
         (blur)="onBlur()"
     /></label>
-    <span class="form__input_invalidFieldSignature" *ngIf="validationMessage.Name">
-      {{ validationMessage.Name }}
+    <span
+      class="form__input_invalidFieldSignature"
+      *ngIf="validationMessage.Name"
+    >
+      {{ validationMessage.Name | translate }}
     </span>
     <br />
     <label class="form__label"
-      ><p><ng-content select="[data-form-secondInput]"></ng-content>:</p>
+      ><p>{{ formControlsNames[1] | translate }}:</p>
       <span class="flex-grow-template"></span>
       <input
         class="form__input form__input_needValidationField"
         type="text"
-        placeholder="{{ formControlsNames[1] | lowercase }} (required)"
+        placeholder="{{ formControlsNames[1] | lowercase | translate }} ({{
+          'FORM.required' | translate
+        }})"
         formControlName="{{ formControlsNames[1] }}"
         (blur)="onBlur()"
     /></label>
-    <span class="form__input_invalidFieldSignature" *ngIf="validationMessage.LastName">
-      {{ validationMessage.LastName }}
+    <span
+      class="form__input_invalidFieldSignature"
+      *ngIf="validationMessage.LastName"
+    >
+      {{ validationMessage.LastName | translate }}
     </span>
     <br />
     <label class="form__label"
-      ><p><ng-content select="[data-form-thirdInput]"></ng-content>:</p>
+      ><p>{{ formControlsNames[2] | translate }}:</p>
       <span class="flex-grow-template"></span>
       <input
         class="form__input"
         type="text"
-        placeholder="{{ formControlsNames[2] | lowercase }}"
+        placeholder="{{ formControlsNames[2] | lowercase | translate }}"
         formControlName="{{ formControlsNames[2] }}"
     /></label>
     <br />
     <label class="form__label"
-      ><p><ng-content select="[data-form-fourthInput]"></ng-content>:</p>
+      ><p>{{ formControlsNames[3] | translate }}:</p>
       <span class="flex-grow-template"></span>
       <textarea
         class="form__textarea"
-        placeholder="{{ formControlsNames[3] | lowercase }}"
+        placeholder="{{ formControlsNames[3] | lowercase | translate }}"
         formControlName="{{ formControlsNames[3] }}"
       ></textarea
     ></label>
@@ -59,7 +69,7 @@
       [disabled]="!profileForm.valid"
       [ngClass]="{ form__submitButton_invalid: !profileForm.valid }"
     >
-      Add
+      {{ "FORM.add" | translate }}
     </button>
   </form>
 </div>

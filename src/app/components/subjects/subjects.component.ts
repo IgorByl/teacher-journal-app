@@ -4,6 +4,7 @@ import { IStudent } from "../../common/entities";
 import { Subscription, Observable } from "rxjs";
 import { unicSubjectSearch } from "src/app/common/helpers";
 import { select } from "@angular-redux/store";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: "app-subjects",
@@ -12,7 +13,6 @@ import { select } from "@angular-redux/store";
 })
 export class SubjectsComponent implements OnDestroy, OnInit {
   private sub: Subscription;
-  public title: string = "List of subjects:";
   public subjects: string[] = [];
   public students: IStudent[];
   public isVisible: boolean = false;
@@ -20,7 +20,10 @@ export class SubjectsComponent implements OnDestroy, OnInit {
   @select(state => state.studentsReducer)
   public readonly students$: Observable<any>;
 
-  constructor(private dataService: DataService) {}
+  constructor(
+    private dataService: DataService,
+    public translate: TranslateService
+  ) {}
 
   public ngOnInit(): void {
     this.sub = this.students$.subscribe(data => {

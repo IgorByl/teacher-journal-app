@@ -5,6 +5,8 @@ import { DataService } from "../../common/services";
 import { sorting } from "../../common/helpers";
 import { select } from "@angular-redux/store";
 import { Observable, Subscription } from "rxjs";
+import { TranslateService } from "@ngx-translate/core";
+import { unicSubjectSearch } from "src/app/common/helpers";
 
 @Component({
   selector: "app-students",
@@ -22,15 +24,21 @@ export class StudentsComponent implements OnInit, OnDestroy {
   @select(state => state.studentsReducer)
   public readonly students$: Observable<any>;
 
-  constructor(private dataService: DataService) {}
+  constructor(
+    private dataService: DataService,
+    public translate: TranslateService
+  ) {}
 
-public ngOnInit(): void {
-  this.sub = this.students$.subscribe(data => this.students = data);
-}
+  public ngOnInit(): void {
+    this.sub = this.students$.subscribe(data => {
+      this.students = data;
+      this.subjects = unicSubjectSearch(data);
+    });
+  }
 
-public ngOnDestroy(): void {
-this.sub.unsubscribe();
-}
+  public ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
 
   public toggleVisibility(): void {
     this.isVisible = !this.isVisible;
@@ -47,7 +55,10 @@ this.sub.unsubscribe();
         increased.value.Name,
         increased.value.Lastname,
         increased.value.Address,
-        increased.value.Description
+        increased.value.Description,
+        ...this.subjects.map(item => {
+          return (item = { [item]: { marks: {}, date: {}, teacher: "", cabinet: "", description: "" } });
+        })
       )
     );
   }

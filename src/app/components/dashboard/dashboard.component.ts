@@ -5,6 +5,7 @@ import { IStudent } from "src/app/common/entities";
 import { setDate, unicSubjectSearch } from "../../common/helpers";
 import { Subscription, Observable } from "rxjs";
 import { select } from "@angular-redux/store";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: "app-dashboard",
@@ -27,7 +28,8 @@ export class DashboardComponent implements DoCheck, OnDestroy {
   constructor(
     private activateRoute: ActivatedRoute,
     private router: Router,
-    private sendDataService: SendDataService
+    private sendDataService: SendDataService,
+    public translate: TranslateService
   ) {
     this.subject = activateRoute.snapshot.params.subject;
   }
