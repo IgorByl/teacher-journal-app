@@ -58,8 +58,11 @@
   padding: 15px;
   box-sizing: border-box;
   overflow-y: auto;
+  position: relative;
   &__student {
     color: lighten(@mainEmblemColor, 20%);
+    margin: 20px;
+    margin-left: 20%;
     &_marks {
       font-weight: 400;
       color: @textColor;
@@ -85,4 +88,19 @@
   100% {
     transform: scale(1, 1);
   }
+}
+
+#donutChart {
+  display: flex;
+  justify-content: center;
+}
+#star {
+  position: absolute;
+  left: 40%;
+  top: 5%;
+}
+
+.donutChart__title {
+  text-align: center;
+  color: @boxShadowColor;
 }

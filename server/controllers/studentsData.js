@@ -14,7 +14,7 @@ async function getMockDataFromFile() {
 }
 
 async function saveDate(data) {
-  return writeFile(pathToData, data, err => {
+  return writeFile(pathToData, JSON.stringify(data), err => {
     if (err) {
       console.log('Error: ', err);
       return;

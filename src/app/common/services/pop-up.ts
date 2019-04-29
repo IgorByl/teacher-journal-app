@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 
-import { ResolvedPopUpComponent } from "../../components/dynamic-pop-up/resolved-pop-up.component";
-import { RejectedPopUpComponent } from "../../components/dynamic-pop-up/rejected-pop-up.component";
+import { ResolvedPopUpComponent } from "../../shared/components/dynamic-pop-up/resolved-pop-up.component";
+import { RejectedPopUpComponent } from "../../shared/components/dynamic-pop-up/rejected-pop-up.component";
 import { PopUpItem } from "../entities";
 
 @Injectable()
@@ -52,6 +52,18 @@ export class PopUpService {
   public dataSavedRejectedPopUp(): PopUpItem {
     return new PopUpItem(RejectedPopUpComponent, {
       message: "Saving failed!",
+    });
+  }
+
+  public exelCreatedResolvedPopUp(): PopUpItem {
+    return new PopUpItem(ResolvedPopUpComponent, {
+      message: "Exel exported successfully!",
+    });
+  }
+
+  public pdfCreatedResolvedPopUp(): PopUpItem {
+    return new PopUpItem(ResolvedPopUpComponent, {
+      message: "Pdf exported successfully!",
     });
   }
 }

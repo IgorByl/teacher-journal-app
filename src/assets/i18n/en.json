@@ -14,10 +14,12 @@
   "Description": "Description",
   "Subject": "Subject",
   "Students": "Students",
+  "select": "Select dates",
   "Subjects": "Subject",
   "Teacher": "Teacher",
   "Cabinet": "Cabinet",
   "name":"Name",
+  "close": "Close",
   "Please enter your name.": "Please fill this field.",
   "Must be longer than 1 characters.": "Must be longer than 1 characters.",
   "Must enclude only letters.": "Must enclude only letters.",
@@ -28,6 +30,7 @@
   "description": "Description",
   "subject": "Subject",
   "teacher": "Teacher",
+  "chart":"Quality of mark to total number of maks:",
   "cabinet": "Cabinet",
     "APP": {
     "title": "Teacher journal",
@@ -42,7 +45,7 @@
   "SUB": {
     "title": "List of subjects",
     "subject": "Subject",
-    "add": "Add new student",
+    "add": "Add new subject",
     "teacher": "Teacher",
     "cabinet": "Cabinet",
     "description": "Description"

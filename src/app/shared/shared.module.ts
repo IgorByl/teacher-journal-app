@@ -9,6 +9,12 @@ import { HttpClient } from "@angular/common/http";
 import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { FormSchemaComponent } from "./components/form-schema/form";
+import { ResolvedPopUpComponent } from "./components/dynamic-pop-up/resolved-pop-up.component";
+import { PopUpComponent } from "./components/dynamic-pop-up/pop-up.component";
+import { RejectedPopUpComponent } from "./components/dynamic-pop-up/rejected-pop-up.component";
+import { PopupDirective } from "../common/directives";
+import { NotFoundComponent } from "./components/not-found-view/not-found-page.component";
+import { AppRoutingModule } from "../routing/app-routing.module";
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -18,6 +24,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   imports: [
     CommonModule,
     FormsModule,
+    AppRoutingModule,
     ReactiveFormsModule,
     TranslateModule.forRoot({
       loader: {
@@ -28,7 +35,24 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
       useDefaultLang: false,
     }),
   ],
-  exports: [ButtonComponent, FormSchemaComponent],
-  declarations: [ButtonComponent, FormSchemaComponent],
+  exports: [
+    ButtonComponent,
+    FormSchemaComponent,
+    PopUpComponent,
+    ResolvedPopUpComponent,
+    RejectedPopUpComponent,
+    PopupDirective,
+    NotFoundComponent,
+  ],
+  declarations: [
+    ButtonComponent,
+    FormSchemaComponent,
+    PopUpComponent,
+    ResolvedPopUpComponent,
+    RejectedPopUpComponent,
+    PopupDirective,
+    NotFoundComponent,
+  ],
+  entryComponents: [ResolvedPopUpComponent, RejectedPopUpComponent],
 })
 export class SharedModule {}

@@ -1,0 +1,34 @@
+.loadingMassage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transition: translate(-50%, -50%);
+  font-size: 3vh;
+}
+
+.loadingMassageDotFirst,
+.loadingMassageDotSecond,
+.loadingMassageDotThird {
+  animation: animation 0.8s linear infinite;
+  animation-delay: 0.3s;
+  opacity: 0;
+  font-size: 4vh;
+}
+
+.loadingMassageDotSecond {
+  animation-delay: 0.5s;
+}
+
+.loadingMassageDotThird {
+  animation-delay: 0.7s;
+}
+
+@keyframes animation {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

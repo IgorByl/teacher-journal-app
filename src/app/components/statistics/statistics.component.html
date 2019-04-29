@@ -1,31 +1,19 @@
 <div class="statisticWrapper">
   <section class="filter">
     <div class="filter__menu">
-      <div
-        [ngClass]="{ activeTitle: activeLinkPointer === 'students' }"
-        class="filter__menu_title"
-        (click)="showFilterContent('students')"
-      >
+      <div [ngClass]="{ activeTitle: activeLinkPointer === 'students' }" class="filter__menu_title"
+        (click)="showFilterContent('students')">
         {{ "Students" | translate | uppercase }}
       </div>
-      <div
-        [ngClass]="{ activeTitle: activeLinkPointer === 'subjects' }"
-        class="filter__menu_title"
-        (click)="showFilterContent('subjects')"
-      >
+      <div [ngClass]="{ activeTitle: activeLinkPointer === 'subjects' }" class="filter__menu_title"
+        (click)="showFilterContent('subjects')">
         {{ "Subjects" | translate | uppercase }}
       </div>
     </div>
     <div *ngIf="activeLinkPointer === 'students'" class="filter__box">
-      <ul
-        class="filter__content_unOrderedList"
-        *ngFor="let i of (students$ | async); let ind = index"
-      >
-        <li
-          [ngClass]="{ activeStudent: ind === listIndex }"
-          class="filter__content_listItem"
-          (click)="showStudentDescription(ind)"
-        >
+      <ul class="filter__content_unOrderedList" *ngFor="let i of (students$ | async); let ind = index">
+        <li [ngClass]="{ activeStudent: ind === listIndex }" class="filter__content_listItem"
+          (click)="showStudentDescription(ind)">
           {{ i.name }} {{ i.lastName }}
         </li>
       </ul>
@@ -38,26 +26,29 @@
     <div *ngIf="name && activeLinkPointer === 'students'">
       <h2>{{ name }}</h2>
       <p>
-        <span> {{ "Description" | translate }}: {{ description }}</span>
+        <span><i>{{ "Description" | translate }}: </i> {{ description }}</span>
       </p>
       <p>
-        <span> {{ "Address" | translate }}: {{ address }}</span>
+        <span><i>{{ "Address" | translate }}: </i> {{ address }}</span>
       </p>
     </div>
+    <br />
+    <p *ngIf="name" class="donutChart__title">{{ "chart"| translate}}</p>
+    <div id="star" #star></div>
+    <div id="donutChart" #chart></div>
     <div *ngIf="activeLinkPointer === 'subjects'">
       <div *ngFor="let subj of subjects">
-        {{ subj }}
-        <div
-          class="presentation__student"
-          *ngFor="let stud of (statistic$ | async)"
-        >
-          <div *ngIf="stud.subjects[subj].length">
-            {{ stud.name }}
-            <span *ngFor="let marks of stud.subjects[subj]">
-              {{ marks }}
-            </span>
+        <ng-container *ngIf="(statistic$| async)[0].subjects[subj].length">
+          {{ subj | translate }}
+          <div class="presentation__student" *ngFor="let stud of (statistic$ | async)">
+            <div *ngIf="stud.subjects[subj].length">
+              {{ stud.name }}: 
+              <span *ngFor="let marks of stud.subjects[subj]">
+                <i>   {{ marks }}   </i>
+              </span>
+            </div>
           </div>
-        </div>
+        </ng-container>
       </div>
     </div>
   </section>

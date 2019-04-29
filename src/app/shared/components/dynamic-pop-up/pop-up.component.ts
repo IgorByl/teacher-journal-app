@@ -10,7 +10,7 @@ import {
   OnChanges,
 } from "@angular/core";
 import { PopupDirective } from "src/app/common/directives";
-import { IPopUpComponent, PopUpItem } from "../../common/entities/pop-up";
+import { IPopUpComponent, PopUpItem } from "../../../common/entities/pop-up";
 
 @Component({
   selector: "app-popup",

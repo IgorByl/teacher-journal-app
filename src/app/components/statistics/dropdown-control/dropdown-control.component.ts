@@ -1,11 +1,18 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 import { Subscription, Observable } from "rxjs";
-import { IStudent, IConditionsOfSubjectsSelect, IDropdownSelectedData } from "src/app/common/entities";
+import {
+  IStudent,
+  IConditionsOfSubjectsSelect,
+  IDropdownSelectedData,
+} from "src/app/common/entities";
 import { select } from "@angular-redux/store";
 import { unicSubjectSearch, searchUnicDate } from "src/app/common/helpers";
 import { StatisticActions } from "src/app/redux/actions";
-import { prepareSelectedDataForRender } from "src/app/common/helpers/statistic";
+import {
+  prepareSelectedDataForRender,
+  sortSelectedMarks,
+} from "src/app/common/helpers/statistic";
 
 @Component({
   selector: "app-dropdown",
@@ -19,9 +26,10 @@ export class DropdownComponent implements OnInit, OnDestroy {
   public students: IStudent[] = [];
   public subjects: string[];
   public sub: Subscription;
-  public dates: string[] = [];
+  public dates: string;
   public conditionsOfSubjectsSelect: IConditionsOfSubjectsSelect = {};
   public Object: Object = Object;
+  public isFilterVisible: boolean = false;
 
   constructor(
     public translate: TranslateService,
@@ -59,10 +67,18 @@ export class DropdownComponent implements OnInit, OnDestroy {
     );
   }
 
+  public getDatesForStatisticRender (): void {
+    this.dates = sortSelectedMarks(
+      this.conditionsOfSubjectsSelect,
+      this.subjects
+    );
+  }
+
   public toggleSubjectDate(event: any, subject: string): void {
     const eventDate: string = event.path[1].innerText;
     this.conditionsOfSubjectsSelect[subject].dates[eventDate] = !this
       .conditionsOfSubjectsSelect[subject].dates[eventDate];
+    this.getDatesForStatisticRender();
     this.getSelectedData();
   }
 
@@ -85,6 +101,7 @@ export class DropdownComponent implements OnInit, OnDestroy {
       });
       this.conditionsOfSubjectsSelect[item].visibility = true;
     });
+    this.getDatesForStatisticRender();
     this.getSelectedData();
   }
 
@@ -97,6 +114,7 @@ export class DropdownComponent implements OnInit, OnDestroy {
         this.conditionsOfSubjectsSelect[item].dates[dat] = false;
       });
     });
+    this.getDatesForStatisticRender();
     this.getSelectedData();
   }
 
@@ -111,5 +129,9 @@ export class DropdownComponent implements OnInit, OnDestroy {
     this.subjects.forEach(item => {
       this.conditionsOfSubjectsSelect[item].visibility = false;
     });
+  }
+
+  public toggleFilterVisibility(value: boolean): void {
+    this.isFilterVisible = value;
   }
 }
