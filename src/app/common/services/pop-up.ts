@@ -60,4 +60,10 @@ export class PopUpService {
       message: "Exel exported successfully!",
     });
   }
+
+  public pdfCreatedResolvedPopUp(): PopUpItem {
+    return new PopUpItem(ResolvedPopUpComponent, {
+      message: "Pdf exported successfully!",
+    });
+  }
 }
