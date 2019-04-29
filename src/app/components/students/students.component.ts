@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
-import { CreateNewStudent, IStudent } from "../../common/entities";
+import { Student, IStudent } from "../../common/entities";
 import { TABLE_HEADERS } from "../../common/constants";
 import { DataService } from "../../common/services";
 import { sorting } from "../../common/helpers";
@@ -7,6 +7,10 @@ import { select } from "@angular-redux/store";
 import { Observable, Subscription } from "rxjs";
 import { TranslateService } from "@ngx-translate/core";
 import { unicSubjectSearch } from "src/app/common/helpers";
+import { FormGroup } from "@angular/forms";
+
+import { PopUpItem } from "../../common/entities";
+import { PopUpService } from "../../common/services";
 
 @Component({
   selector: "app-students",
@@ -22,15 +26,18 @@ export class StudentsComponent implements OnInit, OnDestroy {
   public sub: Subscription;
 
   @select(state => state.studentsReducer)
-  public readonly students$: Observable<any>;
+  public readonly students$: Observable<IStudent[]>;
+  public popUp: PopUpItem;
 
   constructor(
     private dataService: DataService,
-    public translate: TranslateService
+    public translate: TranslateService,
+    private popUpService: PopUpService
   ) {}
 
   public ngOnInit(): void {
     this.sub = this.students$.subscribe(data => {
+      (data) ? this.popUp = this.popUpService.getResolvedLoadedPopUp() : this.popUp = this.popUpService.getRejectedLoadedPopUp();
       this.students = data;
       this.subjects = unicSubjectSearch(data);
     });
@@ -44,21 +51,20 @@ export class StudentsComponent implements OnInit, OnDestroy {
     this.isVisible = !this.isVisible;
   }
 
-  public hiddenVisibility(increased: any): void {
+  public hiddenVisibility(increased: boolean): void {
     this.isVisible = increased;
+    this.popUp = this.popUpService.addNewStudentResolvedPopUp();
   }
 
-  public transferFormData(increased: any): void {
+  public transferFormData(increased: FormGroup): void {
     this.dataService.addStudent(
-      new CreateNewStudent(
+      new Student(
         this.students.length + 1,
         increased.value.Name,
         increased.value.Lastname,
         increased.value.Address,
         increased.value.Description,
-        ...this.subjects.map(item => {
-          return ({ [item]: { marks: {}, date: {}, teacher: "", cabinet: "", description: "" } });
-        })
+        this.subjects
       )
     );
   }

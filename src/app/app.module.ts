@@ -28,6 +28,12 @@ import {
 } from "@ngx-translate/core";
 import { DropdownModule } from "./components/statistics/dropdown-control/dropdown-control.module";
 
+import { ResolvedPopUpComponent } from "./components/dynamic-pop-up/resolved-pop-up.component";
+import { RejectedPopUpComponent } from "./components/dynamic-pop-up/rejected-pop-up.component";
+import { PopupDirective } from "./common/directives";
+import { PopUpComponent } from "./components/dynamic-pop-up/pop-up.component";
+import { PopUpService } from "./common/services";
+
 export function HttpLoaderFactory(http: HttpClient): any {
   return new TranslateHttpLoader(http);
 }
@@ -52,6 +58,10 @@ export class MyMissingTranslationHandler implements MissingTranslationHandler {
     StatisticPipe,
     TableDirective,
     SendButtonDirective,
+    PopUpComponent,
+    ResolvedPopUpComponent,
+    RejectedPopUpComponent,
+    PopupDirective,
   ],
   imports: [
     BrowserModule,
@@ -75,7 +85,8 @@ export class MyMissingTranslationHandler implements MissingTranslationHandler {
       useDefaultLang: false,
     }),
   ],
-  providers: [SendDataService, DataService],
+  providers: [SendDataService, DataService, PopUpService],
   bootstrap: [AppComponent],
+  entryComponents: [ResolvedPopUpComponent, RejectedPopUpComponent],
 })
 export class AppModule {}

@@ -20,13 +20,13 @@
     >
       <div
         class="dropdownWrapper__listOfDate_item"
-        *ngFor="let d of Object.keys(conditionsOfSubjectsSelect[i].dates)"
+        *ngFor="let date of Object.keys(conditionsOfSubjectsSelect[i].dates)"
       >
         <label
           class="dropdownWrapper__date"
           (change)="toggleSubjectDate($event, i)"
         >
-          <input class="dropdownWrapper__date_input" type="checkbox"   [(ngModel)]=checkboxDateVisibility[i+d] />{{ d }}
+          <input class="dropdownWrapper__date_input" type="checkbox"   [(ngModel)]=checkboxDateVisibility[i+date] />{{ date }}
         </label>
       </div>
     </div>

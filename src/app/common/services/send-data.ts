@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { throwError } from "rxjs";
+import { throwError, Observable } from "rxjs";
 import { catchError } from "rxjs/operators";
 import { IStudent } from "../entities";
 import {
@@ -15,19 +15,19 @@ import { URL } from "../constants";
 export class SendDataService {
   constructor(private http: HttpClient) {}
 
-  private handleError(error: HttpErrorResponse): any {
+  private handleError(error: HttpErrorResponse): Observable<never> {
     if (error.error instanceof ErrorEvent) {
       console.error("An error occurred:", error.error.message);
     } else {
       console.warn(
-        `Backend returned code ${error.status}, ` + `body was: ${error.error}`
+        `Backend returned code ${error.status}, body was: ${error.error}`
       );
     }
     return throwError(error);
   }
 
-  public sendActualeDataToServer(data: IStudent[]): any {
-    const body: any = JSON.stringify(data);
+  public sendActualeDataToServer(data: IStudent[]): Observable<Object> {
+    const body: string = JSON.stringify(data);
     const httpOptions: {} = {
       headers: new HttpHeaders({
         "Content-Type": "application/json",

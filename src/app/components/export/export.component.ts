@@ -1,11 +1,9 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 
 @Component({
   selector: "app-export",
-  template: `
-    <h2></h2>
-  `,
+  templateUrl: "./export.component.html",
+  styleUrls: ["./export.component.less"],
 })
-export class ExportComponent implements OnInit {
-  ngOnInit() {}
+export class ExportComponent {
 }

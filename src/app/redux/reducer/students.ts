@@ -1,32 +1,31 @@
-import { Action } from "redux";
 import { StudentsActions } from "../actions";
-import { IStudent } from "../../common/entities";
+import { IStudent, StudentActionTypes } from "../../common/entities";
 
-// enum studentActions {
-
-// }
-
-// type StudentsActionTypes =
-//   ISET_STUDENT;
-//   interface ISET_STUDENT {
-//     type: StudentsActions.SET_STUDENT,
-//     payload: any
-//   }
-// в файл с экшен тайпами!!!
-
-  // public static GET_DATA: string = "GET_DATA";
-  // public static SET_STUDENT: string = "SET_STUDENT";
-  // public static SET_SUBJECT: string = "SET_SUBJECT";
-  // public static GET_DATA_REJECTED: string = "GET_DATA_REJECTED";
-
-export function studentsReducer(state: any = [], action: any ): IStudent[] {
+export function studentsReducer(
+  state: IStudent[] = [],
+  action: StudentActionTypes
+): IStudent[] {
   switch (action.type) {
     case StudentsActions.SET_DATA:
-      return [...state, ...action.payload];
+      return [...state, ...(action.payload as IStudent[])];
     case StudentsActions.SET_STUDENT:
-      return [...state, ...action.payload];
+      const student: IStudent = action.payload as IStudent;
+      console.log(student.subjects);
+      const subjectsList: string[] = student.subjects as string[];
+      student.subjects = {};
+      subjectsList.map(
+        item =>
+          (student.subjects[item] = {
+            date: {},
+            marks: {},
+            teacher: "",
+            descriptions: "",
+            cabinet: "",
+          })
+      );
+      return [...state, student];
     case StudentsActions.SET_SUBJECT:
-      return [ ...state = action.payload];
+      return [...(state = action.payload as IStudent[])];
     default:
       return state;
   }

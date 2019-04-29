@@ -7,6 +7,9 @@ import { Subscription, Observable } from "rxjs";
 import { select } from "@angular-redux/store";
 import { TranslateService } from "@ngx-translate/core";
 
+import { PopUpItem } from "../../common/entities";
+import { PopUpService } from "../../common/services";
+
 @Component({
   selector: "app-dashboard",
   templateUrl: "./dashboard.component.html",
@@ -23,13 +26,15 @@ export class DashboardComponent implements DoCheck, OnDestroy {
   public Object: Object = Object;
 
   @select(state => state.studentsReducer)
-  public readonly students$: Observable<any>;
+  public readonly students$: Observable<IStudent[]>;
+  public popUp: PopUpItem;
 
   constructor(
     private activateRoute: ActivatedRoute,
     private router: Router,
     private sendDataService: SendDataService,
-    public translate: TranslateService
+    public translate: TranslateService,
+    private popUpService: PopUpService
   ) {
     this.subject = activateRoute.snapshot.params.subject;
   }
@@ -71,8 +76,17 @@ export class DashboardComponent implements DoCheck, OnDestroy {
   }
 
   public postData(): void {
-    this.sendDataService.sendActualeDataToServer(this.students).subscribe();
-    this.isChanged = false;
+    this.sendDataService
+      .sendActualeDataToServer(this.students)
+      .subscribe(data => {
+        if (data instanceof Error) {
+          this.popUp = this.popUpService.dataSavedRejectedPopUp();
+          this.isChanged = true;
+        } else {
+          this.isChanged = false;
+          this.popUp = this.popUpService.dataSavedResolvedPopUp();
+        }
+      });
   }
 
   public changeTeacher(teacher: string): void {
@@ -84,14 +98,13 @@ export class DashboardComponent implements DoCheck, OnDestroy {
     });
   }
 
-  public changeMark(mark: string, index: string, student: any): void {
+  public changeMark(mark: string, index: string, student: IStudent): void {
     this.students.forEach(item => {
-      if (
-        item.id === student.id &&
-        item.subjects[this.subject].marks[index] !== mark
-      ) {
+      if (item.id === student.id) {
+        if (item.subjects[this.subject].marks[index] !== mark) {
+          this.isChanged = true;
+        }
         item.subjects[this.subject].marks[index] = mark;
-        this.isChanged = true;
       }
     });
   }

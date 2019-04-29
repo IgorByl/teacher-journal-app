@@ -2,7 +2,7 @@ import { Pipe, PipeTransform } from "@angular/core";
 
 @Pipe({ name: "average", pure: false })
 export class AveragePipe implements PipeTransform {
-  public transform(value: []): any {
+  public transform(value: []): string {
     let counter: number = 0;
     return (
       Object.values(value).reduce((acc, item) => {

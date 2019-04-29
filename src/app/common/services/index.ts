@@ -1,3 +1,4 @@
-export { SendDataService } from "./send-data.service";
-export { DataService } from "./data.service";
-export { StatisticService } from "./statistic.service";
+export { SendDataService } from "./send-data";
+export { DataService } from "./data";
+export { StatisticService } from "./statistic";
+export { PopUpService } from "./pop-up";

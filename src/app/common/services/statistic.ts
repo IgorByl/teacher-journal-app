@@ -8,7 +8,7 @@ export class StatisticService {
     private action: StatisticActions
   ) {}
 
-  public addStatistic(statistic: IStatistic): any {
+  public addStatistic(statistic: IStatistic): void {
     this.action.setStatisticToStore(statistic);
   }
 }

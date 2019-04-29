@@ -15,10 +15,10 @@ export class StudentsActions {
   public getData(): void {
     this.ngRedux.dispatch({ type: StudentsActions.GET_DATA });
   }
-  public setStudentToStore(payload: any): void {
+  public setStudentToStore(payload: IStudent): void {
     this.ngRedux.dispatch({ type: StudentsActions.SET_STUDENT, payload });
   }
-  public setNewSubject(payload: any): void {
+  public setNewSubject(payload: IStudent[]): void {
     this.ngRedux.dispatch({ type: StudentsActions.SET_SUBJECT, payload });
   }
 }
