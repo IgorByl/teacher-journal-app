@@ -12,4 +12,4 @@ interface IPopUpComponent {
   data: {};
 }
 
-export { PopUpItem, IPopUpComponent };
+export { PopUpItem, IPopUpComponent, IMessage };

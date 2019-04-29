@@ -1,0 +1,58 @@
+@import "../../../styles/variables.less";
+
+.addFieldWrapper {
+  margin: 0 auto;
+  max-width: 380px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  border: 3px solid @formBorderColor;
+  border-radius: 10px;
+  &__textarea {
+    width: 195px;
+    height: 100px;
+    border-radius: 4px;
+    padding-left: 2%;
+  }
+  &__label {
+    display: flex;
+    flex-wrap: wrap;
+    .flex-grow-template {
+      flex-grow: 1;
+    }
+  }
+  &__submitButton {
+    margin-left: auto;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 5px;
+    color: @mainEmblemColor;
+    font-size: 1.7vh;
+    font-weight: 900;
+    border: none;
+    &_invalid {
+      cursor: no-drop;
+    }
+  }
+  &__input {
+    width: 195px;
+    padding-left: 2%;
+    &_needValidationField.ng-touched.ng-invalid {
+      background-color: lighten(@inputInvalidFieldColor, 40%);
+      border: solid @inputInvalidFieldColor 2px;
+    }
+    &_needValidationField.ng-touched.ng-valid {
+      background-color: lighten(@inputValidFieldColor, 70%);
+      border: solid @inputValidFieldColor 2px;
+    }
+    &_invalidFieldSignature {
+      color: darken(@textColor, 30%);
+      font-style: italic;
+      padding-left: 5%;
+      margin-top: 5px;
+    }
+  }
+}

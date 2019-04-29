@@ -32,7 +32,7 @@
     "APP": {
     "title": "Teacher journal",
     "select": "Change language",
-    "routs": {
+    "routes": {
       "students": "students",
       "subjects": "subjects",
       "statistics": "statistics",

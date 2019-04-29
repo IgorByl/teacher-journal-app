@@ -9,6 +9,7 @@ import { TranslateService } from "@ngx-translate/core";
 
 import { PopUpItem } from "../../common/entities";
 import { PopUpService } from "../../common/services";
+import { StudentsActions } from "src/app/redux/actions";
 
 @Component({
   selector: "app-dashboard",
@@ -21,20 +22,21 @@ export class DashboardComponent implements DoCheck, OnDestroy {
   public subjects: string[];
   public students: IStudent[];
   public date: Date;
-  public isChanged: any;
+  public isTableDataChanged: boolean;
   public isFirstInit: boolean = true;
   public Object: Object = Object;
 
   @select(state => state.studentsReducer)
   public readonly students$: Observable<IStudent[]>;
-  public popUp: PopUpItem;
+  public popUpInfo: PopUpItem;
 
   constructor(
     private activateRoute: ActivatedRoute,
     private router: Router,
     private sendDataService: SendDataService,
     public translate: TranslateService,
-    private popUpService: PopUpService
+    private popUpService: PopUpService,
+    private action: StudentsActions
   ) {
     this.subject = activateRoute.snapshot.params.subject;
   }
@@ -62,7 +64,7 @@ export class DashboardComponent implements DoCheck, OnDestroy {
   }
 
   public addDateColumn(): void {
-    this.isChanged = true;
+    this.isTableDataChanged = true;
     this.date = setDate(this.date);
     let key: number = ++Object.keys(
       this.students[0].subjects[this.subject].date
@@ -75,25 +77,26 @@ export class DashboardComponent implements DoCheck, OnDestroy {
     });
   }
 
-  public postData(): void {
+  public postDataToServer(): void {
     this.sendDataService
       .sendActualeDataToServer(this.students)
       .subscribe(data => {
         if (data instanceof Error) {
-          this.popUp = this.popUpService.dataSavedRejectedPopUp();
-          this.isChanged = true;
+          this.popUpInfo = this.popUpService.dataSavedRejectedPopUp();
+          this.isTableDataChanged = true;
         } else {
-          this.isChanged = false;
-          this.popUp = this.popUpService.dataSavedResolvedPopUp();
+          this.isTableDataChanged = false;
+          this.popUpInfo = this.popUpService.dataSavedResolvedPopUp();
         }
       });
+    this.action.setStudentsToStore(this.students);
   }
 
   public changeTeacher(teacher: string): void {
     this.students.forEach(item => {
       if (item.subjects[this.subject].teacher !== teacher) {
         item.subjects[this.subject].teacher = teacher;
-        this.isChanged = true;
+        this.isTableDataChanged = true;
       }
     });
   }
@@ -102,7 +105,7 @@ export class DashboardComponent implements DoCheck, OnDestroy {
     this.students.forEach(item => {
       if (item.id === student.id) {
         if (item.subjects[this.subject].marks[index] !== mark) {
-          this.isChanged = true;
+          this.isTableDataChanged = true;
         }
         item.subjects[this.subject].marks[index] = mark;
       }
@@ -113,8 +116,9 @@ export class DashboardComponent implements DoCheck, OnDestroy {
     this.students.forEach(item => {
       if (item.subjects[this.subject].date[index] !== date) {
         item.subjects[this.subject].date[index] = date;
-        this.isChanged = true;
+        this.isTableDataChanged = true;
       }
+      this.isTableDataChanged = false;
     });
   }
 }

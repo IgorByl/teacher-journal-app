@@ -6,22 +6,21 @@ import { ajax } from "rxjs/ajax";
 import { URL } from "../../common/constants";
 import { IStudent } from "src/app/common/entities";
 
-const fetchStudentsFulfilled: Function = (payload: IStudent) => ({
-  type: "SET_DATA",
+const fetchStudentsFulfilled: Function = (payload: IStudent[]) => ({
+  type: "SET_LOADED_DATA_TO_STORE",
   payload,
 });
 
-export const getStudentEpic: Epic = (action$: ActionsObservable<Action>) =>
+export const loadStudentFromServerEpic: Epic = (action$: ActionsObservable<Action>) =>
   action$.pipe(
-    ofType("GET_DATA"),
-    mergeMap(action =>
+    ofType("LOAD_DATA_FORM_SERVER"),
+    mergeMap(() =>
       ajax.getJSON(URL.get).pipe(
         map(response => fetchStudentsFulfilled(response)),
         catchError(error =>
           of({
-            type: "GET_DATA_REJECTED",
+            type: "LOAD_DATA_REJECTED",
             payload: error,
-            error: true,
           })
         )
       )

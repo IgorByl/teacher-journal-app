@@ -1,31 +1,32 @@
-<table appTable *ngIf="!isVisible">
+<table appTable *ngIf="!isComponentTemplateHidden">
   <tr>
-    <th (click)="sortRows(item)" class="table__header table__header_sortItem" *ngFor="let item of tableHeaders">
+    <th
+      (click)="sortRows(item)"
+      class="table__header table__header_sortItem"
+      *ngFor="let item of tableHeaders"
+    >
       {{ item | translate }}
     </th>
   </tr>
   <tbody>
-    <tr *ngFor="let i of students$ | async">
+    <tr *ngFor="let i of students">
       <td>{{ i.id }}</td>
-      <td>{{ i.name }}</td>
+      <td class="table__tableData_studentName">{{ i.name }}</td>
       <td>{{ i.lastName }}</td>
       <td>{{ i.address }}</td>
-      <td class="table__tableData_description">{{ i.desription }}</td>
+      <td class="table__tableData_description">{{ i.description }}</td>
     </tr>
   </tbody>
 </table>
 
-<app-popup [popUp]="popUp"></app-popup>
+<app-popup [popUpInfo]="popUpInfo"></app-popup>
 
 <app-form
-  [isVisible]="isVisible"
-  (hiddenVisibility)="hiddenVisibility($event)"
-  (transferFormData)="transferFormData($event)"
-  ><span data-form-title>{{ "STUD.title" | translate}}</span>
-  <span #formControlsData data-form-firstInput>Name</span>
-  <span #formControlsData data-form-secondInput>Lastname</span>
-  <span #formControlsData data-form-thirdInput>Address</span>
-  <span #formControlsData data-form-fourthInput>Description</span>
+  [isParentTemplateHidden]="isComponentTemplateHidden"
+  [formControles]="formControles"
+  (hiddenParentTemplate)="hiddenTemplate($event)"
+  (transferFormData)="receiveFormData($event)"
+>
 </app-form>
 
-<app-button (toggleVisibility)="toggleVisibility()"></app-button>
+<app-button (raiseEventUp)="toggleTemplateVisibility()">+</app-button>

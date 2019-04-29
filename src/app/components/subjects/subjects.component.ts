@@ -1,14 +1,14 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { DataService } from "../../common/services";
 import { IStudent } from "../../common/entities";
 import { Subscription, Observable } from "rxjs";
-import { unicSubjectSearch } from "src/app/common/helpers";
+import { unicSubjectSearch, addNewSubject } from "src/app/common/helpers";
 import { select } from "@angular-redux/store";
 import { TranslateService } from "@ngx-translate/core";
 import { FormGroup } from "@angular/forms";
-
+import { SUBJECT_FORM_CONTROL } from "../../common/constants";
 import { PopUpItem } from "../../common/entities";
 import { PopUpService } from "../../common/services";
+import { StudentsActions } from "src/app/redux/actions";
 
 @Component({
   selector: "app-subjects",
@@ -16,21 +16,24 @@ import { PopUpService } from "../../common/services";
   styleUrls: ["./subjects.component.less"],
 })
 export class SubjectsComponent implements OnDestroy, OnInit {
-  private sub: Subscription;
+  public sub: Subscription;
   public subjects: string[] = [];
   public students: IStudent[];
-  public isVisible: boolean = false;
+  public isComponentTemplateHidden: boolean = false;
   public isNewSubjectAdded: boolean = false;
+  public formControles: string[];
 
   @select(state => state.studentsReducer)
   public readonly students$: Observable<IStudent[]>;
-  public popUp: PopUpItem;
+  public popUpInfo: PopUpItem;
 
   constructor(
-    private dataService: DataService,
+    private action: StudentsActions,
     public translate: TranslateService,
     private popUpService: PopUpService
-  ) {}
+  ) {
+    this.formControles = SUBJECT_FORM_CONTROL;
+  }
 
   public ngOnInit(): void {
     this.sub = this.students$.subscribe(data => {
@@ -40,21 +43,24 @@ export class SubjectsComponent implements OnDestroy, OnInit {
   }
 
   public ngOnDestroy(): void {
-    this.sub.unsubscribe();
+    if (this.sub) {
+      this.sub.unsubscribe();
+    }
   }
 
-  public toggleVisibility(): void {
-    this.isVisible = !this.isVisible;
+  public toggleTemplateVisibility(): void {
+    this.isComponentTemplateHidden = !this.isComponentTemplateHidden;
     this.isNewSubjectAdded = false;
   }
 
-  public transferFormData(increased: FormGroup): void {
-    this.dataService.addSubject(this.students, increased);
+  public receiveFormData(increased: FormGroup): void {
+    const listOfStudents: IStudent[] = addNewSubject(this.students, increased);
+    this.action.setStudentsWithNewSubjectToStore(listOfStudents);
   }
 
-  public hiddenVisibility(increased: boolean): void {
-    this.popUp = this.popUpService.addNewSubjectResolvedPopUp();
-    this.isVisible = increased;
+  public hiddenTemplate(increased: boolean): void {
+    this.popUpInfo = this.popUpService.addNewSubjectResolvedPopUp();
+    this.isComponentTemplateHidden = increased;
     this.isNewSubjectAdded = true;
   }
 }

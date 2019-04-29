@@ -1,0 +1,45 @@
+<div class="addFieldWrapper" *ngIf="isParentTemplateHidden">
+  <app-form-schema
+    [profileForm]="profileForm"
+    [formControles]="formControles"
+    [formGroup]="profileForm"
+    (raiseBooleanValueUp)="raiseBooleanValueUp($event)"
+    (transferInputDataUp)="transferDataUp($event)"
+  >
+    <div form-schema-control>
+      <ng-container *ngFor="let controls of formControles">
+        <label 
+        class="form__label"
+        *ngIf="controls !== formControles[formControles.length - 1]"
+        >{{controls | translate}}
+          <span class="flex-grow-template"></span>
+          <input
+          *ngIf="controls !== formControles[formControles.length - 1]"
+            class="form__input form__input_needValidationField"
+            type="text"
+            placeholder= "{{controls | translate}}"
+            [formControlName]=controls
+        /></label>
+        <br />
+        <label class="form__label"
+        *ngIf="controls === formControles[formControles.length - 1]">
+        {{controls | translate}}
+        <span class="flex-grow-template"></span>
+          <textarea
+          *ngIf="controls === formControles[formControles.length - 1]"
+            class="form__textarea"
+            placeholder="{{controls | translate}}"
+            [formControlName]=controls
+          ></textarea
+        ></label>
+      </ng-container>
+    </div>
+
+    <div form-schema-actions>
+      <button type="submit" class="form__submitButton" [disabled]="!profileForm.valid"
+      [ngClass]="{ form__submitButton_invalid: !profileForm.valid }">
+      {{ "FORM.add" | translate }}
+      </button>
+    </div>
+  </app-form-schema>
+</div>

@@ -1,0 +1,4 @@
+<form class="form" [formGroup]="profileForm" (ngSubmit)="save()">
+    <ng-content select="[form-schema-control]"></ng-content>
+    <ng-content select="[form-schema-actions]"></ng-content>
+</form>

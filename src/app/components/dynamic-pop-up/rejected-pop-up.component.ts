@@ -1,5 +1,5 @@
 import { Component, Input } from "@angular/core";
-import { IPopUpComponent } from "../../common/entities/pop-up";
+import { IPopUpComponent, IMessage } from "../../common/entities/pop-up";
 
 @Component({
   template: `
@@ -9,5 +9,5 @@ import { IPopUpComponent } from "../../common/entities/pop-up";
   `,
 })
 export class RejectedPopUpComponent implements IPopUpComponent {
-  @Input() public data: any;
+  @Input() public data: IMessage;
 }

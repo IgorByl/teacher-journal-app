@@ -11,7 +11,7 @@ import { TranslateService } from "@ngx-translate/core";
   styleUrls: ["./app.component.less"],
 })
 export class AppComponent implements OnInit {
-  public routs: string[] = TITLE_ROOTS;
+  public routes: string[] = TITLE_ROOTS;
 
   constructor(
     private router: Router,
@@ -25,6 +25,6 @@ export class AppComponent implements OnInit {
     translate.use(browserLang.match(/en|ru/) ? "en" : browserLang);
   }
   public ngOnInit(): void {
-    this.action.getData();
+    this.action.loadStudentsFromServer();
   }
 }

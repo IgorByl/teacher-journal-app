@@ -1,14 +1,14 @@
 import { Injectable } from "@angular/core";
 import { NgRedux } from "@angular-redux/store";
-import { IStatistic } from "../../common/entities";
+import { IDropdownSelectedData } from "../../common/entities";
 
 @Injectable()
 export class StatisticActions {
-  public static SET_STATISTIC_DATA: string = "SET_STATISTIC_DATA";
+  public static SET_STATISTIC_DATA_TO_STORE: string = "SET_STATISTIC_DATA_TO_STORE";
 
-  constructor(private ngRedux: NgRedux<IStatistic>) {}
+  constructor(private ngRedux: NgRedux<IDropdownSelectedData>) {}
 
-  public setStatisticToStore(payload: IStatistic): void {
-    this.ngRedux.dispatch({ type: StatisticActions.SET_STATISTIC_DATA, payload });
+  public setSelectedStatisticToStore(payload: IDropdownSelectedData[]): void {
+    this.ngRedux.dispatch({ type: StatisticActions.SET_STATISTIC_DATA_TO_STORE, payload });
   }
 }

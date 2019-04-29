@@ -1,4 +1,4 @@
 import { combineEpics, Epic } from "redux-observable";
-import { getStudentEpic } from "./students";
+import { loadStudentFromServerEpic } from "./students";
 
-export const rootEpic: Epic = combineEpics(getStudentEpic);
+export const rootEpic: Epic = combineEpics(loadStudentFromServerEpic);

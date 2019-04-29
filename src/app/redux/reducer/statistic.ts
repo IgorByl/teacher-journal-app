@@ -1,10 +1,18 @@
 import { StatisticActions } from "../actions";
-import { IStatistic, StatisticActionTypes } from "../../common/entities";
+import { StatisticActionTypes, IDropdownSelectedData } from "../../common/entities";
 
-export function statisticReducer(state: IStatistic = {}, action: StatisticActionTypes ): IStatistic {
+const initialState: IDropdownSelectedData = {
+  name: "",
+  subjects: {},
+};
+
+export function statisticReducer(
+  state: IDropdownSelectedData[] = [initialState],
+  action: StatisticActionTypes
+): IDropdownSelectedData[] {
   switch (action.type) {
-    case StatisticActions.SET_STATISTIC_DATA:
-      return {...state, ...action.payload};
+    case StatisticActions.SET_STATISTIC_DATA_TO_STORE:
+      return [ ...state = action.payload ];
     default:
       return state;
   }

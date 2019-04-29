@@ -1,6 +1,7 @@
 import { IStudent } from "../entities";
+import { FormGroup } from "@angular/forms";
 
-export const unicSubjectSearch: Function = (students: IStudent[]): string[] => {
+const unicSubjectSearch: Function = (students: IStudent[]): string[] => {
   const subjects: {} = {};
   students.forEach(item => {
     Object.keys(item.subjects).forEach(it => {
@@ -9,3 +10,21 @@ export const unicSubjectSearch: Function = (students: IStudent[]): string[] => {
   });
   return Object.keys(subjects);
 };
+
+const addNewSubject: Function = (
+  students: IStudent[],
+  increased: FormGroup
+): IStudent[] => {
+  students.map(item => {
+    return (item.subjects[increased.value.subject] = {
+      date: {},
+      marks: {},
+      teacher: increased.value.teacher,
+      cabinet: Number(increased.value.cabinet),
+      description: increased.value.description,
+    });
+  });
+  return students;
+};
+
+export { unicSubjectSearch, addNewSubject };
