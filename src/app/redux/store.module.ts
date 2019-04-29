@@ -9,6 +9,7 @@ import { rootReducer } from "./reducer";
 import { StudentsActions, StatisticActions } from "./actions";
 import { rootEpic } from "./epics";
 import { createEpicMiddleware, EpicMiddleware } from "redux-observable";
+import { StoreEnhancer, Middleware } from "redux";
 
 @NgModule({
   imports: [NgReduxModule],
@@ -16,11 +17,11 @@ import { createEpicMiddleware, EpicMiddleware } from "redux-observable";
 })
 export class StoreModule {
   constructor(ngRedux: NgRedux<{}>, devTools: DevToolsExtension) {
-    const storeEnhancers: any = devTools.isEnabled()
+    const storeEnhancers: StoreEnhancer<{}, {}>[] | [] = devTools.isEnabled()
       ? [devTools.enhancer()]
       : [];
     const epicMiddleware: EpicMiddleware<any> = createEpicMiddleware();
-    const middleware: any = [createLogger(), epicMiddleware];
+    const middleware: (Middleware | EpicMiddleware<any>)[] = [createLogger(), epicMiddleware];
     ngRedux.configureStore(
       rootReducer,
       {},

@@ -30,7 +30,9 @@ export class FormComponent implements OnInit {
     this.formControles.reduce((acc, field, ind) => {
       const validationFields: ValidatorFn[] = [];
       if (ind <= 1) {
-        validationFields.push(Validators.required);
+        validationFields.push(Validators.required, Validators.pattern(
+          /^[a-zA-Zа-яА-Я'][a-zA-Zа-яА-Я-' ]+[a-zA-Zа-яА-Я']?$/u
+        ));
       }
       acc[field] = new FormControl("", validationFields);
       return acc;
