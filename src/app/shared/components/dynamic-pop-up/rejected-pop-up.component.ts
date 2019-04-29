@@ -1,5 +1,5 @@
 import { Component, Input } from "@angular/core";
-import { IPopUpComponent, IMessage } from "../../common/entities/pop-up";
+import { IPopUpComponent, IMessage } from "../../../common/entities/pop-up";
 
 @Component({
   template: `

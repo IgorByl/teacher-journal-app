@@ -67,14 +67,18 @@ export class DropdownComponent implements OnInit, OnDestroy {
     );
   }
 
-  public toggleSubjectDate(event: any, subject: string): void {
-    const eventDate: string = event.path[1].innerText;
-    this.conditionsOfSubjectsSelect[subject].dates[eventDate] = !this
-      .conditionsOfSubjectsSelect[subject].dates[eventDate];
+  public getDatesForStatisticRender (): void {
     this.dates = sortSelectedMarks(
       this.conditionsOfSubjectsSelect,
       this.subjects
     );
+  }
+
+  public toggleSubjectDate(event: any, subject: string): void {
+    const eventDate: string = event.path[1].innerText;
+    this.conditionsOfSubjectsSelect[subject].dates[eventDate] = !this
+      .conditionsOfSubjectsSelect[subject].dates[eventDate];
+    this.getDatesForStatisticRender();
     this.getSelectedData();
   }
 
@@ -97,10 +101,7 @@ export class DropdownComponent implements OnInit, OnDestroy {
       });
       this.conditionsOfSubjectsSelect[item].visibility = true;
     });
-    this.dates = sortSelectedMarks(
-      this.conditionsOfSubjectsSelect,
-      this.subjects
-    );
+    this.getDatesForStatisticRender();
     this.getSelectedData();
   }
 
@@ -113,10 +114,7 @@ export class DropdownComponent implements OnInit, OnDestroy {
         this.conditionsOfSubjectsSelect[item].dates[dat] = false;
       });
     });
-    this.dates = sortSelectedMarks(
-      this.conditionsOfSubjectsSelect,
-      this.subjects
-    );
+    this.getDatesForStatisticRender();
     this.getSelectedData();
   }
 

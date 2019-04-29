@@ -30,6 +30,7 @@
   "description": "Description",
   "subject": "Subject",
   "teacher": "Teacher",
+  "chart":"Quality of mark to total number of maks:",
   "cabinet": "Cabinet",
     "APP": {
     "title": "Teacher journal",
@@ -44,7 +45,7 @@
   "SUB": {
     "title": "List of subjects",
     "subject": "Subject",
-    "add": "Add new student",
+    "add": "Add new subject",
     "teacher": "Teacher",
     "cabinet": "Cabinet",
     "description": "Description"

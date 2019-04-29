@@ -10,7 +10,7 @@
   </div>
   <div class="dropdownWrapper">
     <div *ngFor="let i of subjects" class="dropdownWrapper__subject">
-      <label class="dropdownWrapper__subjects">
+      <label [ngClass]="{dropdownWrapper__subjects: true, dropdownWrapper__subjects_active: conditionsOfSubjectsSelect[i].visibility}">
         <input type="checkbox" class="dropdownWrapper__subjects_input" (change)="toggleSubjectSelect($event)"
           hidden />{{ i | translate }}
       </label>

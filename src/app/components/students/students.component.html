@@ -19,7 +19,13 @@
   </tbody>
 </table>
 
-<app-popup [popUpInfo]="popUpInfo"></app-popup>
+<app-loader *ngIf="!students[0]"></app-loader>
+
+<ng-container *ngIf="students[0]">
+    <app-popup [popUpInfo]="popUpInfo"></app-popup>
+</ng-container>
+
+<p class="form__title" *ngIf="isComponentTemplateHidden">{{"STUD.title" | translate}}</p>
 
 <app-form
   [isParentTemplateHidden]="isComponentTemplateHidden"
@@ -29,4 +35,5 @@
 >
 </app-form>
 
-<app-button (raiseEventUp)="toggleTemplateVisibility()">+</app-button>
+<app-button *ngIf="!isComponentTemplateHidden && students[0]" (raiseEventUp)="toggleTemplateVisibility()">+</app-button>
+<app-button *ngIf="isComponentTemplateHidden && students[0]" (raiseEventUp)="toggleTemplateVisibility()">-</app-button>

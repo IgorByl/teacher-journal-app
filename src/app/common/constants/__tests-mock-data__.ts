@@ -1,7 +1,7 @@
 import { IStudent } from "../entities";
 import { PopUpItem } from "../entities/pop-up";
-import { ResolvedPopUpComponent } from "src/app/components/dynamic-pop-up/resolved-pop-up.component";
-import { RejectedPopUpComponent } from "src/app/components/dynamic-pop-up/rejected-pop-up.component";
+import { ResolvedPopUpComponent } from "src/app/shared/components/dynamic-pop-up/resolved-pop-up.component";
+import { RejectedPopUpComponent } from "src/app/shared/components/dynamic-pop-up/rejected-pop-up.component";
 
 export const data: IStudent[] = [
   {

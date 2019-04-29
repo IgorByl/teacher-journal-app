@@ -26,12 +26,14 @@
     <div *ngIf="name && activeLinkPointer === 'students'">
       <h2>{{ name }}</h2>
       <p>
-        <span> {{ "Description" | translate }}: {{ description }}</span>
+        <span><i>{{ "Description" | translate }}: </i> {{ description }}</span>
       </p>
       <p>
-        <span> {{ "Address" | translate }}: {{ address }}</span>
+        <span><i>{{ "Address" | translate }}: </i> {{ address }}</span>
       </p>
     </div>
+    <br />
+    <p *ngIf="name" class="donutChart__title">{{ "chart"| translate}}</p>
     <div id="star" #star></div>
     <div id="donutChart" #chart></div>
     <div *ngIf="activeLinkPointer === 'subjects'">

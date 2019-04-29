@@ -11,9 +11,11 @@
   </div>
 </section>
 
-<div *ngIf="isNewSubjectAdded">
+<ng-container *ngIf="isNewSubjectAdded">
   <app-popup [popUpInfo]="popUpInfo"></app-popup>
-</div>  
+</ng-container>
+
+<p class="form__title" *ngIf="isComponentTemplateHidden">{{"SUB.add" | translate}}</p>
 
 <app-form
   [isParentTemplateHidden]="isComponentTemplateHidden"
@@ -23,4 +25,5 @@
 >
 </app-form>
 
-<app-button (raiseEventUp)="toggleTemplateVisibility()">+</app-button>
+<app-button *ngIf="!isComponentTemplateHidden" (raiseEventUp)="toggleTemplateVisibility()">+</app-button>
+<app-button *ngIf="isComponentTemplateHidden" (raiseEventUp)="toggleTemplateVisibility()">-</app-button>

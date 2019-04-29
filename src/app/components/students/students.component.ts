@@ -40,9 +40,6 @@ export class StudentsComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this.sub = this.students$.subscribe(data => {
-      data[0]
-        ? (this.popUpInfo = this.popUpService.getResolvedLoadedPopUp())
-        : (this.popUpInfo = this.popUpService.getRejectedLoadedPopUp());
       this.students = data;
       this.subjects = unicSubjectSearch(data);
     });

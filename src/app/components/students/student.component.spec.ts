@@ -78,6 +78,8 @@ describe("StudentsComponent", () => {
   it("should display table header", () => {
     compt.isComponentTemplateHidden = false;
     fixture.detectChanges();
+    compt.students[0] = data[0];
+    fixture.detectChanges();
     de = fixture.debugElement.query(By.css("th"));
     el = de.nativeElement;
     expect(el.textContent).toContain("id");
@@ -110,9 +112,9 @@ describe("StudentsComponent", () => {
     expect(compt.students).toEqual([]);
   });
 
-  it("should show dynamic compt OnInit", () => {
+  it("shouldn't show dynamic compt OnInit", () => {
     fixture.detectChanges();
-    expect(compt.popUpInfo).toBeDefined();
+    expect(compt.popUpInfo).not.toBeDefined();
   });
 
   it("should destroy subscription", () => {

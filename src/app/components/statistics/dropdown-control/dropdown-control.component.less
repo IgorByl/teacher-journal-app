@@ -38,17 +38,17 @@
     &:hover::before {
       opacity: 1;
     }
+    &_active::before {
+      content: "▶";
+      position: absolute;
+      left: -25px;
+      color: @mainEmblemColor;
+      cursor: pointer;
+      top: 0px;
+    }
     &_input {
       margin: 5px;
     }
-    // &::before {
-    //   content: "▼";
-    //   position: absolute;
-    //   left: -25px;
-    //   opacity: 1;
-    //   top: 0px;
-    //   color: @mainEmblemColor;
-    // }
   }
 }
 
