@@ -40,9 +40,9 @@
           {{ subj | translate }}
           <div class="presentation__student" *ngFor="let stud of (statistic$ | async)">
             <div *ngIf="stud.subjects[subj].length">
-              {{ stud.name }}
+              {{ stud.name }}: 
               <span *ngFor="let marks of stud.subjects[subj]">
-                {{ marks }}
+                <i>   {{ marks }}   </i>
               </span>
             </div>
           </div>

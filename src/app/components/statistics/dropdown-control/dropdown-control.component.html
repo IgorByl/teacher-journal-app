@@ -1,5 +1,6 @@
 <div class="globalSelect">
-  <div class="globalSelect__dates">{{dates}}<span class="flex-grow-template"></span></div>
+  <div *ngIf="!dates" class="globalSelect__dates"><i>{{ "select" | translate}}...</i><span class="flex-grow-template"></span></div>
+  <div *ngIf="dates" class="globalSelect__dates">{{dates}}<span class="flex-grow-template"></span></div>
   <div [ngClass]="{globalSelect__toggleSign: true, globalSelect__toggleSign_opend: isFilterVisible}" (click)="toggleFilterVisibility(true)">▼</div>
 </div>
 <div *ngIf="isFilterVisible">
