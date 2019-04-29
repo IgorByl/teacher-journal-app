@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { StudentsActions } from "src/app/redux/actions";
-import { IStudent } from "../entities/student";
+import { IStudent } from "../entities";
 
 @Injectable({ providedIn: "root" })
 export class DataService {
@@ -13,7 +13,7 @@ export class DataService {
     this.action.setStudentToStore(student);
   }
 
-  public addSubject(students: IStudent, increased: any): any {
+  public addSubject(students: IStudent[], increased: any): any {
     students.map(
       item =>
         (item.subjects[increased.value.Subject] = {

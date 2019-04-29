@@ -15,7 +15,7 @@ import { ExportComponent } from "./components/export/export.component";
 import { SubjectsComponent } from "./components/subjects/subjects.component";
 import { DashboardComponent } from "./components/dashboard/dashboard.component";
 import { NotFoundComponent } from "./components/not-found-page/not-found-page.component";
-import { DatePipe, AveragePipe } from "./common/pipes";
+import { DatePipe, AveragePipe, StatisticPipe } from "./common/pipes";
 import { TableDirective, SendButtonDirective } from "./common/directives";
 
 import { NgReduxModule } from "@angular-redux/store";
@@ -26,6 +26,7 @@ import {
   MissingTranslationHandler,
   MissingTranslationHandlerParams,
 } from "@ngx-translate/core";
+import { DropdownModule } from "./components/statistics/dropdown-control/dropdown-control.module";
 
 export function HttpLoaderFactory(http: HttpClient): any {
   return new TranslateHttpLoader(http);
@@ -48,6 +49,7 @@ export class MyMissingTranslationHandler implements MissingTranslationHandler {
     NotFoundComponent,
     DatePipe,
     AveragePipe,
+    StatisticPipe,
     TableDirective,
     SendButtonDirective,
   ],
@@ -59,6 +61,7 @@ export class MyMissingTranslationHandler implements MissingTranslationHandler {
     HttpClientModule,
     NgReduxModule,
     StoreModule,
+    DropdownModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
