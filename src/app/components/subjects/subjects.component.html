@@ -13,7 +13,7 @@
 
 <app-form
   [isVisible]="isVisible"
-  (hiddenForm)="hiddenForm($event)"
+  (hiddenVisibility)="hiddenVisibility($event)"
   (transferFormData)="transferFormData($event)"
   ><span data-form-title>Add new student</span>
   <span #formControlsData data-form-firstInput>Subject</span>
@@ -23,4 +23,4 @@
   ></app-form
 >
 
-<app-button (toggleForm)="toggleForm()"></app-button>
+<app-button (toggleVisibility)="toggleVisibility()"></app-button>

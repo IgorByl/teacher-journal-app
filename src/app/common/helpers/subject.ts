@@ -1,5 +1,5 @@
 export const unicSubjectSearch: any = (students): any => {
-  const subjects: object = {};
+  const subjects: any = {};
   students.forEach(item => {
     Object.keys(item.subjects).forEach(it => {
       subjects[it] = 1;

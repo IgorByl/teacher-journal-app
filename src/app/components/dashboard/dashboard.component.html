@@ -1,6 +1,6 @@
 <h2 class="subjectName">{{ subject }}</h2>
 
-<table class="table">
+<table class="table" *ngIf="students$">
   <tr>
     <th class="table__header">
       Name
@@ -25,7 +25,7 @@
     <div class="table__button_addColumn" (click)="addDateColumn()">+</div>
   </tr>
   <tbody>
-    <tr *ngFor="let i of students">
+    <tr *ngFor="let i of students$ | async">
       <td>{{ i.name }}</td>
       <td>{{ i.lastName }}</td>
       <td>{{ i.subjects[subject].marks | average }}</td>

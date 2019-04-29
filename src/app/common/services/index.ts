@@ -1,2 +1,2 @@
-export { HttpService } from "./http.service";
-export { StoreService } from "./store.service";
+export { SendDataService } from "./send-data.service";
+export { DataService } from "./data.service";

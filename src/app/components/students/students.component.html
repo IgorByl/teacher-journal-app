@@ -5,7 +5,7 @@
     </th>
   </tr>
   <tbody>
-    <tr *ngFor="let i of students">
+    <tr *ngFor="let i of students$ | async">
       <td>{{ i.id }}</td>
       <td>{{ i.name }}</td>
       <td>{{ i.lastName }}</td>
@@ -17,7 +17,7 @@
 
 <app-form
   [isVisible]="isVisible"
-  (hiddenForm)="hiddenForm($event)"
+  (hiddenVisibility)="hiddenVisibility($event)"
   (transferFormData)="transferFormData($event)"
   ><span data-form-title>Add new student</span>
   <span #formControlsData data-form-firstInput>Name</span>
@@ -26,4 +26,4 @@
   <span #formControlsData data-form-fourthInput>Description</span>
 </app-form>
 
-<app-button (toggleForm)="toggleForm()"></app-button>
+<app-button (toggleVisibility)="toggleVisibility()"></app-button>

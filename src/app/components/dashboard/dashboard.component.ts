@@ -1,9 +1,10 @@
 import { Component, DoCheck, OnDestroy } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
-import { StoreService, HttpService } from "src/app/common/services";
+import { SendDataService } from "src/app/common/services";
 import { IStudent } from "src/app/common/entities";
 import { setDate, unicSubjectSearch } from "../../common/helpers";
-import { Subscription } from "rxjs";
+import { Subscription, Observable } from "rxjs";
+import { select } from "@angular-redux/store";
 
 @Component({
   selector: "app-dashboard",
@@ -20,17 +21,19 @@ export class DashboardComponent implements DoCheck, OnDestroy {
   public isFirstInit: boolean = true;
   public Object: Object = Object;
 
+  @select(state => state.studentsReducer)
+  public readonly students$: Observable<any>;
+
   constructor(
     private activateRoute: ActivatedRoute,
     private router: Router,
-    private storeService: StoreService,
-    private httpService: HttpService
+    private sendDataService: SendDataService
   ) {
     this.subject = activateRoute.snapshot.params.subject;
   }
 
   public ngDoCheck(): void {
-    this.sub = this.storeService.getStudents().subscribe(data => {
+    this.sub = this.students$.subscribe(data => {
       this.students = data;
       if (this.isFirstInit) {
         if (
@@ -66,7 +69,7 @@ export class DashboardComponent implements DoCheck, OnDestroy {
   }
 
   public postData(): void {
-    this.httpService.postStudents(this.students).subscribe();
+    this.sendDataService.sendActualeDataToServer(this.students).subscribe();
     this.isChanged = false;
   }
 
