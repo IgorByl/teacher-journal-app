@@ -13,3 +13,4 @@ export {
   IConditionsOfSubjectsSelect,
 } from "./dropdown";
 export  { IPopUpComponent, PopUpItem } from "./pop-up";
+export { ICanDeactivate } from "./deactivate";

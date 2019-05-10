@@ -1,7 +1,7 @@
 import { Component, DoCheck, OnDestroy } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
-import { SendDataService } from "src/app/common/services";
-import { IStudent } from "src/app/common/entities";
+import { SendDataService, DialogService } from "src/app/common/services";
+import { IStudent, ICanDeactivate } from "src/app/common/entities";
 import { setDate, unicSubjectSearch } from "../../common/helpers";
 import { Subscription, Observable } from "rxjs";
 import { select } from "@angular-redux/store";
@@ -16,7 +16,7 @@ import { StudentsActions } from "src/app/redux/actions";
   templateUrl: "./dashboard.component.html",
   styleUrls: ["./dashboard.component.less"],
 })
-export class DashboardComponent implements DoCheck, OnDestroy {
+export class DashboardComponent implements DoCheck, OnDestroy, ICanDeactivate {
   private sub: Subscription;
   public subject: string;
   public subjects: string[];
@@ -36,9 +36,14 @@ export class DashboardComponent implements DoCheck, OnDestroy {
     private sendDataService: SendDataService,
     public translate: TranslateService,
     private popUpService: PopUpService,
-    private action: StudentsActions
+    private action: StudentsActions,
+    private dialogService: DialogService
   ) {
     this.subject = activateRoute.snapshot.params.subject;
+  }
+
+  public canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
+    return this.dialogService.confirm("DIscard changes?");
   }
 
   public ngDoCheck(): void {
