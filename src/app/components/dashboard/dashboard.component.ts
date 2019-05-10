@@ -78,18 +78,19 @@ export class DashboardComponent implements DoCheck, OnDestroy {
   }
 
   public postDataToServer(): void {
-    this.sendDataService
-      .sendActualeDataToServer(this.students)
-      .subscribe(data => {
-        if (data instanceof Error) {
-          this.popUpInfo = this.popUpService.dataSavedRejectedPopUp();
-          this.isTableDataChanged = true;
-        } else {
-          this.isTableDataChanged = false;
-          this.popUpInfo = this.popUpService.dataSavedResolvedPopUp();
-        }
-      });
-    this.action.setStudentsToStore(this.students);
+    this.sendDataService.sendActualeDataToServer(this.students).subscribe(
+      data => {
+        console.log(data);
+        this.isTableDataChanged = false;
+        this.popUpInfo = this.popUpService.dataSavedResolvedPopUp();
+        this.action.setStudentsToStore(this.students);
+      },
+      err => {
+        console.log(err);
+        this.popUpInfo = this.popUpService.dataSavedRejectedPopUp();
+        this.isTableDataChanged = true;
+      }
+    );
   }
 
   public changeTeacher(teacher: string): void {

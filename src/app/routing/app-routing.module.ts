@@ -12,8 +12,8 @@ const routes: Routes = [
   { path: "statistics", component: StatisticsComponent },
   { path: "export", component: ExportComponent },
   { path: "students", component: StudentsComponent },
-  { path: "subjects", component: SubjectsComponent },
   { path: "subjects/:subject", component: DashboardComponent },
+  { path: "subjects", component: SubjectsComponent },
   { path: "**", redirectTo: "/not-found" },
   { path: "not-found", component: NotFoundComponent },
 ];

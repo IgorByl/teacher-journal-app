@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { Student, IStudent } from "../../common/entities";
 import { TABLE_HEADERS, STUDENT_FORM_CONTROL } from "../../common/constants";
 import { sorting } from "../../common/helpers";
@@ -11,13 +11,15 @@ import { FormGroup } from "@angular/forms";
 import { PopUpItem } from "../../common/entities";
 import { PopUpService } from "../../common/services";
 import { StudentsActions } from "src/app/redux/actions";
+import { AutoUnsubscribe } from "src/app/common/decorators";
 
 @Component({
   selector: "app-students",
   templateUrl: "./students.component.html",
   styleUrls: ["./students.component.less"],
 })
-export class StudentsComponent implements OnInit, OnDestroy {
+@AutoUnsubscribe()
+export class StudentsComponent implements OnInit {
   public isComponentTemplateHidden: boolean = false;
   public students: IStudent[] = [];
   public subjects: string[];
@@ -43,12 +45,6 @@ export class StudentsComponent implements OnInit, OnDestroy {
       this.students = data;
       this.subjects = unicSubjectSearch(data);
     });
-  }
-
-  public ngOnDestroy(): void {
-    if (this.sub) {
-      this.sub.unsubscribe();
-    }
   }
 
   public toggleTemplateVisibility(): void {

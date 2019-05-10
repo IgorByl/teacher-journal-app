@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Component, OnInit, OnDestroy, Output, Input } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 import { Subscription, Observable } from "rxjs";
 import {
@@ -33,7 +33,7 @@ export class DropdownComponent implements OnInit, OnDestroy {
 
   constructor(
     public translate: TranslateService,
-    private action: StatisticActions
+    private action: StatisticActions,
   ) {}
 
   public ngOnInit(): void {
