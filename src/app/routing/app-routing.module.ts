@@ -6,6 +6,7 @@ import { StudentsComponent } from "../components/students/students.component";
 import { SubjectsComponent } from "../components/subjects/subjects.component";
 import { NotFoundComponent } from "../shared/components/not-found-view/not-found-page.component";
 import { DashboardComponent } from "../components/dashboard/dashboard.component";
+import { LoginComponent } from "../components/login/login.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "/students", pathMatch: "full" },
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: "students", component: StudentsComponent },
   { path: "subjects/:subject", component: DashboardComponent },
   { path: "subjects", component: SubjectsComponent },
+  { path: "login", component: LoginComponent },
   { path: "**", redirectTo: "/not-found" },
   { path: "not-found", component: NotFoundComponent },
 ];

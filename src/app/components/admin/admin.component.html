@@ -1,0 +1,17 @@
+<p>
+  admin works!
+</p>
+<nav>
+  <ul>
+    <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      <a [routerLink]="['./']">Dashboard</a>
+    </li>
+    <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      <a [routerLink]="['./tasks']">Manage tasks</a>
+    </li>
+    <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      <a [routerLink]="['./users']">Manage users</a>
+    </li>
+  </ul>
+</nav>
+<router-outlet></router-outlet>

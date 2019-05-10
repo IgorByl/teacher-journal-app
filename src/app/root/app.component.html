@@ -21,6 +21,11 @@
         <a class="navigation__link" routerLink="{{ item }}">
           {{ item | translate }}</a>
       </li>
+
+
+      <li class="navigation__listItem" routerLinkActive="active"><a [routerLink]="[ '/admin' ]" routerLinkActive="active">ADMIN</a></li>
+      <li class="navigation__listItem" routerLinkActive="active"><a [routerLink]="[ '/login' ]" routerLinkActive="active">LOGIN</a></li>
+      
     </ul>
   </nav>
 </header>

@@ -31,6 +31,8 @@ import { DropdownModule } from "./components/statistics/dropdown-control/dropdow
 import { PopUpService } from "./common/services";
 import { FormComponent } from "./components/form/form.component";
 import { LoaderComponent } from "./shared/components/loader/loader";
+import { AdminModule } from "./components/admin/admin.module";
+import { LoginComponent } from "./components/login/login.component";
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -50,10 +52,11 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     SendButtonDirective,
     FormComponent,
     LoaderComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
+    AdminModule,
     SharedModule,
     FormsModule,
     HttpClientModule,
@@ -69,6 +72,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
       },
       useDefaultLang: false,
     }),
+    AppRoutingModule,
   ],
   providers: [SendDataService, PopUpService, ExcelService, studentsAPIProvider],
   bootstrap: [AppComponent],
