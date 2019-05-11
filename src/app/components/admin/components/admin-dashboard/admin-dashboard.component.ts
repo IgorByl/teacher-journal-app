@@ -1,4 +1,7 @@
 import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
+import { Observable } from "rxjs";
+import { map } from "rxjs/operators";
 
 @Component({
   selector: "app-admin-dashboard",
@@ -6,7 +9,16 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./admin-dashboard.component.less"],
 })
 export class AdminDashboardComponent implements OnInit {
-  constructor() {}
+  public sessionId: Observable<string>;
+  public token: Observable<string>;
+  constructor(private route: ActivatedRoute) {}
 
-  ngOnInit() {}
+  public ngOnInit(): void {
+    this.sessionId = this.route.queryParamMap.pipe(
+      map(params => params.get("sessionId") || "None")
+    );
+    this.token = this.route.fragment.pipe(
+      map(fragment => fragment || "None")
+    );
+  }
 }

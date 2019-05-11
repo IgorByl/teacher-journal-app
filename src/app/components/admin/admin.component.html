@@ -4,13 +4,13 @@
 <nav>
   <ul>
     <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-      <a [routerLink]="['./']">Dashboard</a>
+      <a [routerLink]="['./']" queryParamsHandling="preserve" preserveFragment>Dashboard</a>
     </li>
     <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-      <a [routerLink]="['./tasks']">Manage tasks</a>
+      <a [routerLink]="['./tasks']" queryParamsHandling="preserve" preserveFragment>Manage tasks</a>
     </li>
     <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-      <a [routerLink]="['./users']">Manage users</a>
+      <a [routerLink]="['./users']" queryParamsHandling="preserve" preserveFragment>Manage users</a>
     </li>
   </ul>
 </nav>
