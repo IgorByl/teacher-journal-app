@@ -1,4 +1,12 @@
-import { Component, OnInit } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  ContentChild,
+  AfterContentInit,
+  ViewChild,
+  ElementRef,
+  AfterViewInit,
+} from "@angular/core";
 import { Student, IStudent } from "../../common/entities";
 import { TABLE_HEADERS, STUDENT_FORM_CONTROL } from "../../common/constants";
 import { sorting } from "../../common/helpers";
@@ -12,6 +20,7 @@ import { PopUpItem } from "../../common/entities";
 import { PopUpService } from "../../common/services";
 import { StudentsActions } from "src/app/redux/actions";
 import { AutoUnsubscribe } from "src/app/common/decorators";
+import { FormComponent } from "../form/form.component";
 
 @Component({
   selector: "app-students",
@@ -19,7 +28,7 @@ import { AutoUnsubscribe } from "src/app/common/decorators";
   styleUrls: ["./students.component.less"],
 })
 @AutoUnsubscribe()
-export class StudentsComponent implements OnInit {
+export class StudentsComponent implements OnInit, AfterViewInit {
   public isComponentTemplateHidden: boolean = false;
   public students: IStudent[] = [];
   public subjects: string[];
@@ -27,6 +36,9 @@ export class StudentsComponent implements OnInit {
   public toggleSort: boolean = false;
   public sub: Subscription;
   public formControles: string[];
+
+  // @ContentChild(FormComponent) public form: FormComponent;
+  @ViewChild("form") public form: ElementRef;
 
   @select(state => state.studentsReducer)
   public readonly students$: Observable<IStudent[]>;
@@ -39,6 +51,14 @@ export class StudentsComponent implements OnInit {
   ) {
     this.formControles = STUDENT_FORM_CONTROL;
   }
+
+  public ngAfterContentInit(): void {
+    console.log(this.form);
+  }
+
+  // public ngAfterViewInit(): void {
+  //   setTimeout( () => console.log(this.form), 0);
+  // }
 
   public ngOnInit(): void {
     this.sub = this.students$.subscribe(data => {

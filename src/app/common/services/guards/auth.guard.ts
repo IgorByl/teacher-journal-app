@@ -6,6 +6,8 @@ import {
   Router,
   CanActivateChild,
   NavigationExtras,
+  CanLoad,
+  Route,
 } from "@angular/router";
 import { Observable } from "rxjs";
 import { AuthService } from "./../auth.service";
@@ -13,7 +15,7 @@ import { AuthService } from "./../auth.service";
 @Injectable({
   providedIn: "root",
 })
-export class AuthGuard implements CanActivate, CanActivateChild {
+export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
   constructor(private authService: AuthService, private router: Router) {}
 
   private checkLogin(url: string): boolean {
@@ -47,6 +49,14 @@ export class AuthGuard implements CanActivate, CanActivateChild {
   ): Observable<boolean> | Promise<boolean> | boolean {
     console.log("childguard is called!");
     const { url } = state;
+    return this.checkLogin(url);
+  }
+
+  public canLoad(
+    route: Route
+  ): Observable<boolean> | Promise<boolean> | boolean {
+    console.log("CanLoadGuard is load!");
+    const url: string = `/${route.path}`;
     return this.checkLogin(url);
   }
 }

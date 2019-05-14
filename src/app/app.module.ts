@@ -11,6 +11,7 @@ import {
   SendDataService,
   ExcelService,
   studentsAPIProvider,
+  AuthService,
 } from "./common/services";
 import { HttpClientModule, HttpClient } from "@angular/common/http";
 
@@ -31,8 +32,8 @@ import { DropdownModule } from "./components/statistics/dropdown-control/dropdow
 import { PopUpService } from "./common/services";
 import { FormComponent } from "./components/form/form.component";
 import { LoaderComponent } from "./shared/components/loader/loader";
-import { AdminModule } from "./components/admin/admin.module";
 import { LoginComponent } from "./components/login/login.component";
+import { TooltipDirective } from "./common/directives/tooltip";
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -53,10 +54,10 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     FormComponent,
     LoaderComponent,
     LoginComponent,
+    TooltipDirective,
   ],
   imports: [
     BrowserModule,
-    AdminModule,
     SharedModule,
     FormsModule,
     HttpClientModule,
@@ -74,7 +75,13 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     }),
     AppRoutingModule,
   ],
-  providers: [SendDataService, PopUpService, ExcelService, studentsAPIProvider],
+  providers: [
+    SendDataService,
+    PopUpService,
+    ExcelService,
+    studentsAPIProvider,
+    AuthService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

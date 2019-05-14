@@ -22,7 +22,8 @@
         [ngModel]="i | prettyDate"
       />
     </th>
-    <div class="table__button_addColumn" (click)="addDateColumn()">+</div>
+    <div appTooltip="Add new date column." #myTooltip="appTooltip"></div>
+    <div class="table__button_addColumn" (click)="addDateColumn()" (mouseover)="myTooltip.show()" (mouseout)="myTooltip.hide()">+</div>
   </tr>
   <tbody>
     <tr *ngFor="let i of students$ | async">

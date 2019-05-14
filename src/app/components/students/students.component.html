@@ -8,7 +8,7 @@
       {{ item | translate }}
     </th>
   </tr>
-  <tbody>
+  <tbody #form>
     <tr *ngFor="let i of students">
       <td>{{ i.id }}</td>
       <td class="table__tableData_studentName">{{ i.name }}</td>
@@ -37,3 +37,4 @@
 
 <app-button *ngIf="!isComponentTemplateHidden && students[0]" (raiseEventUp)="toggleTemplateVisibility()">+</app-button>
 <app-button *ngIf="isComponentTemplateHidden && students[0]" (raiseEventUp)="toggleTemplateVisibility()">-</app-button>
+<template>JLHFOGFUOIGFIO#U</template>
