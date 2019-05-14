@@ -3,40 +3,55 @@
 <table class="table" *ngIf="students">
   <tr>
     <th class="table__header">
-     {{"DASH.name" | translate}}
+      {{ "DASH.name" | translate }}
     </th>
     <th class="table__header">
-      {{"DASH.lastname" | translate}}
+      {{ "DASH.lastname" | translate }}
     </th>
     <th class="table__header">
-      {{"DASH.average" | translate}}
+      {{ "DASH.average" | translate }}
     </th>
     <th
       class="table__header"
-      *ngFor="let i of Object.values(students[0].subjects[subject].date), let ind = index"
+      *ngFor="
+        let i of Object.values(students[0].subjects[subject].date);
+        let ind = index
+      "
     >
       <input
         class="table__input table__input_header"
         #date
-        (focusout)="changeDate(date.value, ind+1)"
+        (focusout)="changeDate(date.value, ind + 1)"
         [ngModel]="i | prettyDate"
       />
     </th>
     <div appTooltip="Add new date column." #myTooltip="appTooltip"></div>
-    <div class="table__button_addColumn" (click)="addDateColumn()" (mouseover)="myTooltip.show()" (mouseout)="myTooltip.hide()">+</div>
+    <div
+      class="table__button_addColumn"
+      (click)="addDateColumn()"
+      (mouseover)="myTooltip.show()"
+      (mouseout)="myTooltip.hide()"
+    >
+      +
+    </div>
   </tr>
   <tbody>
     <tr *ngFor="let i of students$ | async">
       <td>{{ i.name }}</td>
       <td>{{ i.lastName }}</td>
       <td>{{ i.subjects[subject].marks | average }}</td>
-      <td *ngFor="let j of Object.values(i.subjects[subject].marks), let ind = index">
+      <td
+        *ngFor="
+          let j of Object.values(i.subjects[subject].marks);
+          let ind = index
+        "
+      >
         <input
           *ngIf="i.subjects[subject].marks"
           class="table__input"
           [ngModel]="j"
           #mark
-          (focusout)="changeMark(mark.value, ind+1, i)"
+          (focusout)="changeMark(mark.value, ind + 1, i)"
         />
       </td>
     </tr>
@@ -44,7 +59,7 @@
 </table>
 
 <h3 class="teacherName">
-  {{"DASH.teacher"| translate }}:
+  {{ "DASH.teacher" | translate }}:
   <input
     class="table__input_teacher"
     [ngModel]="students[0].subjects[subject].teacher"
@@ -53,8 +68,18 @@
   />
 </h3>
 
-<div *ngIf="isTableDataChanged" appSomeDirective="isTableDataChanged" (click)="postDataToServer()">{{"DASH.save" | translate}}</div>
+<div
+  *ngIf="isTableDataChanged"
+  appSomeDirective="isTableDataChanged"
+  (click)="postDataToServer()"
+>
+  {{ "DASH.save" | translate }}
+</div>
 
 <div>
   <app-popup [popUpInfo]="popUpInfo"></app-popup>
 </div>
+
+<ng-template myFor [myForOf]="students$ | async" let-i let-ind="index">
+  <li>{{ i.name }} {{ i.lastName }}</li>
+</ng-template>

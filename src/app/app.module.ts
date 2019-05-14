@@ -34,6 +34,7 @@ import { FormComponent } from "./components/form/form.component";
 import { LoaderComponent } from "./shared/components/loader/loader";
 import { LoginComponent } from "./components/login/login.component";
 import { TooltipDirective } from "./common/directives/tooltip";
+import { IterateDirective } from "./common/directives/iterate";
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -55,6 +56,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     LoaderComponent,
     LoginComponent,
     TooltipDirective,
+    IterateDirective,
   ],
   imports: [
     BrowserModule,
