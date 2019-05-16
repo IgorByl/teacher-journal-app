@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from "@angular/core";
+import { Component, Input, Output, EventEmitter, SimpleChanges, OnChanges } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 
 @Component({
@@ -6,7 +6,8 @@ import { FormGroup } from "@angular/forms";
   templateUrl: "./form.html",
   styleUrls: ["./form.less"],
 })
-export class FormSchemaComponent {
+
+export class FormSchemaComponent implements OnChanges {
   @Input() public profileForm: FormGroup;
   @Input() public formControles: string[];
 
@@ -16,6 +17,10 @@ export class FormSchemaComponent {
   @Output() public transferInputDataUp: EventEmitter<FormGroup> = new EventEmitter<
     FormGroup
   >();
+
+// public ngOnChanges(changes: SimpleChanges): void {
+//   console.log(changes);
+// }
 
   public save(): void {
     this.transferInputDataUp.emit(this.profileForm);

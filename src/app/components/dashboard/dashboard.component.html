@@ -23,6 +23,7 @@
         #date
         (focusout)="changeDate(date.value, ind + 1)"
         [ngModel]="i | prettyDate"
+        (ngModelChange)="showTheState($event)"
       />
     </th>
     <div appTooltip="Add new date column." #myTooltip="appTooltip"></div>

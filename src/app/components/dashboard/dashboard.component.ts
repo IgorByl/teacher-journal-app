@@ -127,4 +127,8 @@ export class DashboardComponent implements DoCheck, OnDestroy, ICanDeactivate {
       this.isTableDataChanged = false;
     });
   }
+
+  public showTheState(event: EventTarget): void {
+    console.log(event);
+  }
 }

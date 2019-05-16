@@ -10,6 +10,8 @@ import { StudentsActions, StatisticActions } from "./actions";
 import { rootEpic } from "./epics";
 import { createEpicMiddleware, EpicMiddleware } from "redux-observable";
 import { StoreEnhancer, Middleware } from "redux";
+import { ajax } from "rxjs/ajax";
+import { SendDataService } from "../common/services";
 
 @NgModule({
   imports: [NgReduxModule],
@@ -20,14 +22,14 @@ export class StoreModule {
     const storeEnhancers: StoreEnhancer<{}, {}>[] | [] = devTools.isEnabled()
       ? [devTools.enhancer()]
       : [];
-    const epicMiddleware: EpicMiddleware<any> = createEpicMiddleware();
-    const middleware: (Middleware | EpicMiddleware<any>)[] = [createLogger(), epicMiddleware];
-    ngRedux.configureStore(
-      rootReducer,
-      {},
-      middleware,
-      storeEnhancers
-    );
+    const epicMiddleware: EpicMiddleware<any> = createEpicMiddleware({
+      dependencies: { getJSON: ajax.getJSON },
+    });
+    const middleware: (Middleware | EpicMiddleware<any>)[] = [
+      createLogger(),
+      epicMiddleware,
+    ];
+    ngRedux.configureStore(rootReducer, {}, middleware, storeEnhancers);
     epicMiddleware.run(rootEpic);
   }
 }

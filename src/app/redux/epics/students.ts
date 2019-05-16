@@ -1,4 +1,9 @@
-import { ofType, Epic, ActionsObservable } from "redux-observable";
+import {
+  ofType,
+  Epic,
+  ActionsObservable,
+  StateObservable,
+} from "redux-observable";
 import { Action } from "redux";
 import { map, mergeMap, catchError } from "rxjs/operators";
 import { of } from "rxjs";
@@ -11,18 +16,26 @@ const fetchStudentsFulfilled: Function = (payload: IStudent[]) => ({
   payload,
 });
 
-export const loadStudentFromServerEpic: Epic = (action$: ActionsObservable<Action>) =>
-  action$.pipe(
+export const loadStudentFromServerEpic: Epic = (
+  action$: ActionsObservable<Action>,
+  state$: StateObservable<IStudent[]>,
+  {getJSON}
+) => {
+  return action$.pipe(
     ofType("LOAD_DATA_FORM_SERVER"),
-    mergeMap(() =>
-      ajax.getJSON(URL.get).pipe(
-        map(response => fetchStudentsFulfilled(response)),
+    mergeMap(() => {
+      console.log(getJSON);
+      return getJSON(URL.get).pipe(
+        map(response => {
+          return fetchStudentsFulfilled(response);
+        }),
         catchError(error =>
           of({
             type: "LOAD_DATA_REJECTED",
             payload: error,
           })
         )
-      )
-    )
+      );
+    })
   );
+};

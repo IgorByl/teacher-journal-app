@@ -13,7 +13,7 @@ import {
   studentsAPIProvider,
   AuthService,
 } from "./common/services";
-import { HttpClientModule, HttpClient } from "@angular/common/http";
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from "@angular/common/http";
 
 import { StatisticsComponent } from "./components/statistics/statistics.component";
 import { ExportComponent } from "./components/export/export.component";
@@ -35,10 +35,15 @@ import { LoaderComponent } from "./shared/components/loader/loader";
 import { LoginComponent } from "./components/login/login.component";
 import { TooltipDirective } from "./common/directives/tooltip";
 import { IterateDirective } from "./common/directives/iterate";
+import { LoggingInterceptor } from "./common/interceptors";
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
 }
+
+export const httpInterceptorProviders = [
+  { provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true },
+];
 
 @NgModule({
   declarations: [
@@ -83,6 +88,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     ExcelService,
     studentsAPIProvider,
     AuthService,
+    httpInterceptorProviders
   ],
   bootstrap: [AppComponent],
 })

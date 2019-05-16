@@ -6,6 +6,8 @@ import {
   ViewChild,
   ElementRef,
   AfterViewInit,
+  OnChanges,
+  SimpleChanges,
 } from "@angular/core";
 import { Student, IStudent } from "../../common/entities";
 import { TABLE_HEADERS, STUDENT_FORM_CONTROL } from "../../common/constants";
@@ -52,9 +54,9 @@ export class StudentsComponent implements OnInit, AfterViewInit {
     this.formControles = STUDENT_FORM_CONTROL;
   }
 
-  public ngAfterContentInit(): void {
-    console.log(this.form);
-  }
+  // public ngAfterContentInit(): void {
+  //   console.log(this.form);
+  // }
 
   // public ngAfterViewInit(): void {
   //   setTimeout( () => console.log(this.form), 0);
